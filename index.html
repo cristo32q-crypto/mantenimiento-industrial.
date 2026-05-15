@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Master en Mantenimiento Industrial | Reliability Lab</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap" rel="stylesheet">
+    <title>Fiabilidad Industrial | ESPOCH Grupo 5</title>
+    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;700;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
         :root {
             --primary: #00f2ff;
-            --secondary: #7000ff;
+            --secondary: #ff3e3e; /* Rojo ESPOCH */
+            --accent: #7000ff;
             --dark-bg: #0a0c10;
             --card-bg: #161b22;
             --text-main: #e6edf3;
@@ -19,79 +20,103 @@
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Inter', sans-serif; background-color: var(--dark-bg); color: var(--text-main); line-height: 1.6; }
+        body { font-family: 'Urbanist', sans-serif; background-color: var(--dark-bg); color: var(--text-main); line-height: 1.6; }
 
-        /* HEADER */
+        /* NAVEGACIÓN PROFESIONAL */
         header {
             background: rgba(10, 12, 16, 0.95);
-            padding: 20px 5%;
+            padding: 15px 5%;
             display: flex; justify-content: space-between; align-items: center;
             border-bottom: 1px solid #30363d;
             position: sticky; top: 0; z-index: 1000;
+            backdrop-filter: blur(10px);
         }
-        .logo { font-weight: 800; font-size: 1.4rem; letter-spacing: -1px; }
+        .logo { font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; display: flex; align-items: center; gap: 10px; }
         .logo span { color: var(--primary); }
+        .espoch-tag { background: var(--secondary); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: bold; }
 
-        /* HERO */
+        /* HERO SECTION */
         .hero {
             padding: 80px 5%;
             text-align: center;
-            background: radial-gradient(circle at top right, #161b22, #0a0c10);
+            background: radial-gradient(circle at top right, #1c2128, #0a0c10);
         }
-        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; background: linear-gradient(to right, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; background: linear-gradient(to right, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; }
         .hero p { font-size: 1.2rem; color: var(--text-dim); max-width: 800px; margin: 0 auto; }
 
-        /* SECCIONES DE INFORMACIÓN */
-        .container { max-width: 1100px; margin: 0 auto; padding: 60px 20px; }
-        
+        .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+
+        /* TARJETAS DE INFORMACIÓN */
         .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
-        .card { background: var(--card-bg); padding: 30px; border-radius: 12px; border: 1px solid #30363d; transition: 0.3s; }
+        .card { background: var(--card-bg); padding: 30px; border-radius: 12px; border: 1px solid #30363d; transition: 0.3s; position: relative; overflow: hidden; }
         .card:hover { border-color: var(--primary); transform: translateY(-5px); }
         .card i { font-size: 2rem; color: var(--primary); margin-bottom: 20px; }
-        .card h3 { margin-bottom: 15px; font-size: 1.5rem; }
+        .card h3 { margin-bottom: 15px; font-size: 1.5rem; color: #fff; }
 
-        /* LA ECUACIÓN - DISEÑO CLARO */
-        .formula-section { background: #0d1117; padding: 60px 5%; border-radius: 20px; text-align: center; margin: 40px 0; }
-        .math-box { font-size: 2.5rem; margin: 30px 0; padding: 20px; background: rgba(0, 242, 255, 0.05); border-radius: 10px; display: inline-block; font-family: 'Times New Roman', serif; }
-        .math-box sub { font-size: 1rem; }
-        .math-box sup { font-size: 1.5rem; }
+        /* SECCIÓN NORMATIVA ISO */
+        .normas-header { text-align: center; margin: 80px 0 30px; }
+        .normas-header h2 { font-size: 2.2rem; color: var(--primary); }
+
+        /* LA ECUACIÓN TÉCNICA */
+        .formula-section { background: #0d1117; padding: 60px 5%; border-radius: 24px; text-align: center; margin: 60px 0; border: 1px solid #21262d; }
+        .math-box { 
+            font-size: 2.8rem; margin: 30px 0; padding: 30px; 
+            background: rgba(0, 242, 255, 0.05); border-radius: 15px; 
+            display: inline-block; font-family: 'JetBrains Mono', monospace;
+            color: var(--primary); border: 1px dashed rgba(0, 242, 255, 0.3);
+        }
+        .math-box sub { font-size: 1.2rem; }
+        .math-box sup { font-size: 1.2rem; }
         
-        .legend { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 20px; color: var(--text-dim); }
-        .legend span b { color: var(--primary); }
+        .legend { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 20px; color: var(--text-dim); font-size: 0.95rem; }
+        .legend b { color: var(--primary); }
 
-        /* VIDEO */
-        .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; margin: 40px 0; border-radius: 15px; overflow: hidden; border: 2px solid #30363d; }
-        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        /* REPRODUCTOR DE VIDEO GRUPO 5 */
+        .video-wrapper { 
+            margin: 60px 0; background: #000; border-radius: 20px; 
+            overflow: hidden; border: 2px solid #30363d; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        video { width: 100%; display: block; max-height: 600px; }
 
-        /* SIMULADOR */
-        .lab { background: var(--card-bg); padding: 40px; border-radius: 20px; border: 2px solid var(--primary); box-shadow: 0 0 30px rgba(0, 242, 255, 0.1); }
-        .lab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-        @media (max-width: 800px) { .lab-grid { grid-template-columns: 1fr; } }
+        /* SIMULADOR DE DIAGNÓSTICO */
+        .lab { background: var(--card-bg); padding: 50px; border-radius: 24px; border: 1px solid var(--primary); box-shadow: 0 0 40px rgba(0, 242, 255, 0.1); }
+        .lab-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 50px; }
+        @media (max-width: 850px) { .lab-grid { grid-template-columns: 1fr; } }
 
-        .input-group { margin-bottom: 20px; }
-        .input-group label { display: block; margin-bottom: 8px; font-size: 0.9rem; color: var(--primary); }
-        input { width: 100%; padding: 15px; background: #0d1117; border: 1px solid #30363d; color: white; border-radius: 8px; font-size: 1rem; }
+        .input-group { margin-bottom: 25px; }
+        .input-group label { display: block; margin-bottom: 10px; font-size: 0.9rem; color: var(--primary); font-weight: 600; }
+        input { width: 100%; padding: 15px; background: #0d1117; border: 1px solid #30363d; color: white; border-radius: 10px; font-size: 1.1rem; transition: 0.3s; }
+        input:focus { border-color: var(--primary); outline: none; }
         
-        button { width: 100%; padding: 18px; background: var(--primary); color: #000; border: none; border-radius: 8px; font-weight: 800; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; }
-        button:hover { background: #fff; box-shadow: 0 0 20px var(--primary); }
+        button { width: 100%; padding: 20px; background: var(--primary); color: #000; border: none; border-radius: 10px; font-weight: 800; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; }
+        button:hover { background: #fff; box-shadow: 0 0 25px var(--primary); transform: translateY(-2px); }
 
-        .res-display { text-align: center; }
-        #res-num { font-size: 5rem; font-weight: 800; color: var(--primary); display: block; }
-        .chart-container { height: 300px; margin-top: 20px; }
+        #res-num { font-size: 5.5rem; font-weight: 800; color: var(--primary); display: block; margin: 20px 0; }
+        .chart-container { height: 300px; }
 
-        footer { text-align: center; padding: 40px; color: var(--text-dim); border-top: 1px solid #30363d; }
+        /* EQUIPO DE TRABAJO */
+        .team-section { text-align: center; margin-top: 80px; padding: 40px; background: rgba(255,255,255,0.02); border-radius: 20px; }
+        .member-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 25px; }
+        .member { background: #21262d; padding: 8px 20px; border-radius: 30px; font-size: 0.9rem; border: 1px solid #30363d; color: #c9d1d9; }
+
+        footer { text-align: center; padding: 60px; color: var(--text-dim); border-top: 1px solid #30363d; font-size: 0.9rem; }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">Mantenimiento<span>Industrial</span></div>
-        <div class="logo"><i class="fas fa-gear fa-spin"></i></div>
+        <div class="logo">
+            <i class="fas fa-industry"></i> 
+            Mantenimiento<span>Industrial</span> 
+            <div class="espoch-tag">ESPOCH</div>
+        </div>
+        <div style="color: var(--text-dim); font-size: 0.8rem; font-weight: 600;">FACULTAD DE MECÁNICA</div>
     </header>
 
     <section class="hero">
-        <h1>Gestión de Activos y Fiabilidad</h1>
-        <p>El mantenimiento moderno no espera a que algo se rompa; utiliza la matemática para predecir el futuro y garantizar la producción ininterrumpida.</p>
+        <h1>Gestión de Activos & Fiabilidad</h1>
+        <p>Dashboard Técnico del Grupo 5. Aplicación de modelos probabilísticos y normativas internacionales para la optimización de la vida útil de equipos industriales.</p>
     </section>
 
     <div class="container">
@@ -99,77 +124,85 @@
         <section class="info-grid">
             <div class="card">
                 <i class="fas fa-microchip"></i>
-                <h3>¿Qué es el Mantenimiento?</h3>
-                <p>Es la disciplina encargada de asegurar que los activos físicos (maquinaria, edificios, herramientas) sigan realizando sus funciones de diseño bajo condiciones seguras y económicas.</p>
+                <h3>¿Qué es la Fiabilidad?</h3>
+                <p>Es la probabilidad de que un equipo desempeñe su función satisfactoriamente durante un periodo de tiempo determinado bajo condiciones dadas.</p>
             </div>
             <div class="card">
-                <i class="fas fa-chart-line"></i>
-                <h3>Importancia Crítica</h3>
-                <p>Un buen plan de mantenimiento reduce costos en un 30%, evita accidentes fatales y garantiza que los productos lleguen a tiempo a los clientes.</p>
+                <i class="fas fa-shield-halved"></i>
+                <h3>Importancia ISO</h3>
+                <p>Implementar normativas reduce costos operativos en un 30% y garantiza la seguridad de los operarios mediante el mantenimiento predictivo.</p>
             </div>
             <div class="card">
-                <i class="fas fa-shield-virus"></i>
+                <i class="fas fa-robot"></i>
                 <h3>Mantenimiento 4.0</h3>
-                <p>Hoy usamos sensores e Inteligencia Artificial para monitorear vibraciones, temperatura y sonido, permitiendo un mantenimiento <strong>Predictivo</strong> de alta precisión.</p>
+                <p>Uso de análisis de datos e integración de sistemas para predecir fallos antes de que ocurran, maximizando la disponibilidad de planta.</p>
             </div>
         </section>
 
-        <h2 style="text-align: center; margin: 60px 0 30px; color: var(--primary); font-size: 2rem;">Marco Normativo Internacional</h2>
-        <section class="info-grid" style="margin-bottom: 50px;">
-            <div class="card" style="border-top: 4px solid var(--secondary);">
-                <i class="fas fa-certificate"></i>
+        <div class="normas-header">
+            <h2>Marco Normativo Internacional</h2>
+        </div>
+        <section class="info-grid">
+            <div class="card" style="border-top: 4px solid var(--accent);">
+                <i class="fas fa-award"></i>
                 <h3>ISO 55000</h3>
-                <p>El estándar fundamental para la <strong>Gestión de Activos</strong>. Proporciona el marco para optimizar el valor de la maquinaria, equilibrando el riesgo y el desempeño financiero durante todo su ciclo de vida.</p>
+                <p>Gestión de Activos: El marco estratégico para obtener el máximo valor de la maquinaria equilibrando riesgo y desempeño financiero.</p>
             </div>
-            <div class="card" style="border-top: 4px solid var(--secondary);">
+            <div class="card" style="border-top: 4px solid var(--accent);">
                 <i class="fas fa-database"></i>
                 <h3>ISO 14224</h3>
-                <p>Norma clave para la <strong>Fiabilidad</strong>. Establece la base para la recolección de datos de fallos y mantenimiento, permitiendo que el cálculo de λ (Lambda) sea preciso y estandarizado.</p>
+                <p>Recolección e intercambio de datos de fiabilidad y mantenimiento. Es la base para que el cálculo de λ sea preciso.</p>
             </div>
-            <div class="card" style="border-top: 4px solid var(--secondary);">
+            <div class="card" style="border-top: 4px solid var(--accent);">
                 <i class="fas fa-clipboard-check"></i>
                 <h3>ISO 17359</h3>
-                <p>Establece las directrices para el <strong>Monitoreo de Condición</strong>. Es la guía técnica para implementar mantenimiento predictivo basado en datos reales de vibración y temperatura.</p>
+                <p>Monitoreo de condición: Guía técnica para implementar programas de mantenimiento basados en la salud real del equipo.</p>
             </div>
         </section>
 
         <section class="formula-section">
-            <h2>La Ciencia de la Fiabilidad</h2>
-            <p>La fiabilidad es la "promesa" matemática de que una máquina no te fallará.</p>
+            <h2 style="color: var(--primary);">La Ciencia de la Confiabilidad</h2>
+            <p>Ecuación General de Fiabilidad (Modelo de Tasa de Fallos Variable)</p>
             
             <div class="math-box">
-                R(t) = e<sup>-λt</sup>
+                R(t) = e<sup>-∫<sub style="font-size: 0.5em;">0</sub><sup style="font-size: 0.5em;">t</sup> Z(x)dx</sup>
             </div>
 
             <div class="legend">
-                <span><b>R(t):</b> Probabilidad de éxito</span>
+                <span><b>R(t):</b> Probabilidad de supervivencia</span>
                 <span><b>e:</b> Constante de Euler (~2.718)</span>
-                <span><b>λ (Lambda):</b> Tasa de fallas (1/MTBF)</span>
+                <span><b>Z(x):</b> Tasa de fallos instantánea</span>
                 <span><b>t:</b> Tiempo de misión</span>
             </div>
+        </section>
 
+        <section class="video-section">
+            <h2 style="text-align: center; margin-bottom: 20px; color: #fff;">Explicación del Grupo 5</h2>
             <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/vKGKcgbLKvA" frameborder="0" allowfullscreen></iframe>
+                <video controls poster="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&q=80&w=1200">
+                    <source src="video_fiabilidad.mp4" type="video/mp4">
+                    Tu navegador no soporta la reproducción de video.
+                </video>
             </div>
         </section>
 
         <section class="lab" id="lab">
-            <h2 style="margin-bottom: 30px; text-align: center;">Simulador de Diagnóstico Industrial</h2>
+            <h2 style="margin-bottom: 40px; text-align: center; font-size: 2rem;">Simulador de Fiabilidad en Tiempo Real</h2>
             <div class="lab-grid">
                 <div class="inputs">
                     <div class="input-group">
                         <label>MTBF (Tiempo Medio Entre Fallos - Horas)</label>
-                        <input type="number" id="mtbf" value="8000" placeholder="Ej. 8000">
+                        <input type="number" id="mtbf" value="8000">
                     </div>
                     <div class="input-group">
-                        <label>Tiempo de Operación Deseado (Horas)</label>
-                        <input type="number" id="time" value="1000" placeholder="Ej. 1000">
+                        <label>Tiempo de Operación Crítica (t - Horas)</label>
+                        <input type="number" id="time" value="1200">
                     </div>
-                    <button onclick="ejecutarAnalisis()">Iniciar Escaneo Matemático</button>
+                    <button onclick="ejecutarAnalisis()">Calcular Probabilidad <i class="fas fa-bolt"></i></button>
                 </div>
 
-                <div class="res-display">
-                    <p style="color: var(--text-dim);">PROBABILIDAD DE SUPERVIVENCIA</p>
+                <div class="res-display" style="text-align: center;">
+                    <p style="color: var(--text-dim); font-weight: bold; letter-spacing: 2px;">FIABILIDAD CALCULADA</p>
                     <span id="res-num">0%</span>
                     <div class="chart-container">
                         <canvas id="mainChart"></canvas>
@@ -178,11 +211,22 @@
             </div>
         </section>
 
+        <section class="team-section">
+            <h3>Grupo 5 - Ingeniería en Mantenimiento Industrial</h3>
+            <div class="member-list">
+                <div class="member">Baque Eduardo</div>
+                <div class="member">Guamán Cristofer</div>
+                <div class="member">Quevedo Cristhofer</div>
+                <div class="member">Macas Michael</div>
+                <div class="member">Pinduisaca Jhon</div>
+            </div>
+        </section>
+
     </div>
 
     <footer>
-        <p>Creado por <strong>Crear Aplicaciones WEB</strong> para Cristopher Quevedo | ESPOCH 2026</p>
-    </footer>
+        <p>ESPOCH - Escuela Superior Politécnica de Chimborazo | Facultad de Mecánica | 2026</p>
+    </section>
 
     <script>
         let myChart;
@@ -195,11 +239,16 @@
 
             const lambda = 1 / mtbf;
             const r = Math.exp(-lambda * t);
-            const finalRes = (r * 100).toFixed(2);
+            const finalRes = (r * 100).toFixed(1);
 
-            // Animación del número
             document.getElementById('res-num').innerText = finalRes + "%";
             
+            // Cambio de color dinámico según riesgo
+            const numDisplay = document.getElementById('res-num');
+            if(r < 0.6) numDisplay.style.color = "#ff3e3e";
+            else if(r < 0.85) numDisplay.style.color = "#ffa500";
+            else numDisplay.style.color = "#00f2ff";
+
             dibujarGrafica(lambda, t);
         }
 
@@ -207,7 +256,7 @@
             const ctx = document.getElementById('mainChart').getContext('2d');
             const labels = [];
             const points = [];
-            const maxTime = tUser * 3;
+            const maxTime = tUser * 2.5;
 
             for(let i=0; i <= maxTime; i += maxTime/20) {
                 labels.push(Math.round(i));
@@ -221,7 +270,7 @@
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: 'Curva de Fiabilidad',
+                        label: 'Fiabilidad R(t) %',
                         data: points,
                         borderColor: '#00f2ff',
                         backgroundColor: 'rgba(0, 242, 255, 0.1)',
@@ -234,15 +283,14 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     scales: {
-                        y: { beginAtZero: true, max: 100, ticks: { color: '#8b949e' } },
-                        x: { ticks: { color: '#8b949e' } }
+                        y: { beginAtZero: true, max: 100, ticks: { color: '#8b949e' }, grid: { color: 'rgba(255,255,255,0.05)' } },
+                        x: { ticks: { color: '#8b949e' }, grid: { display: false } }
                     },
                     plugins: { legend: { display: false } }
                 }
             });
         }
 
-        // Ejecutar al inicio
         window.onload = ejecutarAnalisis;
     </script>
 </body>
