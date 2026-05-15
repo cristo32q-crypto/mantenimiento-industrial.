@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fiabilidad Industrial | ESPOCH Grupo 4</title>
+    <title>Ingeniería de Fiabilidad | ESPOCH Grupo 4</title>
     <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;700;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <style>
@@ -35,134 +36,164 @@
         .espoch-tag { background: var(--secondary); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: bold; }
 
         .hero {
-            padding: 80px 5%;
+            padding: 100px 5%;
             text-align: center;
             background: radial-gradient(circle at top right, #1c2128, #0a0c10);
         }
-        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; background: linear-gradient(to right, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; }
-        .hero p { font-size: 1.2rem; color: var(--text-dim); max-width: 800px; margin: 0 auto; }
+        .hero h1 { font-size: 4rem; margin-bottom: 20px; background: linear-gradient(to right, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; }
 
         .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
 
-        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
-        .card { background: var(--card-bg); padding: 30px; border-radius: 12px; border: 1px solid #30363d; transition: 0.3s; position: relative; overflow: hidden; }
+        /* SECCIONES INFORMATIVAS */
+        section { margin-bottom: 100px; }
+        h2.section-title { font-size: 2.5rem; color: var(--primary); margin-bottom: 40px; text-align: center; }
+
+        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card { background: var(--card-bg); padding: 35px; border-radius: 16px; border: 1px solid #30363d; transition: 0.3s; }
         .card:hover { border-color: var(--primary); transform: translateY(-5px); }
-        .card i { font-size: 2rem; color: var(--primary); margin-bottom: 20px; }
-        .card h3 { margin-bottom: 15px; font-size: 1.5rem; color: #fff; }
-
-        .formula-section { background: #0d1117; padding: 60px 5%; border-radius: 24px; text-align: center; margin: 60px 0; border: 1px solid #21262d; }
-        .math-box { 
-            font-size: 2.8rem; margin: 30px 0; padding: 30px; 
-            background: rgba(0, 242, 255, 0.05); border-radius: 15px; 
-            display: inline-block; font-family: 'JetBrains Mono', monospace;
-            color: var(--primary); border: 1px dashed rgba(0, 242, 255, 0.3);
-        }
+        .card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 20px; }
         
-        .video-wrapper { 
-            margin: 60px 0; background: #000; border-radius: 20px; 
-            overflow: hidden; border: 2px solid #30363d; 
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-        }
-        video { width: 100%; display: block; max-height: 600px; }
+        /* TABLA COMPARATIVA */
+        .table-container { overflow-x: auto; background: var(--card-bg); border-radius: 16px; border: 1px solid #30363d; padding: 20px; }
+        table { width: 100%; border-collapse: collapse; text-align: left; }
+        th { color: var(--primary); padding: 15px; border-bottom: 2px solid #30363d; }
+        td { padding: 15px; border-bottom: 1px solid #30363d; }
 
-        .lab { background: var(--card-bg); padding: 50px; border-radius: 24px; border: 1px solid var(--primary); box-shadow: 0 0 40px rgba(0, 242, 255, 0.1); }
+        /* QR SECTION */
+        .qr-section { background: #fff; color: #000; padding: 40px; border-radius: 24px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 20px; }
+        #qrcode { padding: 20px; background: white; border-radius: 10px; }
+
+        /* FORMULA */
+        .math-box { font-size: 2.8rem; margin: 30px 0; padding: 30px; background: rgba(0, 242, 255, 0.05); border-radius: 15px; display: inline-block; font-family: 'JetBrains Mono', monospace; color: var(--primary); }
+
+        .video-wrapper { border-radius: 24px; overflow: hidden; border: 2px solid #30363d; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        video { width: 100%; display: block; }
+
+        .lab { background: var(--card-bg); padding: 50px; border-radius: 24px; border: 1px solid var(--primary); }
         .lab-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 50px; }
+        @media (max-width: 850px) { .lab-grid { grid-template-columns: 1fr; } }
 
-        .input-group { margin-bottom: 25px; }
-        .input-group label { display: block; margin-bottom: 10px; font-size: 0.9rem; color: var(--primary); font-weight: 600; }
         input { width: 100%; padding: 15px; background: #0d1117; border: 1px solid #30363d; color: white; border-radius: 10px; font-size: 1.1rem; }
-        
-        button { width: 100%; padding: 20px; background: var(--primary); color: #000; border: none; border-radius: 10px; font-weight: 800; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; }
+        button { width: 100%; padding: 20px; background: var(--primary); color: #000; border: none; border-radius: 10px; font-weight: 800; cursor: pointer; text-transform: uppercase; }
 
-        #res-num { font-size: 5.5rem; font-weight: 800; color: var(--primary); display: block; margin: 20px 0; }
-        .chart-container { height: 300px; }
+        #res-num { font-size: 5.5rem; font-weight: 800; color: var(--primary); display: block; }
 
-        .team-section { text-align: center; margin-top: 80px; padding: 40px; background: rgba(255,255,255,0.02); border-radius: 20px; }
         .member-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 25px; }
-        .member { background: #21262d; padding: 8px 20px; border-radius: 30px; font-size: 0.9rem; border: 1px solid #30363d; color: #c9d1d9; }
+        .member { background: #21262d; padding: 8px 20px; border-radius: 30px; border: 1px solid #30363d; }
 
-        footer { text-align: center; padding: 60px; color: var(--text-dim); border-top: 1px solid #30363d; font-size: 0.9rem; }
+        footer { text-align: center; padding: 60px; border-top: 1px solid #30363d; }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">
-            <i class="fas fa-industry"></i> 
-            Mantenimiento<span>Industrial</span> 
-            <div class="espoch-tag">ESPOCH</div>
-        </div>
-        <div style="color: var(--text-dim); font-size: 0.8rem; font-weight: 600;">FACULTAD DE MECÁNICA</div>
+        <div class="logo"><i class="fas fa-industry"></i> Mantenimiento<span>Industrial</span> <div class="espoch-tag">ESPOCH</div></div>
+        <div style="color: var(--text-dim); font-size: 0.8rem;">FACULTAD DE MECÁNICA</div>
     </header>
 
     <section class="hero">
-        <h1>Gestión de Activos & Fiabilidad</h1>
-        <p>Dashboard Técnico del <strong>Grupo 4</strong>. Aplicación de modelos probabilísticos y normativas internacionales para la optimización de la vida útil de equipos industriales.</p>
+        <h1>Ingeniería de Confiabilidad</h1>
+        <p>Portal Técnico del <strong>Grupo 4</strong>. Un análisis profundo sobre la gestión de activos, normativas ISO y modelos predictivos.</p>
     </section>
 
     <div class="container">
         
-        <section class="info-grid">
-            <div class="card">
-                <i class="fas fa-microchip"></i>
-                <h3>¿Qué es la Fiabilidad?</h3>
-                <p>Es la probabilidad de que un equipo desempeñe su función satisfactoriamente durante un periodo de tiempo determinado bajo condiciones dadas.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-shield-halved"></i>
-                <h3>Importancia ISO</h3>
-                <p>Implementar normativas reduce costos operativos en un 30% y garantiza la seguridad de los operarios mediante el mantenimiento predictivo.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-robot"></i>
-                <h3>Mantenimiento 4.0</h3>
-                <p>Uso de análisis de datos e integración de sistemas para predecir fallos antes de que ocurran, maximizando la disponibilidad de planta.</p>
+        <section id="intro">
+            <h2 class="section-title">Pilares del Mantenimiento Moderno</h2>
+            <div class="info-grid">
+                <div class="card">
+                    <i class="fas fa-tools"></i>
+                    <h3>Preventivo</h3>
+                    <p>Intervenciones programadas basadas en el tiempo o uso para evitar fallas antes de que ocurran.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-satellite-dish"></i>
+                    <h3>Predictivo</h3>
+                    <p>Monitoreo en tiempo real de variables (vibración, temperatura) para intervenir justo antes del fallo.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-brain"></i>
+                    <h3>Proactivo</h3>
+                    <p>Análisis de causa raíz para eliminar problemas de diseño o instalación de forma permanente.</p>
+                </div>
             </div>
         </section>
 
-        <section class="formula-section">
-            <h2 style="color: var(--primary);">La Ciencia de la Confiabilidad</h2>
+        <section id="normas">
+            <h2 class="section-title">Normativas Internacionales</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Norma</th>
+                            <th>Enfoque Principal</th>
+                            <th>Aplicación en Fiabilidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>ISO 55000</strong></td>
+                            <td>Gestión de Activos</td>
+                            <td>Optimización del ciclo de vida del equipo.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ISO 14224</strong></td>
+                            <td>Datos de Fiabilidad</td>
+                            <td>Base para recolectar datos de fallas estándar.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ISO 17359</strong></td>
+                            <td>Monitoreo de Condición</td>
+                            <td>Guía para mantenimiento predictivo.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="teoria" style="text-align:center;">
+            <h2 class="section-title">Fundamentos Matemáticos</h2>
             <div class="math-box">
                 R(t) = e<sup>-∫<sub style="font-size: 0.5em;">0</sub><sup style="font-size: 0.5em;">t</sup> Z(x)dx</sup>
             </div>
-        </section>
-
-        <section class="video-section">
-            <h2 style="text-align: center; margin-bottom: 20px; color: #fff;">Explicación del Grupo 4</h2>
             <div class="video-wrapper">
-                <video controls poster="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&q=80&w=1200">
+                <video controls poster="https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1200">
                     <source src="video_fiabilidad.mp4" type="video/mp4">
-                    Tu navegador no soporta la reproducción de video.
                 </video>
             </div>
+            <p style="margin-top:20px; color:var(--text-dim);">Explicación técnica detallada por el Grupo 4.</p>
         </section>
 
-        <section class="lab" id="lab">
-            <h2 style="margin-bottom: 40px; text-align: center; font-size: 2rem;">Simulador de Fiabilidad</h2>
+        <section id="simulador" class="lab">
+            <h2 style="text-align: center; margin-bottom: 40px; font-size: 2rem;">Simulador de Fiabilidad Real</h2>
             <div class="lab-grid">
                 <div class="inputs">
-                    <div class="input-group">
-                        <label>MTBF (Horas)</label>
+                    <div style="margin-bottom:20px;">
+                        <label>MTBF (Horas promedio de vida)</label>
                         <input type="number" id="mtbf" value="8000">
                     </div>
-                    <div class="input-group">
-                        <label>Tiempo de Operación (t)</label>
+                    <div style="margin-bottom:20px;">
+                        <label>Tiempo de Operación Crítica (t)</label>
                         <input type="number" id="time" value="1200">
                     </div>
-                    <button onclick="ejecutarAnalisis()">Calcular Probabilidad <i class="fas fa-bolt"></i></button>
+                    <button onclick="ejecutarAnalisis()">Analizar Supervivencia</button>
                 </div>
-
-                <div class="res-display" style="text-align: center;">
+                <div style="text-align: center;">
                     <span id="res-num">0%</span>
-                    <div class="chart-container">
-                        <canvas id="mainChart"></canvas>
-                    </div>
+                    <div style="height: 300px;"><canvas id="mainChart"></canvas></div>
                 </div>
             </div>
+        </section>
+
+        <section class="qr-section">
+            <h2 style="margin-bottom: 10px;">Acceso Rápido</h2>
+            <p>Escanea este código para acceder al dashboard desde cualquier dispositivo móvil.</p>
+            <div id="qrcode"></div>
+            <p style="font-weight: bold; margin-top: 10px;">Grupo 4 - ESPOCH</p>
         </section>
 
         <section class="team-section">
-            <h3>Grupo 4 - Ingeniería en Mantenimiento Industrial</h3>
+            <h3>Integrantes del Grupo 4</h3>
             <div class="member-list">
                 <div class="member">Baque Eduardo</div>
                 <div class="member">Guamán Cristofer</div>
@@ -175,7 +206,7 @@
     </div>
 
     <footer>
-        <p>ESPOCH - Escuela Superior Politécnica de Chimborazo | Facultad de Mecánica | 2026</p>
+        <p>ESPOCH | Facultad de Mecánica | Escuela de Mantenimiento Industrial | 2026</p>
     </footer>
 
     <script>
@@ -191,9 +222,7 @@
 
         function dibujarGrafica(lambda, tUser) {
             const ctx = document.getElementById('mainChart').getContext('2d');
-            const labels = [];
-            const points = [];
-            const maxTime = tUser * 2.5;
+            const labels = []; const points = []; const maxTime = tUser * 2.5;
             for(let i=0; i <= maxTime; i += maxTime/20) {
                 labels.push(Math.round(i));
                 points.push((Math.exp(-lambda * i) * 100).toFixed(2));
@@ -204,19 +233,29 @@
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: 'Fiabilidad R(t) %',
+                        label: 'Fiabilidad %',
                         data: points,
                         borderColor: '#00f2ff',
                         backgroundColor: 'rgba(0, 242, 255, 0.1)',
-                        fill: true,
-                        tension: 0.4,
-                        pointRadius: 0
+                        fill: true, tension: 0.4, pointRadius: 0
                     }]
                 },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+                options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 100 } } }
             });
         }
-        window.onload = ejecutarAnalisis;
+
+        // Generar QR automáticamente al cargar
+        window.onload = () => {
+            new QRCode(document.getElementById("qrcode"), {
+                text: window.location.href,
+                width: 180,
+                height: 180,
+                colorDark : "#000000",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+            ejecutarAnalisis();
+        };
     </script>
 </body>
 </html>
