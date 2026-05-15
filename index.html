@@ -3,232 +3,308 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ingeniería de Fiabilidad | ESPOCH Grupo 4</title>
-    <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;600;700;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <title>Reliability Engineering | ESPOCH Grupo 4</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
         :root {
-            --primary: #00f2ff;
-            --secondary: #ff3e3e; 
-            --accent: #7000ff;
-            --dark-bg: #0a0c10;
-            --card-bg: #161b22;
-            --text-main: #e6edf3;
-            --text-dim: #8b949e;
+            --bg-dark: #030008;
+            --card-bg: rgba(20, 10, 35, 0.7);
+            --primary-purple: #7000ff;
+            --neon-cyan: #00f2ff;
+            --text-main: #f0f0f5;
+            --text-dim: #a0a0b5;
+            --glass-border: rgba(112, 0, 255, 0.3);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Urbanist', sans-serif; background-color: var(--dark-bg); color: var(--text-main); line-height: 1.7; }
+        
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: var(--bg-dark); 
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(112, 0, 255, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 242, 255, 0.05) 0%, transparent 40%);
+            color: var(--text-main); 
+            line-height: 1.8; 
+            overflow-x: hidden;
+        }
 
+        /* BARRA DE NAVEGACIÓN ESTILO CRISTAL */
         header {
-            background: rgba(10, 12, 16, 0.95);
-            padding: 15px 5%;
+            background: rgba(3, 0, 8, 0.8);
+            padding: 20px 8%;
             display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 1px solid #30363d;
+            border-bottom: 1px solid var(--glass-border);
             position: sticky; top: 0; z-index: 1000;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px);
         }
-        .logo { font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; display: flex; align-items: center; gap: 10px; }
-        .logo span { color: var(--primary); }
-        .espoch-tag { background: var(--secondary); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: bold; }
+        .logo { font-weight: 800; font-size: 1.6rem; letter-spacing: -1px; display: flex; align-items: center; gap: 12px; }
+        .logo span { background: linear-gradient(to right, var(--primary-purple), var(--neon-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
+        /* HERO DE ALTO IMPACTO */
         .hero {
-            padding: 100px 5% 60px;
+            padding: 120px 5% 80px;
             text-align: center;
-            background: radial-gradient(circle at top right, #1c2128, #0a0c10);
+            position: relative;
         }
-        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; background: linear-gradient(to right, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; }
+        .hero h1 { 
+            font-size: 4.5rem; 
+            margin-bottom: 25px; 
+            font-weight: 800; 
+            line-height: 1;
+            background: linear-gradient(to bottom, #fff 40%, var(--primary-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 20px rgba(112, 0, 255, 0.4));
+        }
+        .hero p { font-size: 1.3rem; color: var(--text-dim); max-width: 800px; margin: 0 auto; font-weight: 500; }
 
-        .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
-        .text-block { 
+        /* BLOQUES DE TEXTO TIPO "DASHBOARD" */
+        .glass-panel { 
             background: var(--card-bg); 
-            padding: 40px; 
-            border-radius: 20px; 
-            border: 1px solid #30363d; 
+            padding: 50px; 
+            border-radius: 30px; 
+            border: 1px solid var(--glass-border); 
             margin-bottom: 60px;
             text-align: justify;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            position: relative;
         }
-        .text-block h2 { color: var(--primary); margin-bottom: 25px; font-size: 2rem; border-left: 4px solid var(--primary); padding-left: 20px; }
-        .text-block p { margin-bottom: 20px; color: #c9d1d9; }
+        .glass-panel::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            border-radius: 30px; background: linear-gradient(45deg, transparent, rgba(0, 242, 255, 0.05), transparent);
+            pointer-events: none;
+        }
+        .glass-panel h2 { color: var(--neon-cyan); margin-bottom: 30px; font-size: 2.2rem; display: flex; align-items: center; gap: 15px; }
+        .glass-panel p { color: #d0d0e0; font-size: 1.1rem; margin-bottom: 20px; }
 
-        .math-focus {
+        /* FORMULA MAGENTA NEÓN */
+        .math-display {
             text-align: center;
-            margin: 60px 0;
+            margin: 40px 0;
             padding: 40px;
-            background: rgba(0, 242, 255, 0.03);
-            border-radius: 24px;
-            border: 1px dashed var(--primary);
+            background: rgba(112, 0, 255, 0.1);
+            border-radius: 20px;
+            border: 1px solid var(--primary-purple);
+            box-shadow: 0 0 30px rgba(112, 0, 255, 0.2);
         }
-        .formula { font-family: 'JetBrains Mono', monospace; font-size: 2.5rem; color: var(--primary); margin: 30px 0; display: block; }
+        .math-display code { 
+            font-family: 'JetBrains Mono', monospace; 
+            font-size: 3rem; 
+            color: var(--neon-cyan);
+            text-shadow: 0 0 15px rgba(0, 242, 255, 0.5);
+        }
 
-        /* MULTIMEDIA: VIDEO Y QR */
-        .media-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 30px; margin-bottom: 60px; }
-        @media (max-width: 850px) { .media-grid { grid-template-columns: 1fr; } }
+        /* GRID MULTIMEDIA */
+        .media-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 40px; margin-bottom: 60px; }
+        @media (max-width: 900px) { .media-grid { grid-template-columns: 1fr; } }
 
-        .video-wrapper { border-radius: 20px; overflow: hidden; border: 1px solid #30363d; background: #000; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        video { width: 100%; display: block; }
+        .video-wrapper { 
+            border-radius: 25px; 
+            overflow: hidden; 
+            border: 1px solid var(--glass-border);
+            background: #000;
+            box-shadow: 0 0 40px rgba(112, 0, 255, 0.3);
+        }
+        video { width: 100%; height: 100%; display: block; }
 
-        .qr-card { background: #fff; color: #000; padding: 30px; border-radius: 20px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        #qrcode { margin: 15px 0; }
+        .qr-card { 
+            background: #fff; 
+            padding: 40px; 
+            border-radius: 25px; 
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            box-shadow: 0 0 30px var(--primary-purple);
+        }
+        #qrcode { margin-bottom: 20px; }
+        .qr-card h3 { color: #000; font-weight: 800; font-size: 1.2rem; }
 
-        /* SIMULACIÓN Y LAB */
-        .lab { background: var(--card-bg); padding: 50px; border-radius: 24px; border: 1px solid var(--primary); margin-bottom: 60px; box-shadow: 0 0 40px rgba(0, 242, 255, 0.05); }
-        .lab-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; }
+        /* SIMULADOR CIBERNETICO */
+        .lab-box { 
+            background: linear-gradient(145deg, #0d0a1a, #030008);
+            padding: 60px; 
+            border-radius: 35px; 
+            border: 1px solid var(--neon-cyan);
+            box-shadow: 0 0 50px rgba(0, 242, 255, 0.1);
+        }
+        .lab-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
         @media (max-width: 850px) { .lab-grid { grid-template-columns: 1fr; } }
+
+        .input-group { margin-bottom: 30px; }
+        .input-group label { color: var(--neon-cyan); font-weight: 700; margin-bottom: 12px; display: block; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+        input { 
+            width: 100%; padding: 18px; background: #100a1a; border: 1px solid var(--glass-border); 
+            color: #fff; border-radius: 15px; font-size: 1.2rem; transition: 0.3s;
+            outline: none;
+        }
+        input:focus { border-color: var(--neon-cyan); box-shadow: 0 0 15px rgba(0, 242, 255, 0.2); }
         
-        label { color: var(--primary); font-weight: bold; margin-bottom: 5px; display: block; }
-        input { width: 100%; padding: 15px; background: #0d1117; border: 1px solid #30363d; color: white; border-radius: 10px; margin-bottom: 20px; outline: none; }
-        input:focus { border-color: var(--primary); }
-        
-        button { width: 100%; padding: 20px; background: var(--primary); color: #000; border: none; border-radius: 10px; font-weight: 800; cursor: pointer; text-transform: uppercase; transition: 0.3s; }
-        button:hover { filter: brightness(1.1); box-shadow: 0 0 20px var(--primary); }
+        button { 
+            width: 100%; padding: 22px; background: var(--primary-purple); color: #fff; 
+            border: none; border-radius: 15px; font-weight: 800; cursor: pointer;
+            text-transform: uppercase; letter-spacing: 3px; font-size: 1rem; transition: 0.4s;
+        }
+        button:hover { background: var(--neon-cyan); color: #000; transform: scale(1.02); box-shadow: 0 0 30px var(--neon-cyan); }
 
-        #res-num { font-size: 5rem; color: var(--primary); font-weight: 800; display: block; }
+        .res-circle { text-align: center; }
+        #res-num { font-size: 6rem; font-weight: 900; color: var(--neon-cyan); line-height: 1; }
 
-        .team-section { text-align: center; padding: 40px; border-top: 1px solid #30363d; margin-top: 40px; }
-        .member-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 20px; }
-        .member { background: #21262d; padding: 8px 20px; border-radius: 30px; font-size: 0.9rem; border: 1px solid #30363d; }
-
-        footer { text-align: center; padding: 40px; color: var(--text-dim); font-size: 0.8rem; }
+        /* FOOTER */
+        footer { 
+            text-align: center; padding: 80px 20px; 
+            border-top: 1px solid var(--glass-border); 
+            background: #030008; color: var(--text-dim);
+        }
+        .espoch-badge { background: #ff3e3e; color: #fff; padding: 5px 15px; border-radius: 30px; font-size: 0.8rem; font-weight: 800; }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo"><i class="fas fa-industry"></i> Mantenimiento<span>Industrial</span> <div class="espoch-tag">ESPOCH</div></div>
-        <div style="color: var(--text-dim); font-size: 0.8rem; font-weight: 600;">GRUPO 4 - FACULTAD DE MECÁNICA</div>
+        <div class="logo">
+            <i class="fas fa-microchip" style="color: var(--neon-cyan);"></i> 
+            <span>Reliability</span>Dashboard
+        </div>
+        <div class="espoch-badge">GRUPO 4 - ESPOCH</div>
     </header>
 
     <section class="hero">
-        <h1>Gestión de Confiabilidad Industrial</h1>
-        <p>Un análisis técnico-científico sobre la optimización de procesos y la vida útil de activos industriales.</p>
+        <p style="color: var(--primary-purple); font-weight: 800; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 10px;">Ingeniería de Mantenimiento</p>
+        <h1>Análisis de <br><span>Fiabilidad Industrial</span></h1>
+        <p>Modelado matemático y predictivo para la optimización estratégica de activos industriales críticos.</p>
     </section>
 
     <div class="container">
         
-        <article class="text-block">
-            <h2>El Mantenimiento Industrial</h2>
-            <p>El mantenimiento industrial es el conjunto de técnicas, procedimientos y actividades que se realizan para conservar máquinas, equipos e instalaciones en óptimas condiciones de funcionamiento. Su principal objetivo es prevenir fallas, reducir tiempos de parada y garantizar que los procesos productivos se desarrollen de manera segura y eficiente. Además, el mantenimiento industrial sirve para prolongar la vida útil de los equipos, disminuir costos de reparación, mejorar la productividad y asegurar la continuidad de las operaciones dentro de una empresa.</p>
-            <p>En la actualidad, las industrias dependen del correcto funcionamiento de sus sistemas mecánicos, eléctricos y automatizados, por lo que el mantenimiento se ha convertido en un área fundamental en sectores como la manufactura, minería, transporte, generación eléctrica y automatización industrial. También permite detectar problemas antes de que ocurran daños graves, evitando accidentes y pérdidas económicas que pueden afectar tanto a la producción como a la seguridad de los trabajadores.</p>
+        <article class="glass-panel">
+            <h2><i class="fas fa-cogs"></i> El Mantenimiento Industrial</h2>
+            <p>El mantenimiento industrial es el conjunto de técnicas, procedimientos y actividades que se realizan para conservar máquinas, equipos e instalaciones en óptimas condiciones de funcionamiento. Su principal objetivo es prevenir fallas, reducir tiempos de parada y garantizar que los procesos productivos se desarrollen de manera segura y eficiente.</p>
+            <p>Además, el mantenimiento industrial sirve para prolongar la vida útil de los equipos, disminuir costos de reparación, mejorar la productividad y asegurar la continuidad de las operaciones dentro de una empresa. En la actualidad, las industrias dependen del correcto funcionamiento de sus sistemas mecánicos, eléctricos y automatizados, por lo que el mantenimiento se ha convertido en un área fundamental en sectores como la manufactura, minería, transporte, generación eléctrica y automatización industrial.</p>
+            <p>También permite detectar problemas antes de que ocurran daños graves, evitando accidentes y pérdidas económicas que pueden afectar tanto a la producción como a la seguridad de los trabajadores. Por esta razón, las empresas implementan distintos tipos de mantenimiento, como el preventivo, predictivo y correctivo, con el fin de garantizar un mejor rendimiento y mayor confiabilidad de los equipos industriales.</p>
         </article>
 
-        <article class="text-block">
-            <h2>Fundamentos de la Ingeniería de Confiabilidad</h2>
-            <p>Dentro de este campo, la ecuación de fiabilidad es una de las herramientas matemáticas más importantes, ya que permite calcular la probabilidad de que un sistema continúe funcionando correctamente durante un intervalo de tiempo sin fallas.</p>
+        <article class="glass-panel">
+            <h2><i class="fas fa-square-root-variable"></i> Ingeniería de Confiabilidad</h2>
+            <p>Dentro de este campo, la ecuación de fiabilidad es una de las herramientas matemáticas más importantes del mantenimiento industrial y la ingeniería de confiabilidad, ya que permite calcular la probabilidad de que una máquina, equipo o sistema continúe funcionando correctamente durante un intervalo de tiempo determinado sin presentar fallas.</p>
             
-            <div class="math-focus">
-                <span class="formula">R(t) = e<sup>-∫<sub style="font-size: 0.6em;">0</sub><sup style="font-size: 0.6em;">t</sup> λ(x)dx</sup></span>
-                <p style="color: var(--primary); font-weight: bold;">Ecuación de Fiabilidad del Grupo 4</p>
+            <div class="math-display">
+                <code>R(t) = e<sup>-∫<sub style="font-size: 0.5em;">0</sub><sup style="font-size: 0.5em;">t</sup> λ(x)dx</sup></code>
             </div>
 
-            <p>En esta ecuación, <strong>R(t)</strong> representa la confiabilidad, mientras que <strong>λ(x)</strong> corresponde a la tasa de fallas. Gracias a esta herramienta, los ingenieros pueden estimar la vida útil, programar mantenimientos predictivos y optimizar el rendimiento de las máquinas basándose en datos reales y estudios estadísticos.</p>
+            <p>En esta ecuación, <strong>R(t)</strong> representa la confiabilidad del sistema, mientras que <strong>λ(x)</strong> corresponde a la tasa de fallas o frecuencia con la que pueden ocurrir averías a lo largo del tiempo. Su aplicación es fundamental en industrias donde una falla inesperada puede generar pérdidas económicas, accidentes laborales o interrupciones en la producción.</p>
+            <p>Gracias a esta ecuación, los ingenieros pueden analizar el comportamiento de los equipos, estimar su vida útil, programar mantenimientos preventivos y predictivos, reducir costos de reparación y optimizar el rendimiento de las máquinas. Además, esta herramienta matemática permite realizar estudios estadísticos sobre el desempeño de los sistemas industriales, facilitando la toma de decisiones técnicas y administrativas basadas en datos reales.</p>
         </article>
 
-        <h2 style="text-align: center; margin-bottom: 25px; color: var(--primary);">Demostración Multimedia</h2>
         <div class="media-grid">
             <div class="video-wrapper">
-                <video controls poster="https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1200">
+                <video controls poster="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1000">
                     <source src="video_fiabilidad.mp4" type="video/mp4">
-                    Tu navegador no soporta el video.
                 </video>
-                <div style="padding: 10px; background: #161b22; text-align: center; font-size: 0.8rem;">
-                    Video Técnico - Aplicación de la Ecuación
-                </div>
             </div>
             <div class="qr-card">
-                <h3 style="margin-bottom: 5px;">Código QR del Sitio</h3>
+                <h3>ESCANEAR DASHBOARD</h3>
                 <div id="qrcode"></div>
-                <span style="font-weight: 800; color: #333;">ESCANEAME</span>
+                <p style="color: #666; font-size: 0.8rem; font-weight: 700;">GRUPO 4 - FACULTAD DE MECÁNICA</p>
             </div>
         </div>
 
-        <section class="lab">
-            <h2 style="text-align: center; margin-bottom: 40px; color: var(--primary);">Simulador de Probabilidad de Supervivencia</h2>
+        <section class="lab-box">
+            <h2 style="color: var(--neon-cyan); text-align: center; margin-bottom: 40px; font-size: 2rem;">Simulador Predictivo R(t)</h2>
             <div class="lab-grid">
-                <div>
-                    <label>MTBF (Vida Media en Horas)</label>
-                    <input type="number" id="mtbf" value="8000">
-                    <label>Tiempo de Misión (t en Horas)</label>
-                    <input type="number" id="time" value="1500">
-                    <button onclick="calcular()">Calcular Fiabilidad Ahora</button>
+                <div class="form-side">
+                    <div class="input-group">
+                        <label>MTBF (Vida Media en Horas)</label>
+                        <input type="number" id="mtbf_s" value="8000">
+                    </div>
+                    <div class="input-group">
+                        <label>Tiempo de Misión (t)</label>
+                        <input type="number" id="time_s" value="1500">
+                    </div>
+                    <button onclick="ejecutarSimulacion()">Ejecutar Algoritmo</button>
                 </div>
-                <div style="text-align: center;">
-                    <p style="font-weight: bold; font-size: 0.8rem; letter-spacing: 2px;">R(t) CALCULADO</p>
+                <div class="res-circle">
+                    <p style="color: var(--text-dim); font-size: 0.8rem; letter-spacing: 3px; margin-bottom: 10px;">PROBABILIDAD DE SUPERVIVENCIA</p>
                     <span id="res-num">0%</span>
-                    <div style="height: 250px;"><canvas id="mainChart"></canvas></div>
+                    <div style="height: 250px; margin-top: 20px;">
+                        <canvas id="chart_s"></canvas>
+                    </div>
                 </div>
-            </div>
-        </section>
-
-        <section class="team-section">
-            <h3>Grupo 4 - Ingeniería en Mantenimiento Industrial</h3>
-            <div class="member-list">
-                <div class="member">Baque Eduardo</div>
-                <div class="member">Guamán Cristofer</div>
-                <div class="member">Quevedo Cristhofer</div>
-                <div class="member">Macas Michael</div>
-                <div class="member">Pinduisaca Jhon</div>
             </div>
         </section>
 
     </div>
 
     <footer>
-        <p>ESPOCH - Facultad de Mecánica | Escuela de Mantenimiento | 2026</p>
+        <p><strong>ESCUELA SUPERIOR POLITÉCNICA DE CHIMBORAZO</strong></p>
+        <p style="margin: 10px 0;">Facultad de Mecánica | Ingeniería de Mantenimiento | 2026</p>
+        <div style="margin-top: 20px; opacity: 0.5; font-size: 0.7rem; letter-spacing: 2px;">MODELO MATEMÁTICO GRUPO 4</div>
     </footer>
 
     <script>
-        let myChart;
-        function calcular() {
-            const mtbf = parseFloat(document.getElementById('mtbf').value);
-            const t = parseFloat(document.getElementById('time').value);
+        let myChartS;
+
+        function ejecutarSimulacion() {
+            const mtbf = parseFloat(document.getElementById('mtbf_s').value);
+            const t = parseFloat(document.getElementById('time_s').value);
             const lambda = 1 / mtbf;
             const r = Math.exp(-lambda * t);
-            document.getElementById('res-num').innerText = (r * 100).toFixed(1) + "%";
             
-            // Color dinámico según criticidad
-            const display = document.getElementById('res-num');
-            if(r < 0.6) display.style.color = "#ff3e3e";
-            else if(r < 0.85) display.style.color = "#ffa500";
-            else display.style.color = "#00f2ff";
+            const resDisplay = document.getElementById('res-num');
+            resDisplay.innerText = (r * 100).toFixed(1) + "%";
+            
+            // Color según nivel de riesgo
+            if(r < 0.6) resDisplay.style.color = "#ff3e3e";
+            else if(r < 0.85) resDisplay.style.color = "#ffa500";
+            else resDisplay.style.color = "#00f2ff";
 
-            dibujarGrafica(lambda, t);
+            dibujarChart(lambda, t);
         }
 
-        function dibujarGrafica(lambda, tUser) {
-            const ctx = document.getElementById('mainChart').getContext('2d');
-            const labels = []; const points = []; const maxTime = tUser * 2.5;
-            for(let i=0; i <= maxTime; i += maxTime/20) {
+        function dibujarChart(lambda, tSelect) {
+            const ctx = document.getElementById('chart_s').getContext('2d');
+            const labels = []; const points = []; const range = tSelect * 2.5;
+
+            for(let i=0; i <= range; i += range/20) {
                 labels.push(Math.round(i));
                 points.push((Math.exp(-lambda * i) * 100).toFixed(2));
             }
-            if(myChart) myChart.destroy();
-            myChart = new Chart(ctx, {
+
+            if(myChartS) myChartS.destroy();
+            myChartS = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: 'R(t) %',
                         data: points,
-                        borderColor: '#00f2ff',
-                        backgroundColor: 'rgba(0, 242, 255, 0.1)',
+                        borderColor: '#7000ff',
+                        backgroundColor: 'rgba(112, 0, 255, 0.1)',
                         fill: true, tension: 0.4, pointRadius: 0
                     }]
                 },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+                options: { 
+                    responsive: true, maintainAspectRatio: false, 
+                    plugins: { legend: { display: false } },
+                    scales: { 
+                        x: { ticks: { color: '#666' }, grid: { display: false } },
+                        y: { beginAtZero: true, max: 100, ticks: { color: '#666' }, grid: { color: 'rgba(112,0,255,0.1)' } }
+                    }
+                }
             });
         }
 
         window.onload = () => {
             new QRCode(document.getElementById("qrcode"), {
                 text: window.location.href,
-                width: 150, height: 150
+                width: 180, height: 180,
+                colorDark : "#030008", colorLight : "#ffffff"
             });
-            calcular();
+            ejecutarSimulacion();
         };
     </script>
 </body>
