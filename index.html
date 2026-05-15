@@ -21,7 +21,7 @@
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Urbanist', sans-serif; background-color: var(--dark-bg); color: var(--text-main); line-height: 1.6; }
+        body { font-family: 'Urbanist', sans-serif; background-color: var(--dark-bg); color: var(--text-main); line-height: 1.7; }
 
         header {
             background: rgba(10, 12, 16, 0.95);
@@ -36,164 +36,136 @@
         .espoch-tag { background: var(--secondary); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.7rem; font-weight: bold; }
 
         .hero {
-            padding: 100px 5%;
+            padding: 100px 5% 60px;
             text-align: center;
             background: radial-gradient(circle at top right, #1c2128, #0a0c10);
         }
-        .hero h1 { font-size: 4rem; margin-bottom: 20px; background: linear-gradient(to right, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; background: linear-gradient(to right, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 800; }
 
         .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
 
-        /* SECCIONES INFORMATIVAS */
-        section { margin-bottom: 100px; }
-        h2.section-title { font-size: 2.5rem; color: var(--primary); margin-bottom: 40px; text-align: center; }
+        .text-block { 
+            background: var(--card-bg); 
+            padding: 40px; 
+            border-radius: 20px; 
+            border: 1px solid #30363d; 
+            margin-bottom: 60px;
+            text-align: justify;
+        }
+        .text-block h2 { color: var(--primary); margin-bottom: 25px; font-size: 2rem; border-left: 4px solid var(--primary); padding-left: 20px; }
+        .text-block p { margin-bottom: 20px; color: #c9d1d9; }
 
-        .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .card { background: var(--card-bg); padding: 35px; border-radius: 16px; border: 1px solid #30363d; transition: 0.3s; }
-        .card:hover { border-color: var(--primary); transform: translateY(-5px); }
-        .card i { font-size: 2.5rem; color: var(--primary); margin-bottom: 20px; }
-        
-        /* TABLA COMPARATIVA */
-        .table-container { overflow-x: auto; background: var(--card-bg); border-radius: 16px; border: 1px solid #30363d; padding: 20px; }
-        table { width: 100%; border-collapse: collapse; text-align: left; }
-        th { color: var(--primary); padding: 15px; border-bottom: 2px solid #30363d; }
-        td { padding: 15px; border-bottom: 1px solid #30363d; }
+        .math-focus {
+            text-align: center;
+            margin: 60px 0;
+            padding: 40px;
+            background: rgba(0, 242, 255, 0.03);
+            border-radius: 24px;
+            border: 1px dashed var(--primary);
+        }
+        .formula { font-family: 'JetBrains Mono', monospace; font-size: 2.5rem; color: var(--primary); margin: 30px 0; display: block; }
 
-        /* QR SECTION */
-        .qr-section { background: #fff; color: #000; padding: 40px; border-radius: 24px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 20px; }
-        #qrcode { padding: 20px; background: white; border-radius: 10px; }
+        /* MULTIMEDIA: VIDEO Y QR */
+        .media-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 30px; margin-bottom: 60px; }
+        @media (max-width: 850px) { .media-grid { grid-template-columns: 1fr; } }
 
-        /* FORMULA */
-        .math-box { font-size: 2.8rem; margin: 30px 0; padding: 30px; background: rgba(0, 242, 255, 0.05); border-radius: 15px; display: inline-block; font-family: 'JetBrains Mono', monospace; color: var(--primary); }
-
-        .video-wrapper { border-radius: 24px; overflow: hidden; border: 2px solid #30363d; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        .video-wrapper { border-radius: 20px; overflow: hidden; border: 1px solid #30363d; background: #000; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         video { width: 100%; display: block; }
 
-        .lab { background: var(--card-bg); padding: 50px; border-radius: 24px; border: 1px solid var(--primary); }
-        .lab-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 50px; }
+        .qr-card { background: #fff; color: #000; padding: 30px; border-radius: 20px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        #qrcode { margin: 15px 0; }
+
+        /* SIMULACIÓN Y LAB */
+        .lab { background: var(--card-bg); padding: 50px; border-radius: 24px; border: 1px solid var(--primary); margin-bottom: 60px; box-shadow: 0 0 40px rgba(0, 242, 255, 0.05); }
+        .lab-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; }
         @media (max-width: 850px) { .lab-grid { grid-template-columns: 1fr; } }
+        
+        label { color: var(--primary); font-weight: bold; margin-bottom: 5px; display: block; }
+        input { width: 100%; padding: 15px; background: #0d1117; border: 1px solid #30363d; color: white; border-radius: 10px; margin-bottom: 20px; outline: none; }
+        input:focus { border-color: var(--primary); }
+        
+        button { width: 100%; padding: 20px; background: var(--primary); color: #000; border: none; border-radius: 10px; font-weight: 800; cursor: pointer; text-transform: uppercase; transition: 0.3s; }
+        button:hover { filter: brightness(1.1); box-shadow: 0 0 20px var(--primary); }
 
-        input { width: 100%; padding: 15px; background: #0d1117; border: 1px solid #30363d; color: white; border-radius: 10px; font-size: 1.1rem; }
-        button { width: 100%; padding: 20px; background: var(--primary); color: #000; border: none; border-radius: 10px; font-weight: 800; cursor: pointer; text-transform: uppercase; }
+        #res-num { font-size: 5rem; color: var(--primary); font-weight: 800; display: block; }
 
-        #res-num { font-size: 5.5rem; font-weight: 800; color: var(--primary); display: block; }
+        .team-section { text-align: center; padding: 40px; border-top: 1px solid #30363d; margin-top: 40px; }
+        .member-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 20px; }
+        .member { background: #21262d; padding: 8px 20px; border-radius: 30px; font-size: 0.9rem; border: 1px solid #30363d; }
 
-        .member-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 25px; }
-        .member { background: #21262d; padding: 8px 20px; border-radius: 30px; border: 1px solid #30363d; }
-
-        footer { text-align: center; padding: 60px; border-top: 1px solid #30363d; }
+        footer { text-align: center; padding: 40px; color: var(--text-dim); font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
     <header>
         <div class="logo"><i class="fas fa-industry"></i> Mantenimiento<span>Industrial</span> <div class="espoch-tag">ESPOCH</div></div>
-        <div style="color: var(--text-dim); font-size: 0.8rem;">FACULTAD DE MECÁNICA</div>
+        <div style="color: var(--text-dim); font-size: 0.8rem; font-weight: 600;">GRUPO 4 - FACULTAD DE MECÁNICA</div>
     </header>
 
     <section class="hero">
-        <h1>Ingeniería de Confiabilidad</h1>
-        <p>Portal Técnico del <strong>Grupo 4</strong>. Un análisis profundo sobre la gestión de activos, normativas ISO y modelos predictivos.</p>
+        <h1>Gestión de Confiabilidad Industrial</h1>
+        <p>Un análisis técnico-científico sobre la optimización de procesos y la vida útil de activos industriales.</p>
     </section>
 
     <div class="container">
         
-        <section id="intro">
-            <h2 class="section-title">Pilares del Mantenimiento Moderno</h2>
-            <div class="info-grid">
-                <div class="card">
-                    <i class="fas fa-tools"></i>
-                    <h3>Preventivo</h3>
-                    <p>Intervenciones programadas basadas en el tiempo o uso para evitar fallas antes de que ocurran.</p>
-                </div>
-                <div class="card">
-                    <i class="fas fa-satellite-dish"></i>
-                    <h3>Predictivo</h3>
-                    <p>Monitoreo en tiempo real de variables (vibración, temperatura) para intervenir justo antes del fallo.</p>
-                </div>
-                <div class="card">
-                    <i class="fas fa-brain"></i>
-                    <h3>Proactivo</h3>
-                    <p>Análisis de causa raíz para eliminar problemas de diseño o instalación de forma permanente.</p>
-                </div>
-            </div>
-        </section>
+        <article class="text-block">
+            <h2>El Mantenimiento Industrial</h2>
+            <p>El mantenimiento industrial es el conjunto de técnicas, procedimientos y actividades que se realizan para conservar máquinas, equipos e instalaciones en óptimas condiciones de funcionamiento. Su principal objetivo es prevenir fallas, reducir tiempos de parada y garantizar que los procesos productivos se desarrollen de manera segura y eficiente. Además, el mantenimiento industrial sirve para prolongar la vida útil de los equipos, disminuir costos de reparación, mejorar la productividad y asegurar la continuidad de las operaciones dentro de una empresa.</p>
+            <p>En la actualidad, las industrias dependen del correcto funcionamiento de sus sistemas mecánicos, eléctricos y automatizados, por lo que el mantenimiento se ha convertido en un área fundamental en sectores como la manufactura, minería, transporte, generación eléctrica y automatización industrial. También permite detectar problemas antes de que ocurran daños graves, evitando accidentes y pérdidas económicas que pueden afectar tanto a la producción como a la seguridad de los trabajadores.</p>
+        </article>
 
-        <section id="normas">
-            <h2 class="section-title">Normativas Internacionales</h2>
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Norma</th>
-                            <th>Enfoque Principal</th>
-                            <th>Aplicación en Fiabilidad</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>ISO 55000</strong></td>
-                            <td>Gestión de Activos</td>
-                            <td>Optimización del ciclo de vida del equipo.</td>
-                        </tr>
-                        <tr>
-                            <td><strong>ISO 14224</strong></td>
-                            <td>Datos de Fiabilidad</td>
-                            <td>Base para recolectar datos de fallas estándar.</td>
-                        </tr>
-                        <tr>
-                            <td><strong>ISO 17359</strong></td>
-                            <td>Monitoreo de Condición</td>
-                            <td>Guía para mantenimiento predictivo.</td>
-                        </tr>
-                    </tbody>
-                </table>
+        <article class="text-block">
+            <h2>Fundamentos de la Ingeniería de Confiabilidad</h2>
+            <p>Dentro de este campo, la ecuación de fiabilidad es una de las herramientas matemáticas más importantes, ya que permite calcular la probabilidad de que un sistema continúe funcionando correctamente durante un intervalo de tiempo sin fallas.</p>
+            
+            <div class="math-focus">
+                <span class="formula">R(t) = e<sup>-∫<sub style="font-size: 0.6em;">0</sub><sup style="font-size: 0.6em;">t</sup> λ(x)dx</sup></span>
+                <p style="color: var(--primary); font-weight: bold;">Ecuación de Fiabilidad del Grupo 4</p>
             </div>
-        </section>
 
-        <section id="teoria" style="text-align:center;">
-            <h2 class="section-title">Fundamentos Matemáticos</h2>
-            <div class="math-box">
-                R(t) = e<sup>-∫<sub style="font-size: 0.5em;">0</sub><sup style="font-size: 0.5em;">t</sup> Z(x)dx</sup>
-            </div>
+            <p>En esta ecuación, <strong>R(t)</strong> representa la confiabilidad, mientras que <strong>λ(x)</strong> corresponde a la tasa de fallas. Gracias a esta herramienta, los ingenieros pueden estimar la vida útil, programar mantenimientos predictivos y optimizar el rendimiento de las máquinas basándose en datos reales y estudios estadísticos.</p>
+        </article>
+
+        <h2 style="text-align: center; margin-bottom: 25px; color: var(--primary);">Demostración Multimedia</h2>
+        <div class="media-grid">
             <div class="video-wrapper">
                 <video controls poster="https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1200">
                     <source src="video_fiabilidad.mp4" type="video/mp4">
+                    Tu navegador no soporta el video.
                 </video>
+                <div style="padding: 10px; background: #161b22; text-align: center; font-size: 0.8rem;">
+                    Video Técnico - Aplicación de la Ecuación
+                </div>
             </div>
-            <p style="margin-top:20px; color:var(--text-dim);">Explicación técnica detallada por el Grupo 4.</p>
-        </section>
+            <div class="qr-card">
+                <h3 style="margin-bottom: 5px;">Código QR del Sitio</h3>
+                <div id="qrcode"></div>
+                <span style="font-weight: 800; color: #333;">ESCANEAME</span>
+            </div>
+        </div>
 
-        <section id="simulador" class="lab">
-            <h2 style="text-align: center; margin-bottom: 40px; font-size: 2rem;">Simulador de Fiabilidad Real</h2>
+        <section class="lab">
+            <h2 style="text-align: center; margin-bottom: 40px; color: var(--primary);">Simulador de Probabilidad de Supervivencia</h2>
             <div class="lab-grid">
-                <div class="inputs">
-                    <div style="margin-bottom:20px;">
-                        <label>MTBF (Horas promedio de vida)</label>
-                        <input type="number" id="mtbf" value="8000">
-                    </div>
-                    <div style="margin-bottom:20px;">
-                        <label>Tiempo de Operación Crítica (t)</label>
-                        <input type="number" id="time" value="1200">
-                    </div>
-                    <button onclick="ejecutarAnalisis()">Analizar Supervivencia</button>
+                <div>
+                    <label>MTBF (Vida Media en Horas)</label>
+                    <input type="number" id="mtbf" value="8000">
+                    <label>Tiempo de Misión (t en Horas)</label>
+                    <input type="number" id="time" value="1500">
+                    <button onclick="calcular()">Calcular Fiabilidad Ahora</button>
                 </div>
                 <div style="text-align: center;">
+                    <p style="font-weight: bold; font-size: 0.8rem; letter-spacing: 2px;">R(t) CALCULADO</p>
                     <span id="res-num">0%</span>
-                    <div style="height: 300px;"><canvas id="mainChart"></canvas></div>
+                    <div style="height: 250px;"><canvas id="mainChart"></canvas></div>
                 </div>
             </div>
-        </section>
-
-        <section class="qr-section">
-            <h2 style="margin-bottom: 10px;">Acceso Rápido</h2>
-            <p>Escanea este código para acceder al dashboard desde cualquier dispositivo móvil.</p>
-            <div id="qrcode"></div>
-            <p style="font-weight: bold; margin-top: 10px;">Grupo 4 - ESPOCH</p>
         </section>
 
         <section class="team-section">
-            <h3>Integrantes del Grupo 4</h3>
+            <h3>Grupo 4 - Ingeniería en Mantenimiento Industrial</h3>
             <div class="member-list">
                 <div class="member">Baque Eduardo</div>
                 <div class="member">Guamán Cristofer</div>
@@ -206,17 +178,24 @@
     </div>
 
     <footer>
-        <p>ESPOCH | Facultad de Mecánica | Escuela de Mantenimiento Industrial | 2026</p>
+        <p>ESPOCH - Facultad de Mecánica | Escuela de Mantenimiento | 2026</p>
     </footer>
 
     <script>
         let myChart;
-        function ejecutarAnalisis() {
+        function calcular() {
             const mtbf = parseFloat(document.getElementById('mtbf').value);
             const t = parseFloat(document.getElementById('time').value);
             const lambda = 1 / mtbf;
             const r = Math.exp(-lambda * t);
             document.getElementById('res-num').innerText = (r * 100).toFixed(1) + "%";
+            
+            // Color dinámico según criticidad
+            const display = document.getElementById('res-num');
+            if(r < 0.6) display.style.color = "#ff3e3e";
+            else if(r < 0.85) display.style.color = "#ffa500";
+            else display.style.color = "#00f2ff";
+
             dibujarGrafica(lambda, t);
         }
 
@@ -233,28 +212,23 @@
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: 'Fiabilidad %',
+                        label: 'R(t) %',
                         data: points,
                         borderColor: '#00f2ff',
                         backgroundColor: 'rgba(0, 242, 255, 0.1)',
                         fill: true, tension: 0.4, pointRadius: 0
                     }]
                 },
-                options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true, max: 100 } } }
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
             });
         }
 
-        // Generar QR automáticamente al cargar
         window.onload = () => {
             new QRCode(document.getElementById("qrcode"), {
                 text: window.location.href,
-                width: 180,
-                height: 180,
-                colorDark : "#000000",
-                colorLight : "#ffffff",
-                correctLevel : QRCode.CorrectLevel.H
+                width: 150, height: 150
             });
-            ejecutarAnalisis();
+            calcular();
         };
     </script>
 </body>
