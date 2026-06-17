@@ -49,7 +49,7 @@
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-        /* HERO SECTION */
+        /* HERO SECTION - TÍTULO ACTUALIZADO */
         .hero { padding: 100px 5% 40px; text-align: center; }
         .hero h1 { 
             font-size: 4.5rem; margin-bottom: 20px; font-weight: 800; line-height: 1.1;
@@ -141,7 +141,7 @@
         #res-val { font-size: 5.5rem; font-weight: 900; color: var(--neon-cyan); line-height: 1; margin-bottom: 15px; display: block; }
         .chart-container { height: 220px; position: relative; width: 100%; }
 
-        /* COLUMNA 3: PANEL RENDER AJUSTADO CON EFECTO CLICK */
+        /* COLUMNA 3: PANEL VISUALIZADOR DE RENDERS MEJORADO */
         .model-3d-side { display: flex; flex-direction: column; justify-content: center; }
         .model-3d-container {
             width: 100%; height: 100%; min-height: 300px;
@@ -150,6 +150,7 @@
             padding: 20px; border: 2px solid var(--neon-cyan);
             box-shadow: 0 0 25px rgba(0, 242, 255, 0.15); position: relative;
         }
+        /* Ajuste perfecto del render al contenedor blanco */
         .model-3d-container img { 
             width: 100%; height: 100%; max-height: 220px; 
             object-fit: contain; border-radius: 8px; cursor: zoom-in;
@@ -162,7 +163,7 @@
             background: rgba(0, 242, 255, 0.3); padding: 3px 12px; border-radius: 6px;
         }
 
-        /* BADGE GENERAL */
+        /* FOOTER */
         footer { text-align: center; padding: 80px 20px; border-top: 1px solid var(--glass-border); background: rgba(3, 0, 8, 0.9); }
         .badge-espoch { background: #ff3e3e; color: #fff; padding: 6px 18px; border-radius: 30px; font-size: 0.8rem; font-weight: 800; margin-bottom: 20px; display: inline-block; }
     </style>
@@ -179,7 +180,7 @@
 
     <section class="hero">
         <p style="color: var(--primary-purple); font-weight: 800; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 15px;">Mantenimiento Industrial 4.0</p>
-        <h1>Ingeniería de <br><span>Confiabilidad</span></h1>
+        <h1>Ingeniería de <br><span>Fiabilidad</span></h1>
         <p>Optimización proactiva de activos mediante modelado probabilístico y estándares internacionales.</p>
     </section>
 
@@ -193,7 +194,7 @@
         
         <article class="glass-panel">
             <h2><i class="fas fa-tools"></i> Mantenimiento Industrial</h2>
-            <p>El mantenimiento industrial es el conjunto de técnicas, procedures y actividades que se realizan para conservar máquinas, equipos e instalaciones en óptimas condiciones de funcionamiento. Su principal objetivo es prevenir fallas, reducir tiempos de parada y garantizar que los procesos productivos se desarrollen de manera segura y eficiente.</p>
+            <p>El mantenimiento industrial es el conjunto de técnicas, procedimientos y actividades que se realizan para conservar máquinas, equipos e instalaciones en óptimas condiciones de funcionamiento. Su principal objetivo es prevenir fallas, reducir tiempos de parada y garantizar que los procesos productivos se desarrollen de manera segura y eficiente.</p>
             <p>Además, el mantenimiento industrial sirve para prolongar la vida útil de los equipos, disminuir costos de reparación, mejorar la productividad y asegurar la continuidad de las operaciones dentro de una empresa. En la actualidad, las industrias dependen del correcto funcionamiento de sus sistemas mecánicos, eléctricos y automatizados, por lo que el mantenimiento se ha convertido en un área fundamental en sectores como la manufactura, minería, transporte, generación eléctrica y automatización industrial.</p>
             <p>También permite detectar problemas antes de que ocurran daños graves, evitando accidentes y pérdidas económicas que pueden afectar tanto a la producción como a la seguridad de los trabajadores. Por esta razón, las empresas implementan distintos tipos de mantenimiento, como el preventivo, predictivo y correctivo, con el fin de garantizar un mejor rendimiento y mayor confiabilidad de los equipos industriales.</p>
         </article>
@@ -288,6 +289,7 @@
     <script>
         let mainChart;
 
+        // Base de datos de activos (Sincronizada con tus minúsculas en GitHub)
         const baseDeDatosActivos = {
             custom: { mtbf: 8500, time: 1200, img: "seleccion_general.png", lbl: "CONFIGURACIÓN MANUAL" },
             motor: { mtbf: 12000, time: 2000, img: "motor.png", lbl: "CAD 3D: MOTOR AC" },
@@ -367,7 +369,7 @@
             });
         }
 
-        // LÓGICA INTERACTIVA DEL MODAL CON ZOOM POR SCROLL
+        // INTERACTIVIDAD DE ZOOM Y MODAL EN PANTALLA COMPLETA
         const modal = document.getElementById('zoomModal');
         const modalImg = document.getElementById('imgZoomed');
         const mainImg = document.getElementById('asset_img');
