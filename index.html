@@ -50,143 +50,178 @@
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
         /* HERO SECTION */
-        .hero { padding: 80px 5% 40px; text-align: center; }
+        .hero { padding: 100px 5% 40px; text-align: center; }
         .hero h1 { 
-            font-size: 4rem; margin-bottom: 20px; font-weight: 800; line-height: 1.1;
+            font-size: 4.5rem; margin-bottom: 20px; font-weight: 800; line-height: 1.1;
             background: linear-gradient(to bottom, #fff 40%, var(--primary-purple));
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 15px rgba(112, 0, 255, 0.3));
         }
-        .hero p { font-size: 1.2rem; color: var(--text-dim); max-width: 800px; margin: 0 auto; }
+        .hero p { font-size: 1.3rem; color: var(--text-dim); max-width: 800px; margin: 0 auto; }
+
+        /* IMAGEN ILUSTRATIVA PRINCIPAL */
+        .featured-image-container { max-width: 1100px; margin: 0 auto 60px; padding: 0 20px; }
+        .featured-image {
+            width: 100%; height: 450px; border-radius: 30px; overflow: hidden;
+            border: 1px solid var(--glass-border); box-shadow: 0 0 40px rgba(112, 0, 255, 0.2); position: relative;
+        }
+        .featured-image img {
+            width: 100%; height: 100%; object-fit: cover; filter: brightness(0.6) contrast(1.1); transition: transform 0.5s ease;
+        }
+        .featured-image:hover img { transform: scale(1.05); }
 
         /* PANELES DE CONTENIDO */
         .glass-panel { 
-            background: var(--card-bg); padding: 40px; border-radius: 24px; 
-            border: 1px solid var(--glass-border); margin-bottom: 40px; text-align: justify;
+            background: var(--card-bg); padding: 50px; border-radius: 30px; 
+            border: 1px solid var(--glass-border); margin-bottom: 60px; text-align: justify;
+            backdrop-filter: blur(10px); box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
-        .glass-panel h2 { color: var(--neon-cyan); margin-bottom: 20px; font-size: 2rem; display: flex; align-items: center; gap: 15px; }
+        .glass-panel h2 { color: var(--neon-cyan); margin-bottom: 25px; font-size: 2.2rem; display: flex; align-items: center; gap: 15px; }
+        .glass-panel p { margin-bottom: 20px; font-size: 1.1rem; color: #d0d0e0; }
 
-        /* MATEMÁTICAS */
-        .math-box { text-align: center; margin: 30px 0; padding: 30px; background: rgba(112, 0, 255, 0.05); border-radius: 16px; border: 1px solid var(--primary-purple); }
-        .math-box code { font-family: 'JetBrains Mono', monospace; font-size: 2.4rem; color: var(--neon-cyan); }
+        /* MATEMÁTICAS NEÓN */
+        .math-box { text-align: center; margin: 40px 0; padding: 40px; background: rgba(112, 0, 255, 0.05); border-radius: 20px; border: 1px solid var(--primary-purple); }
+        .math-box code { font-family: 'JetBrains Mono', monospace; font-size: 2.8rem; color: var(--neon-cyan); text-shadow: 0 0 10px rgba(0, 242, 255, 0.5); }
 
         /* GRID MULTIMEDIA */
-        .media-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 30px; margin-bottom: 40px; }
-        .video-card { border-radius: 20px; overflow: hidden; border: 1px solid var(--glass-border); background: #000; }
+        .media-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 40px; margin-bottom: 60px; }
+        @media (max-width: 900px) { .media-grid { grid-template-columns: 1fr; } }
+        .video-card { border-radius: 25px; overflow: hidden; border: 1px solid var(--glass-border); background: #000; box-shadow: 0 0 30px rgba(112, 0, 255, 0.2); }
         video { width: 100%; display: block; }
-        .qr-card { background: #fff; padding: 30px; border-radius: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .qr-card { background: #fff; padding: 40px; border-radius: 25px; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 0 30px var(--primary-purple); }
         #qrcode { margin-bottom: 15px; }
         .qr-card p { color: #000; font-weight: 800; font-size: 0.9rem; }
 
-        /* ESTRUCTURA PERFECTA EN 3 COLUMNAS PARA EL SIMULADOR */
+        /* SIMULADOR DE FIABILIDAD CON ESTRUCTURA CORREGIDA EN 3 COLUMNAS */
         .simulator-card { 
             background: linear-gradient(145deg, #0d0a1a, #030008);
-            padding: 40px; 
-            border-radius: 24px; 
-            border: 1px solid var(--neon-cyan);
-            box-shadow: 0 0 40px rgba(0, 242, 255, 0.1);
-            margin-bottom: 60px;
+            padding: 50px; border-radius: 35px; border: 1px solid var(--neon-cyan);
+            box-shadow: 0 0 50px rgba(0, 242, 255, 0.1); margin-bottom: 80px;
         }
         
         .sim-grid-3col { 
             display: grid; 
-            grid-template-columns: 1fr 1.2fr 0.8fr; 
+            grid-template-columns: 1fr 1.1fr 0.9fr; 
             gap: 30px; 
             align-items: stretch; 
         }
         
-        @media (max-width: 1000px) { 
+        @media (max-width: 1050px) { 
             .sim-grid-3col { grid-template-columns: 1fr; } 
         }
 
-        /* COLUMNA 1: CONTROLES */
+        /* COLUMNA 1: FORMULARIO */
         .controls-side { display: flex; flex-direction: column; justify-content: center; }
-        .input-item { margin-bottom: 20px; }
-        .input-item label { color: var(--neon-cyan); font-weight: 700; margin-bottom: 8px; display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
+        .input-item { margin-bottom: 25px; }
+        .input-item label { color: var(--neon-cyan); font-weight: 700; margin-bottom: 10px; display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; }
         
         input, select { 
-            width: 100%; padding: 14px; background: #0a0614; border: 1px solid var(--glass-border); 
-            color: #fff; border-radius: 10px; font-size: 1rem; outline: none;
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            width: 100%; padding: 18px; background: #0a0614; border: 1px solid var(--glass-border); 
+            color: #fff; border-radius: 12px; font-size: 1.1rem; outline: none;
+            font-family: 'Plus Jakarta Sans', sans-serif; transition: 0.3s;
         }
-        input:focus, select:focus { border-color: var(--neon-cyan); }
+        input:focus, select:focus { border-color: var(--neon-cyan); box-shadow: 0 0 15px rgba(0, 242, 255, 0.1); }
+        select option { background: #0c081c; color: #fff; }
         
         .btn-glow { 
-            width: 100%; padding: 16px; background: var(--primary-purple); color: #fff; 
-            border: none; border-radius: 10px; font-weight: 800; cursor: pointer;
-            text-transform: uppercase; letter-spacing: 2px; transition: 0.3s;
+            width: 100%; padding: 20px; background: var(--primary-purple); color: #fff; 
+            border: none; border-radius: 12px; font-weight: 800; cursor: pointer;
+            text-transform: uppercase; letter-spacing: 3px; transition: 0.4s;
         }
-        .btn-glow:hover { background: var(--neon-cyan); color: #000; box-shadow: 0 0 20px var(--neon-cyan); }
+        .btn-glow:hover { background: var(--neon-cyan); color: #000; box-shadow: 0 0 30px var(--neon-cyan); transform: translateY(-2px); }
 
-        /* COLUMNA 2: GRÁFICA CENTRAL Y PORCENTAJE */
+        /* COLUMNA 2: PANTALLA CENTRAL DE GRÁFICA */
         .display-side {
             background: rgba(5, 2, 15, 0.6);
             border: 1px solid rgba(112, 0, 255, 0.2);
-            border-radius: 20px;
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            text-align: center;
+            border-radius: 24px; padding: 30px;
+            display: flex; flex-direction: column; justify-content: space-between; text-align: center;
         }
-        #res-val { font-size: 4.5rem; font-weight: 900; color: var(--neon-cyan); line-height: 1; margin-bottom: 15px; display: block; }
-        .chart-container { height: 200px; position: relative; width: 100%; }
+        #res-val { font-size: 5.5rem; font-weight: 900; color: var(--neon-cyan); line-height: 1; margin-bottom: 15px; display: block; }
+        .chart-container { height: 220px; position: relative; width: 100%; }
 
-        /* COLUMNA 3: PANEL RENDER 3D (TOTALMENTE INDEPENDIENTE A LA DERECHA) */
-        .model-3d-side {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+        /* COLUMNA 3: PANEL RENDER 3D AUTOESTABLE A LA DERECHA */
+        .model-3d-side { display: flex; flex-direction: column; justify-content: center; }
         .model-3d-container {
-            width: 100%;
-            height: 100%;
-            min-height: 280px;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 16px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            border: 2px solid var(--neon-cyan);
-            box-shadow: 0 0 20px rgba(0, 242, 255, 0.15);
-            position: relative;
+            width: 100%; height: 100%; min-height: 300px;
+            background: rgba(255, 255, 255, 0.95); border-radius: 16px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 20px; border: 2px solid var(--neon-cyan);
+            box-shadow: 0 0 25px rgba(0, 242, 255, 0.15); position: relative;
         }
-        .model-3d-container img {
-            max-width: 100%;
-            max-height: 190px;
-            object-fit: contain;
-            transition: transform 0.3s ease;
-        }
+        .model-3d-container img { max-width: 100%; max-height: 200px; object-fit: contain; transition: transform 0.3s ease; }
+        .model-3d-container:hover img { transform: scale(1.05); }
         .model-label {
-            position: absolute;
-            bottom: 12px;
-            font-size: 0.7rem;
-            font-weight: 800;
-            color: #030008;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            background: rgba(0, 242, 255, 0.3);
-            padding: 3px 12px;
-            border-radius: 6px;
+            position: absolute; bottom: 12px; font-size: 0.7rem; font-weight: 800;
+            color: #030008; letter-spacing: 1px; text-transform: uppercase;
+            background: rgba(0, 242, 255, 0.3); padding: 3px 12px; border-radius: 6px;
         }
 
         /* FOOTER */
-        footer { text-align: center; padding: 60px 20px; border-top: 1px solid var(--glass-border); background: rgba(3, 0, 8, 0.9); }
-        .badge-espoch { background: #ff3e3e; color: #fff; padding: 6px 18px; border-radius: 30px; font-size: 0.8rem; font-weight: 800; margin-bottom: 15px; display: inline-block; }
+        footer { text-align: center; padding: 80px 20px; border-top: 1px solid var(--glass-border); background: rgba(3, 0, 8, 0.9); }
+        .badge-espoch { background: #ff3e3e; color: #fff; padding: 6px 18px; border-radius: 30px; font-size: 0.8rem; font-weight: 800; margin-bottom: 20px; display: inline-block; }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo"><i class="fas fa-industry" style="color: var(--neon-cyan);"></i> <span>Reliability</span>Analytics</div>
+        <div class="logo">
+            <i class="fas fa-industry" style="color: var(--neon-cyan);"></i> 
+            <span>Reliability</span>Analytics
+        </div>
         <div class="badge-espoch">GRUPO 4 - MECÁNICA</div>
     </header>
 
-    <div class="container" style="margin-top: 40px;">
+    <section class="hero">
+        <p style="color: var(--primary-purple); font-weight: 800; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 15px;">Mantenimiento Industrial 4.0</p>
+        <h1>Ingeniería de <br><span>Confiabilidad</span></h1>
+        <p>Optimización proactiva de activos mediante modelado probabilístico y estándares internacionales.</p>
+    </section>
+
+    <div class="featured-image-container">
+        <div class="featured-image">
+            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070" alt="Mantenimiento Industrial Avanzado">
+        </div>
+    </div>
+
+    <div class="container">
         
+        <article class="glass-panel">
+            <h2><i class="fas fa-tools"></i> Mantenimiento Industrial</h2>
+            <p>El mantenimiento industrial es el conjunto de técnicas, procedures y actividades que se realizan para conservar máquinas, equipos e instalaciones en óptimas condiciones de funcionamiento. Su principal objetivo es prevenir fallas, reducir tiempos de parada y garantizar que los procesos productivos se desarrollen de manera segura y eficiente.</p>
+            <p>Además, el mantenimiento industrial sirve para prolongar la vida útil de los equipos, disminuir costos de reparación, mejorar la productividad y asegurar la continuidad de las operaciones dentro de una empresa. En la actualidad, las industrias dependen del correcto funcionamiento de sus sistemas mecánicos, eléctricos y automatizados, por lo que el mantenimiento se ha convertido en un área fundamental en sectores como la manufactura, minería, transporte, generación eléctrica y automatización industrial.</p>
+            <p>También permite detectar problemas antes de que ocurran daños graves, evitando accidentes y pérdidas económicas que pueden afectar tanto a la producción como a la seguridad de los trabajadores. Por esta razón, las empresas implementan distintos tipos de mantenimiento, como el preventivo, predictivo y correctivo, con el fin de garantizar un mejor rendimiento y mayor confiabilidad de los equipos industriales.</p>
+        </article>
+
+        <article class="glass-panel">
+            <h2><i class="fas fa-calculator"></i> Cálculo de Fiabilidad R(t)</h2>
+            <p>Dentro de este campo, la ecuación de fiabilidad es una de las herramientas matemáticas más importantes del mantenimiento industrial y la ingeniería de confiabilidad, ya que permite calcular la probabilidad de que una máquina, equipo o sistema continúe funcionando correctamente durante un intervalo de tiempo determinado sin presentar fallas.</p>
+            
+            <div class="math-box">
+                <code>R(t) = e<sup>-∫<sub style="font-size: 0.5em;">0</sub><sup style="font-size: 0.5em;">t</sup> λ(x)dx</sup></code>
+            </div>
+
+            <p>En esta ecuación, <strong>R(t)</strong> representa la confiabilidad del sistema, mientras que <strong>λ(x)</strong> corresponde a la tasa de fallas o frecuencia con la que pueden ocurrir averías a lo largo del tiempo. Su aplicación es fundamental en industrias donde una falla inesperada puede generar pérdidas económicas, accidentes laborales o interrupciones en la producción.</p>
+            <p>Gracias a esta ecuación, los ingenieros pueden analizar el comportamiento de los equipos, estimar su vida útil, programar mantenimientos preventivos y predictivos, reducir costos de reparación y optimizar el rendimiento de las máquinas. Además, esta herramienta permite realizar estudios estadísticos sobre el desempeño de los sistemas industriales, facilitando la toma de decisiones técnicas y administrativas basadas en datos reales.</p>
+        </article>
+
+        <div class="media-grid">
+            <div class="video-card">
+                <video controls poster="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1000">
+                    <source src="video_fiabilidad.mp4" type="video/mp4">
+                    Tu navegador no soporta video.
+                </video>
+            </div>
+            <div class="qr-card">
+                <h3>ESCANEAR PORTAL</h3>
+                <div id="qrcode"></div>
+                <p>GRUPO 4 - ESPOCH 2026</p>
+            </div>
+        </div>
+
         <section class="simulator-card">
-            <h2 style="color: var(--neon-cyan); text-align: center; margin-bottom: 35px; font-size: 2rem;">Simulador de Fiabilidad</h2>
+            <h2 style="color: var(--neon-cyan); text-align: center; margin-bottom: 45px; font-size: 2.2rem;">Simulador de Fiabilidad</h2>
             
             <div class="sim-grid-3col">
                 
@@ -215,7 +250,7 @@
                 
                 <div class="display-side">
                     <div>
-                        <p style="color: var(--text-dim); font-size: 0.75rem; letter-spacing: 3px; margin-bottom: 5px;">CONFIABILIDAD CALCULADA</p>
+                        <p style="color: var(--text-dim); font-size: 0.75rem; letter-spacing: 4px; margin-bottom: 5px;">CONFIABILIDAD CALCULADA</p>
                         <span id="res-val">0%</span>
                     </div>
                     <div class="chart-container">
@@ -235,10 +270,16 @@
 
     </div>
 
+    <footer>
+        <div class="badge-espoch">ESCUELA SUPERIOR POLÍTICA DE CHIMBORAZO</div>
+        <p style="color: #fff; font-weight: 700; font-size: 1.1rem; margin-top: 10px;">Facultad de Mecánica | Ingeniería de Mantenimiento</p>
+        <p style="margin-top: 20px; opacity: 0.5; font-size: 0.7rem; letter-spacing: 3px;">DESARROLLADO POR GRUPO 4 • 2026</p>
+    </footer>
+
     <script>
         let mainChart;
 
-        // Base de datos usando imágenes estables y optimizadas de servidores globales de desarrollo
+        // Base de datos de imágenes estables 
         const baseDeDatosActivos = {
             custom: {
                 mtbf: 8500, time: 1200, 
@@ -343,6 +384,11 @@
         }
 
         window.onload = () => {
+            new QRCode(document.getElementById("qrcode"), {
+                text: window.location.href,
+                width: 150, height: 150,
+                colorDark : "#030008", colorLight : "#ffffff"
+            });
             procesarCalculo();
         };
     </script>
