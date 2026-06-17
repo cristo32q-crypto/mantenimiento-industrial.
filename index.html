@@ -141,7 +141,7 @@
         #res-val { font-size: 5.5rem; font-weight: 900; color: var(--neon-cyan); line-height: 1; margin-bottom: 15px; display: block; }
         .chart-container { height: 220px; position: relative; width: 100%; }
 
-        /* COLUMNA 3: PANEL RENDER 3D A LA DERECHA */
+        /* COLUMNA 3: PANEL RENDER AJUSTADO CON EFECTO CLICK */
         .model-3d-side { display: flex; flex-direction: column; justify-content: center; }
         .model-3d-container {
             width: 100%; height: 100%; min-height: 300px;
@@ -150,15 +150,19 @@
             padding: 20px; border: 2px solid var(--neon-cyan);
             box-shadow: 0 0 25px rgba(0, 242, 255, 0.15); position: relative;
         }
-        .model-3d-container img { max-width: 100%; max-height: 200px; object-fit: contain; transition: transform 0.3s ease, opacity 0.15s ease; }
-        .model-3d-container:hover img { transform: scale(1.05); }
+        .model-3d-container img { 
+            width: 100%; height: 100%; max-height: 220px; 
+            object-fit: contain; border-radius: 8px; cursor: zoom-in;
+            transition: transform 0.3s ease, opacity 0.15s ease; 
+        }
+        .model-3d-container:hover img { transform: scale(1.03); }
         .model-label {
             position: absolute; bottom: 12px; font-size: 0.7rem; font-weight: 800;
             color: #030008; letter-spacing: 1px; text-transform: uppercase;
             background: rgba(0, 242, 255, 0.3); padding: 3px 12px; border-radius: 6px;
         }
 
-        /* FOOTER */
+        /* BADGE GENERAL */
         footer { text-align: center; padding: 80px 20px; border-top: 1px solid var(--glass-border); background: rgba(3, 0, 8, 0.9); }
         .badge-espoch { background: #ff3e3e; color: #fff; padding: 6px 18px; border-radius: 30px; font-size: 0.8rem; font-weight: 800; margin-bottom: 20px; display: inline-block; }
     </style>
@@ -189,7 +193,7 @@
         
         <article class="glass-panel">
             <h2><i class="fas fa-tools"></i> Mantenimiento Industrial</h2>
-            <p>El mantenimiento industrial es el conjunto de técnicas, procedimientos y actividades que se realizan para conservar máquinas, equipos e instalaciones en óptimas condiciones de funcionamiento. Su principal objetivo es prevenir fallas, reducir tiempos de parada y garantizar que los procesos productivos se desarrollen de manera segura y eficiente.</p>
+            <p>El mantenimiento industrial es el conjunto de técnicas, procedures y actividades que se realizan para conservar máquinas, equipos e instalaciones en óptimas condiciones de funcionamiento. Su principal objetivo es prevenir fallas, reducir tiempos de parada y garantizar que los procesos productivos se desarrollen de manera segura y eficiente.</p>
             <p>Además, el mantenimiento industrial sirve para prolongar la vida útil de los equipos, disminuir costos de reparación, mejorar la productividad y asegurar la continuidad de las operaciones dentro de una empresa. En la actualidad, las industrias dependen del correcto funcionamiento de sus sistemas mecánicos, eléctricos y automatizados, por lo que el mantenimiento se ha convertido en un área fundamental en sectores como la manufactura, minería, transporte, generación eléctrica y automatización industrial.</p>
             <p>También permite detectar problemas antes de que ocurran daños graves, evitando accidentes y pérdidas económicas que pueden afectar tanto a la producción como a la seguridad de los trabajadores. Por esta razón, las empresas implementan distintos tipos de mantenimiento, como el preventivo, predictivo y correctivo, con el fin de garantizar un mejor rendimiento y mayor confiabilidad de los equipos industriales.</p>
         </article>
@@ -202,7 +206,7 @@
                 <code>R(t) = e<sup>-∫<sub style="font-size: 0.5em;">0</sub><sup style="font-size: 0.5em;">t</sup> λ(x)dx</sup></code>
             </div>
 
-            <p>En esta ecuación, <strong>R(t)</strong> representa la confiabilidad del sistema, mientras que <strong>λ(x)</strong> corresponde a la tasa de fallas o frecuencia con la que pueden ocurir averías a lo largo del tiempo. Su aplicación es fundamental en industrias donde una falla inesperada puede generar pérdidas económicas, accidentes laborales o interrupciones en la producción.</p>
+            <p>En esta ecuación, <strong>R(t)</strong> representa la confiabilidad del sistema, mientras que <strong>λ(x)</strong> corresponde a la tasa de fallas o frecuencia con la que pueden ocurrir averías a lo largo del tiempo. Su aplicación es fundamental en industrias donde una falla inesperada puede generar pérdidas económicas, accidentes laborales o interrupciones en la producción.</p>
             <p>Gracias a esta ecuación, los ingenieros pueden analizar el comportamiento de los equipos, estimar su vida útil, programar mantenimientos preventivos y predictivos, reducir costos de reparación y optimizar el rendimiento de las máquinas. Además, esta herramienta permite realizar estudios estadísticos sobre el desempeño de los sistemas industriales, facilitando la toma de decisiones técnicas y administrativas basadas en datos reales.</p>
         </article>
 
@@ -270,6 +274,11 @@
 
     </div>
 
+    <div id="zoomModal" style="display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(3, 0, 8, 0.95); backdrop-filter: blur(10px); align-items: center; justify-content: center; cursor: zoom-out;">
+        <span style="position: absolute; top: 20px; right: 30px; color: #00f2ff; font-size: 40px; font-weight: bold; cursor: pointer; font-family: sans-serif;">&times;</span>
+        <img id="imgZoomed" src="" style="max-width: 90%; max-height: 85%; object-fit: contain; border-radius: 12px; box-shadow: 0 0 50px rgba(0, 242, 255, 0.25); transition: transform 0.2s ease; cursor: grab;">
+    </div>
+
     <footer>
         <div class="badge-espoch">ESCUELA SUPERIOR POLÍTICA DE CHIMBORAZO</div>
         <p style="color: #fff; font-weight: 700; font-size: 1.1rem; margin-top: 10px;">Facultad de Mecánica | Ingeniería de Mantenimiento</p>
@@ -279,38 +288,13 @@
     <script>
         let mainChart;
 
-        // Base de datos sincronizada en minúsculas con tus archivos de GitHub
         const baseDeDatosActivos = {
-            custom: {
-                mtbf: 8500, time: 1200, 
-                img: "seleccion_general.png", 
-                lbl: "CONFIGURACIÓN MANUAL"
-            },
-            motor: { 
-                mtbf: 12000, time: 2000, 
-                img: "motor.png", 
-                lbl: "CAD 3D: MOTOR AC" 
-            },
-            bomba: { 
-                mtbf: 7400, time: 1500, 
-                img: "bomba.png", 
-                lbl: "VISTA CAD: BOMBA DE PROCESO" 
-            },
-            compresor: { 
-                mtbf: 5500, time: 1000, 
-                img: "compresor.png", 
-                lbl: "RENDER: COMPRESOR INDUSTRIAL" 
-            },
-            turbina: { 
-                mtbf: 22000, time: 5000, 
-                img: "turbina.png", 
-                lbl: "SECCIÓN 3D: TURBINA" 
-            },
-            reductor: { 
-                mtbf: 9800, time: 1500, 
-                img: "reductor.png", 
-                lbl: "CORTE MECÁNICO: REDUCTOR" 
-            }
+            custom: { mtbf: 8500, time: 1200, img: "seleccion_general.png", lbl: "CONFIGURACIÓN MANUAL" },
+            motor: { mtbf: 12000, time: 2000, img: "motor.png", lbl: "CAD 3D: MOTOR AC" },
+            bomba: { mtbf: 7400, time: 1500, img: "bomba.png", lbl: "VISTA CAD: BOMBA DE PROCESO" },
+            compresor: { mtbf: 5500, time: 1000, img: "compresor.png", lbl: "RENDER: COMPRESOR INDUSTRIAL" },
+            turbina: { mtbf: 22000, time: 5000, img: "turbina.png", lbl: "SECCIÓN 3D: TURBINA" },
+            reductor: { mtbf: 9800, time: 1500, img: "reductor.png", lbl: "CORTE MECÁNICO: REDUCTOR" }
         };
 
         function cargarDatosActivo() {
@@ -382,6 +366,36 @@
                 }
             });
         }
+
+        // LÓGICA INTERACTIVA DEL MODAL CON ZOOM POR SCROLL
+        const modal = document.getElementById('zoomModal');
+        const modalImg = document.getElementById('imgZoomed');
+        const mainImg = document.getElementById('asset_img');
+        let scale = 1;
+
+        mainImg.onclick = function() {
+            modal.style.display = "flex";
+            modalImg.src = this.src;
+            scale = 1;
+            modalImg.style.transform = `scale(${scale})`;
+        };
+
+        modal.onclick = function(e) {
+            if (e.target !== modalImg) {
+                modal.style.display = "none";
+            }
+        };
+
+        modalImg.onwheel = function(e) {
+            e.preventDefault();
+            if (e.deltaY < 0) {
+                scale += 0.15;
+            } else {
+                scale -= 0.15;
+            }
+            scale = Math.min(Math.max(0.5, scale), 4); 
+            modalImg.style.transform = `scale(${scale})`;
+        };
 
         window.onload = () => {
             new QRCode(document.getElementById("qrcode"), {
