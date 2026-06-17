@@ -179,34 +179,36 @@
         /* VISUALIZADOR 3D INTEGRADO */
         .asset-preview-container {
             width: 100%;
-            height: 180px;
+            height: 220px;
             border-radius: 16px;
             overflow: hidden;
-            border: 1px dashed var(--glass-border);
+            border: 1px solid var(--neon-cyan);
             margin-top: 15px;
-            background: #020005;
+            background: #070412;
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
+            box-shadow: inset 0 0 20px rgba(0, 242, 255, 0.15);
         }
         .asset-preview-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: opacity 0.4s ease;
+            width: 90%;
+            height: 90%;
+            object-fit: contain;
+            transition: opacity 0.3s ease;
         }
         .preview-label {
             position: absolute;
             bottom: 10px;
             left: 10px;
-            background: rgba(0, 0, 0, 0.75);
+            background: rgba(3, 0, 8, 0.85);
             padding: 4px 12px;
             border-radius: 6px;
             font-size: 0.75rem;
             color: var(--neon-cyan);
             border: 1px solid var(--neon-cyan);
             letter-spacing: 1px;
+            font-weight: 700;
         }
 
         /* FOOTER */
@@ -257,8 +259,8 @@
                 <code>R(t) = e<sup>-∫<sub style="font-size: 0.5em;">0</sub><sup style="font-size: 0.5em;">t</sup> λ(x)dx</sup></code>
             </div>
 
-            <p>En esta ecuación, <strong>R(t)</strong> representa la confiabilidad del sistema, mientras que <strong>λ(x)</strong> corresponde a la tasa de fallas o frecuencia con la que pueden ocurrir averías a lo largo del tiempo. Su aplicación es fundamental en industrias donde una falla unexpected puede generar pérdidas económicas, accidentes laborales o interrupciones en la producción.</p>
-            <p>Gracias a esta ecuación, los ingenieros pueden analizar el comportamiento de los equipos, estimar su vida útil, programar mantenimientos preventivos y predictivos, reducir costos de reparación y optimizar el rendimiento de las máquinas. Además, esta herramienta permite realizar estudios estadísticos sobre el desempeño de los sistemas industriales, facilitando la toma de decisiones técnicas y administrativas basadas en datos reales.</p>
+            <p>En esta ecuación, <strong>R(t)</strong> representa la confiabilidad del sistema, mientras que <strong>λ(x)</strong> corresponde a la tasa de fallas o frecuencia con la que pueden ocurrir averías a lo largo del tiempo. Su aplicación es fundamental en industrias donde una falla inesperada puede generar pérdidas económicas, accidentes laborales o interrupciones en la producción.</p>
+            <p>Gracias a esta ecuación, los ingenieros pueden analizar el comportamiento de los equipos, estimar su vida útil, programar mantenimientos preventivos y predictivos, reduce costos de reparación y optimizar el rendimiento de las máquinas. Además, esta herramienta permite realizar estudios estadísticos sobre el desempeño de los sistemas industriales, facilitando la toma de decisiones técnicas y administrativas basadas en datos reales.</p>
         </article>
 
         <div class="media-grid">
@@ -291,8 +293,8 @@
                         </select>
                         
                         <div class="asset-preview-container">
-                            <img id="asset_img" src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=500" alt="Esquema Técnico">
-                            <span id="asset_lbl" class="preview-label">MONITOR RECONOCIMIENTO</span>
+                            <img id="asset_img" src="https://cdn-icons-png.flaticon.com/512/3557/3557618.png" alt="Esquema Técnico" style="filter: hue-rotate(180deg) brightness(1.5);">
+                            <span id="asset_lbl" class="preview-label">SISTEMA: EN ESPERA</span>
                         </div>
                     </div>
                     <div class="input-item">
@@ -326,37 +328,37 @@
     <script>
         let mainChart;
 
-        // Base de datos de activos y sus renders e imágenes técnicas correspondientes
+        // Base de datos de activos actualizada con diagramas técnicos esquemáticos/Cuts/CAD transparentes
         const baseDeDatosActivos = {
             custom: {
                 mtbf: 8500, time: 1200, 
-                img: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=500", 
-                lbl: "MONITOR RECONOCIMIENTO"
+                img: "https://cdn-icons-png.flaticon.com/512/3557/3557618.png", 
+                lbl: "SISTEMA: EN ESPERA"
             },
             motor: { 
                 mtbf: 12000, time: 2000, 
-                img: "https://images.unsplash.com/photo-1620714223084-8fcacc6dfd8d?q=80&w=500", 
-                lbl: "VISTA CAD 3D: MOTOR TRIFÁSICO" 
+                img: "https://cdn-icons-png.flaticon.com/512/5760/5760166.png", 
+                lbl: "PLANO ISOMÉTRICO: MOTOR ELÉCTRICO" 
             },
             bomba: { 
                 mtbf: 7400, time: 1500, 
-                img: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=500", 
-                lbl: "MODELO 3D: BOMBA CENTRÍFUGA" 
+                img: "https://cdn-icons-png.flaticon.com/512/9334/9334460.png", 
+                lbl: "DIAGRAMA CAD: BOMBA CENTRÍFUGA" 
             },
             compresor: { 
                 mtbf: 5500, time: 1000, 
-                img: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=500", 
-                lbl: "VISTA INTERNA: COMPRESOR TORNILLO" 
+                img: "https://cdn-icons-png.flaticon.com/512/2830/2830284.png", 
+                lbl: "ESQUEMA TÉCNICO: COMPRESOR" 
             },
             turbina: { 
                 mtbf: 22000, time: 5000, 
-                img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=500", 
-                lbl: "RENDER INGENIERÍA: TURBINA VAPOR" 
+                img: "https://cdn-icons-png.flaticon.com/512/2921/2921937.png", 
+                lbl: "VISTA DE SECCIÓN: TURBINA" 
             },
             reductor: { 
                 mtbf: 9800, time: 1500, 
-                img: "https://images.unsplash.com/photo-1537462715879-360eeb61a0bc?q=80&w=500", 
-                lbl: "SISTEMA MECÁNICO: REDUCTOR ENGRANAJES" 
+                img: "https://cdn-icons-png.flaticon.com/512/5027/5027376.png", 
+                lbl: "CORTE MECÁNICO: REDUCTOR" 
             }
         };
 
@@ -369,14 +371,22 @@
             document.getElementById('inp_mtbf').value = datos.mtbf;
             document.getElementById('inp_time').value = datos.time;
             
-            // EFECTO DINÁMICO: Cambia la imagen técnica y la etiqueta de render 3D
+            // Cambia la imagen técnica y la etiqueta al instante
             const imgElement = document.getElementById('asset_img');
-            imgElement.style.opacity = 0; // Transición suave
+            imgElement.style.opacity = 0; 
             setTimeout(() => {
                 imgElement.src = datos.img;
                 document.getElementById('asset_lbl').innerText = datos.lbl;
+                
+                // Si es un activo real, aplicamos un filtro estético cian neón para que parezca un holograma CAD
+                if(activoSeleccionado !== 'custom') {
+                    imgElement.style.filter = "drop-shadow(0 0 8px #00f2ff) brightness(1.2)";
+                } else {
+                    imgElement.style.filter = "hue-rotate(180deg) brightness(1.5)";
+                }
+                
                 imgElement.style.opacity = 1;
-            }, 200);
+            }, 150);
 
             procesarCalculo(); 
         }
