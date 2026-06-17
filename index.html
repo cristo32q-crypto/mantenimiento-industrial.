@@ -145,12 +145,12 @@
         .model-3d-side { display: flex; flex-direction: column; justify-content: center; }
         .model-3d-container {
             width: 100%; height: 100%; min-height: 300px;
-            background: rgba(255, 255, 255, 0.95); border-radius: 16px;
+            background: #ffffff; border-radius: 16px;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             padding: 20px; border: 2px solid var(--neon-cyan);
             box-shadow: 0 0 25px rgba(0, 242, 255, 0.15); position: relative;
         }
-        .model-3d-container img { max-width: 100%; max-height: 200px; object-fit: contain; transition: transform 0.3s ease; }
+        .model-3d-container img { max-width: 100%; max-height: 200px; object-fit: contain; transition: transform 0.3s ease, opacity 0.15s ease; }
         .model-3d-container:hover img { transform: scale(1.05); }
         .model-label {
             position: absolute; bottom: 12px; font-size: 0.7rem; font-weight: 800;
@@ -189,7 +189,7 @@
         
         <article class="glass-panel">
             <h2><i class="fas fa-tools"></i> Mantenimiento Industrial</h2>
-            <p>El mantenimiento industrial es el conjunto de técnicas, procedures y actividades que se realizan para conservar máquinas, equipos e instalaciones en óptimas condiciones de funcionamiento. Su principal objetivo es prevenir fallas, reducir tiempos de parada y garantizar que los procesos productivos se desarrollen de manera segura y eficiente.</p>
+            <p>El mantenimiento industrial es el conjunto de técnicas, procedimientos y actividades que se realizan para conservar máquinas, equipos e instalaciones en óptimas condiciones de funcionamiento. Su principal objetivo es prevenir fallas, reducir tiempos de parada y garantizar que los procesos productivos se desarrollen de manera segura y eficiente.</p>
             <p>Además, el mantenimiento industrial sirve para prolongar la vida útil de los equipos, disminuir costos de reparación, mejorar la productividad y asegurar la continuidad de las operaciones dentro de una empresa. En la actualidad, las industrias dependen del correcto funcionamiento de sus sistemas mecánicos, eléctricos y automatizados, por lo que el mantenimiento se ha convertido en un área fundamental en sectores como la manufactura, minería, transporte, generación eléctrica y automatización industrial.</p>
             <p>También permite detectar problemas antes de que ocurran daños graves, evitando accidentes y pérdidas económicas que pueden afectar tanto a la producción como a la seguridad de los trabajadores. Por esta razón, las empresas implementan distintos tipos de mantenimiento, como el preventivo, predictivo y correctivo, con el fin de garantizar un mejor rendimiento y mayor confiabilidad de los equipos industriales.</p>
         </article>
@@ -260,7 +260,7 @@
 
                 <div class="model-3d-side">
                     <div class="model-3d-container">
-                        <img id="asset_img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/3D_Pump.svg/512px-3D_Pump.svg.png" alt="Render de Componente">
+                        <img id="asset_img" src="sistema-general.png" alt="Render de Componente">
                         <span id="model_lbl" class="model-label">SISTEMA GENERAL</span>
                     </div>
                 </div>
@@ -279,37 +279,37 @@
     <script>
         let mainChart;
 
-        // Base de datos de imágenes estables 
+        // Base de datos de imágenes locales vinculadas
         const baseDeDatosActivos = {
             custom: {
                 mtbf: 8500, time: 1200, 
-                img: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/3D_Pump.svg/512px-3D_Pump.svg.png", 
+                img: "sistema-general.png", 
                 lbl: "CONFIGURACIÓN MANUAL"
             },
             motor: { 
                 mtbf: 12000, time: 2000, 
-                img: "https://images.unsplash.com/photo-1620714223084-8fcacc6dfd8d?q=80&w=400&auto=format&fit=crop", 
+                img: "motor.png", 
                 lbl: "CAD 3D: MOTOR AC" 
             },
             bomba: { 
                 mtbf: 7400, time: 1500, 
-                img: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Centrifugal_Pump.svg/512px-Centrifugal_Pump.svg.png", 
-                lbl: "PLANO INDUSTRIAL: BOMBA" 
+                img: "bomba.png", 
+                lbl: "VISTA CAD: BOMBA DE PROCESO" 
             },
             compresor: { 
                 mtbf: 5500, time: 1000, 
-                img: "https://images.unsplash.com/photo-1605810230434-7631ac76ec81?q=80&w=400&auto=format&fit=crop", 
-                lbl: "RENDER: COMPRESOR" 
+                img: "compresor.png", 
+                lbl: "RENDER: COMPRESOR INDUSTRIAL" 
             },
             turbina: { 
                 mtbf: 22000, time: 5000, 
-                img: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Steam_turbine_3D_layout_cut.png/640px-Steam_turbine_3D_layout_cut.png", 
-                lbl: "CORTE MECÁNICO: TURBINA" 
+                img: "turbina.png", 
+                lbl: "SECCIÓN 3D: TURBINA" 
             },
             reductor: { 
                 mtbf: 9800, time: 1500, 
-                img: "https://images.unsplash.com/photo-1537462715879-360eeb61a0bc?q=80&w=400&auto=format&fit=crop", 
-                lbl: "SISTEMA: ENGRANAJES" 
+                img: "reductor.png", 
+                lbl: "CORTE MECÁNICO: REDUCTOR" 
             }
         };
 
