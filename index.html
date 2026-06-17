@@ -158,11 +158,14 @@
 
         .input-item { margin-bottom: 25px; }
         .input-item label { color: var(--neon-cyan); font-weight: 700; margin-bottom: 10px; display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; }
-        input { 
+        
+        input, select { 
             width: 100%; padding: 18px; background: #0a0614; border: 1px solid var(--glass-border); 
             color: #fff; border-radius: 12px; font-size: 1.1rem; transition: 0.3s; outline: none;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
-        input:focus { border-color: var(--neon-cyan); box-shadow: 0 0 15px rgba(0, 242, 255, 0.1); }
+        input:focus, select:focus { border-color: var(--neon-cyan); box-shadow: 0 0 15px rgba(0, 242, 255, 0.1); }
+        select option { background: #0c081c; color: #fff; }
         
         .btn-glow { 
             width: 100%; padding: 20px; background: var(--primary-purple); color: #fff; 
@@ -208,7 +211,7 @@
         
         <article class="glass-panel">
             <h2><i class="fas fa-tools"></i> Mantenimiento Industrial</h2>
-            <p>El mantenimiento industrial es el conjunto de técnicas, procedimientos y actividades que se realizan para conservar máquinas, equipos e instalaciones en óptimas condiciones de funcionamiento. Su principal objetivo es prevenir fallas, reducir tiempos de parada y garantizar que los procesos productivos se desarrollen de manera segura y eficiente.</p>
+            <p>El mantenimiento industrial es el conjunto de técnicas, procedures y actividades que se realizan para conservar máquinas, equipos e instalaciones en óptimas condiciones de funcionamiento. Su principal objetivo es prevenir fallas, reducir tiempos de parada y garantizar que los procesos productivos se desarrollen de manera segura y eficiente.</p>
             <p>Además, el mantenimiento industrial sirve para prolongar la vida útil de los equipos, disminuir costos de reparación, mejorar la productividad y asegurar la continuidad de las operaciones dentro de una empresa. En la actualidad, las industrias dependen del correcto funcionamiento de sus sistemas mecánicos, eléctricos y automatizados, por lo que el mantenimiento se ha convertido en un área fundamental en sectores como la manufactura, minería, transporte, generación eléctrica y automatización industrial.</p>
             <p>También permite detectar problemas antes de que ocurran daños graves, evitando accidentes y pérdidas económicas que pueden afectar tanto a la producción como a la seguridad de los trabajadores. Por esta razón, las empresas implementan distintos tipos de mantenimiento, como el preventivo, predictivo y correctivo, con el fin de garantizar un mejor rendimiento y mayor confiabilidad de los equipos industriales.</p>
         </article>
@@ -244,11 +247,22 @@
             <div class="sim-grid">
                 <div class="controls-side">
                     <div class="input-item">
-                        <label>MTBF (Tiempo Medio Entre Fallos)</label>
+                        <label><i class="fas fa-database" style="color: var(--neon-cyan);"></i> Activos Industriales Reales (Base de Datos)</label>
+                        <select id="asset_select" onchange="cargarDatosActivo()">
+                            <option value="custom">-- Configuración Manual --</option>
+                            <option value="motor">Motor Eléctrico Trifásico (Estándar IEEE 493) - MTBF: 12,000h</option>
+                            <option value="bomba">Bomba Centrífuga de Procesos (Norma OREDA) - MTBF: 7,400h</option>
+                            <option value="compresor">Compresor de Tornillo Rotativo (Datos de Planta) - MTBF: 5,500h</option>
+                            <option value="turbina">Turbina de Vapor Crítica (Historial Industrial) - MTBF: 22,000h</option>
+                            <option value="reductor">Reductor de Velocidad de Engranajes - MTBF: 9,800h</option>
+                        </select>
+                    </div>
+                    <div class="input-item">
+                        <label>MTBF (Tiempo Medio Entre Fallos - Horas)</label>
                         <input type="number" id="inp_mtbf" value="8500">
                     </div>
                     <div class="input-item">
-                        <label>Tiempo de Misión (Horas Operativas)</label>
+                        <label>Tiempo de Misión (Horas Operativas Solicitadas)</label>
                         <input type="number" id="inp_time" value="1200">
                     </div>
                     <button class="btn-glow" onclick="procesarCalculo()">Ejecutar Algoritmo</button>
@@ -274,9 +288,33 @@
     <script>
         let mainChart;
 
+        // Base de datos integrada de activos reales
+        const baseDeDatosActivos = {
+            motor: { mtbf: 12000, time: 2000 },
+            bomba: { mtbf: 7400, time: 1500 },
+            compresor: { mtbf: 5500, time: 1000 },
+            turbina: { mtbf: 22000, time: 5000 },
+            reductor: { mtbf: 9800, time: 1500 }
+        };
+
+        function cargarDatosActivo() {
+            const selector = document.getElementById('asset_select');
+            const activoSeleccionado = selector.value;
+            
+            if (activoSeleccionado !== 'custom') {
+                const datos = baseDeDatosActivos[activoSeleccionado];
+                document.getElementById('inp_mtbf').value = datos.mtbf;
+                document.getElementById('inp_time').value = datos.time;
+                procesarCalculo(); // Ejecuta automáticamente para ver el impacto inmediato
+            }
+        }
+
         function procesarCalculo() {
             const mtbf = parseFloat(document.getElementById('inp_mtbf').value);
             const t = parseFloat(document.getElementById('inp_time').value);
+            
+            if(!mtbf || mtbf <= 0 || !t || t <= 0) return;
+            
             const lambda = 1 / mtbf;
             const r = Math.exp(-lambda * t);
             
