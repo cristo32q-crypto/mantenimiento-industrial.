@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ingeniería de Fiabilidad</title>
+    <title>Ingeniería de Fiabilidad | Grupo 4 ESPOCH</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;600;700;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
@@ -62,7 +62,7 @@
         }
         .featured-image img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.6) contrast(1.1); transition: transform 0.5s ease; }
 
-        /* PANELES RECONSTRUIDOS DE TU VERSIÓN ORIGINAL */
+        /* PANELES DE TEXTO CON TU INFORMACIÓN RESTAURADA */
         .glass-panel {
             background: var(--card-bg); padding: 50px; border-radius: 30px;
             border: 1px solid var(--glass-border); margin-bottom: 60px; text-align: justify;
@@ -71,7 +71,7 @@
         .glass-panel h2 { color: var(--neon-cyan); margin-bottom: 25px; font-size: 2.2rem; display: flex; align-items: center; gap: 15px; }
         .glass-panel p { margin-bottom: 20px; font-size: 1.1rem; color: #d0d0e0; }
 
-        /* CONTENEDOR EXACTO DE TU ECUACIÓN ORIGINAL */
+        /* CONTENEDOR DE LA ECUACIÓN DE FIABILIDAD */
         .math-box { text-align: center; margin: 40px 0; padding: 40px; background: rgba(112, 0, 255, 0.05); border-radius: 20px; border: 1px solid var(--primary-purple); }
         .math-box code { font-family: 'JetBrains Mono', monospace; font-size: 2.8rem; color: var(--neon-cyan); text-shadow: 0 0 10px rgba(0, 242, 255, 0.5); }
         
@@ -123,7 +123,7 @@
         #res-val { font-size: 5.5rem; font-weight: 900; color: var(--neon-cyan); line-height: 1; margin-bottom: 15px; display: block; }
         .chart-container { height: 220px; position: relative; width: 100%; }
 
-        /* VISOR DE IMÁGENES REALES SELECCIONADAS */
+        /* VISOR DE IMÁGENES REALES */
         .image-viewer-side { display: flex; flex-direction: column; justify-content: center; }
         .image-viewer {
             width: 100%; min-height: 320px;
@@ -196,10 +196,9 @@
 
 <header>
     <div class="logo">
-        <i class="fas fa-industry" style="color: var(--neon-cyan);"></i>
         <span>Ingeniería de Confiabilidad</span>
     </div>
-    <div class="badge-espoch">GRUPO 4 - ESPOCH</div>
+    <div class="badge-espoch">GRUPO 4</div>
 </header>
 
 <section class="hero">
@@ -208,7 +207,7 @@
 
 <div class="featured-image-container">
     <div class="featured-image">
-        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070" alt="Mantenimiento">
+        <img src="seleccion_general.png" alt="Mantenimiento Industrial">
     </div>
 </div>
 
@@ -216,20 +215,26 @@
 
     <article class="glass-panel">
         <h2><i class="fas fa-tools"></i> Mantenimiento Industrial</h2>
-        <p>El mantenimiento industrial abarca las metodologías de análisis predictivo, preventivo y correctivo necesarias para maximizar el ciclo de vida operacional de los activos mecánicos reduciendo drásticamente el MTTR (Tiempo Medio de Reparación).</p>
+        <p>El mantenimiento industrial es el conjunto de técnicas, procedimientos y actividades que se realizan para conservar máquinas, equipos e instalaciones en óptimas condiciones de funcionamiento. Su principal objetivo es prevenir fallas, reducir tiempos de parada y garantizar que los procesos productivos se desarrollen de manera segura y eficiente.</p>
+        <p>Además, el mantenimiento industrial sirve para prolongar la vida útil de los equipos, disminuir costos de reparación, mejorar la productividad y asegurar la continuidad de las operaciones dentro de una empresa. En la actualidad, las industrias dependen del correcto funcionamiento de sus sistemas mecánicos, eléctricos y automatizados, por lo que el mantenimiento se ha convertido en un área fundamental en sectores como la manufactura, minería, transporte, generación eléctrica y automatización industrial.</p>
+        <p>También permite detectar problemas antes de que ocurran daños graves, evitando accidentes y pérdidas económicas que pueden afectar tanto a la producción como a la seguridad de los trabajadores. Por esta razón, las empresas implementan distintos tipos de mantenimiento, como el preventivo, predictivo y correctivo, con el fin de garantizar un mejor rendimiento y mayor confiabilidad de los equipos industriales.</p>
     </article>
 
     <article class="glass-panel">
         <h2><i class="fas fa-calculator"></i> Cálculo de Fiabilidad R(t)</h2>
+        <p>Dentro de este campo, la ecuación de fiabilidad es una de las herramientas matemáticas más importantes del mantenimiento industrial y la ingeniería de confiabilidad, ya que permite calcular la probabilidad de que una máquina, equipo o sistema continúe funcionando correctamente durante un intervalo de tiempo determinado sin presentar fallas.</p>
+        
         <div class="math-box">
             <code>R(t) = e<sup>-λt</sup></code>
         </div>
-        <p>Modelo matemático exponencial utilizado para predecir la probabilidad de éxito de un componente dinámico en misiones continuas bajo condiciones nominales de carga.</p>
+        
+        <p>En esta ecuación, R(t) representa la confiabilidad del sistema, mientras que λ = 1/MTBF corresponde a la tasa de fallas por hora. Su aplicación es fundamental en industrias donde una falla inesperada puede generar pérdidas económicas, accidentes laborales o interrupciones en la producción.</p>
+        <p>Gracias a esta ecuación, los ingenieros pueden analizar el comportamiento de los equipos, estimar su vida útil, programar mantenimientos preventivos y predictivos, reducir costos de reparación y optimizar el rendimiento de las máquinas. Los valores de MTBF utilizados en este simulador provienen de datos experimentales reales del Gearbox Reliability Collaborative (GRC) del Laboratorio Nacional de Energías Renovables (NREL/NLR), obtenidos en ensayos con dinamómetro en el National Wind Technology Center</p>
     </article>
 
     <div class="media-grid">
         <div class="video-card">
-            <video controls poster="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1000">
+            <video controls poster="seleccion_general.png">
                 <source src="video_fiabilidad.mp4" type="video/mp4">
                 Tu navegador no soporta video.
             </video>
@@ -252,11 +257,11 @@
                 <div class="input-item">
                     <label><i class="fas fa-cogs"></i> Componente Real de Selección</label>
                     <select id="asset_select" onchange="cargarDatosActivo()">
-                        <option value="gearbox_completo">Gearbox GB2 — Tren Completo de Transmisión</option>
-                        <option value="hss">Eje de Alta Velocidad — High Speed Shaft (HSS)</option>
-                        <option value="ntl_planetario">Corona y Satélites del Tren Planetario</option>
-                        <option value="rodamientos">Rodamientos Cónicos de Rodillos</option>
-                        <option value="lubricacion">Bomba y Filtro del Circuito de Aceite</option>
+                        <option value="bomba">Bomba Centrífuga (Sistema de Bombeo)</option>
+                        <option value="compresor">Compresor de Aire Industrial</option>
+                        <option value="motor">Motor Eléctrico de Inducción</option>
+                        <option value="reductor">Reductor de Velocidad (Gearbox)</option>
+                        <option value="turbina">Turbina de Generación</option>
                     </select>
                 </div>
 
@@ -290,7 +295,7 @@
 
             <div class="image-viewer-side">
                 <div class="image-viewer" id="image_viewer">
-                    <img id="comp_img" src="" alt="Componente Industrial">
+                    <img id="comp_img" src="bomba.png" alt="Componente Industrial">
                     <span class="model-label" id="model_lbl">—</span>
                 </div>
             </div>
@@ -316,7 +321,7 @@
                 <p id="rep_comp">--</p>
             </div>
             <div class="report-item">
-                <span>Campaña de Ensayo GRC</span>
+                <span>Campaña de Ensayo</span>
                 <p id="rep_ensayo">--</p>
             </div>
             <div class="report-item">
@@ -367,51 +372,52 @@
 </footer>
 
 <script>
+// Base de datos ajustada para usar tus imágenes locales (.png)
 const baseDeDatosGRC = {
-    gearbox_completo: {
-        name: "Caja Multiplicadora GRC GB2 (Conjunto Completo)",
+    bomba: {
+        name: "Bomba Centrífuga",
+        mtbf: 9200,
+        ensayo: "Ensayo Hidráulico - Operación Continua",
+        rpm: "3600 RPM",
+        carga: "Flujo y presión nominal",
+        lbl: "Sistema de Bombeo",
+        imgUrl: "bomba.png"
+    },
+    compresor: {
+        name: "Compresor de Aire Industrial",
+        mtbf: 14000,
+        ensayo: "Ensayo Neumático - Ciclos de Carga",
+        rpm: "1800 RPM nominales",
+        carga: "Ciclos de presurización",
+        lbl: "Compresor de Aire",
+        imgUrl: "compresor.png"
+    },
+    motor: {
+        name: "Motor Eléctrico de Inducción",
+        mtbf: 24000,
+        ensayo: "Ensayo Eléctrico - Carga Constante",
+        rpm: "1750 RPM",
+        carga: "Torque nominal constante",
+        lbl: "Motor Eléctrico",
+        imgUrl: "motor.png"
+    },
+    reductor: {
+        name: "Reductor de Velocidad (Gearbox)",
         mtbf: 18200,
         ensayo: "Ensayo GRC - Operación Continua",
         rpm: "1800 RPM (Alta) / 22.5 RPM (Baja)",
         carga: "100% Torque Nominal",
-        lbl: "Tren de Transmisión Completo",
-        imgUrl: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=800"
+        lbl: "Caja Reductora",
+        imgUrl: "reductor.png"
     },
-    hss: {
-        name: "High Speed Shaft (Eje de Alta Velocidad)",
-        mtbf: 14000,
-        ensayo: "Ensayo GRC - Transitorios de Torque",
-        rpm: "1800 RPM nominales",
-        carga: "Cargas transitorias variables",
-        lbl: "Eje Mecánico HSS GRC",
-        imgUrl: "https://images.unsplash.com/photo-1537462715879-360eeb61a0bc?q=80&w=800"
-    },
-    ntl_planetario: {
-        name: "Tren Epicíclico / Planetario de Baja Velocidad",
-        mtbf: 24000,
-        ensayo: "Ensayo GRC - Cargas No-Torque (NTL)",
-        rpm: "22.5 RPM de entrada",
-        carga: "Fuerza radial asimétrica",
-        lbl: "Etapa Planetaria de Reducción",
-        imgUrl: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=800"
-    },
-    rodamientos: {
-        name: "Rodamientos Cónicos de Rodillos del Conjunto",
+    turbina: {
+        name: "Turbina de Generación",
         mtbf: 11500,
-        ensayo: "Ensayo GRC - Desalineación Axial",
-        rpm: "Régimen dinámico acoplado",
-        carga: "Desalineación de rodadura controlada",
-        lbl: "Pistas de Rodadura Integradas",
-        imgUrl: "https://images.unsplash.com/photo-1619542402915-dcaf30e4e2a1?q=80&w=800"
-    },
-    lubricacion: {
-        name: "Bomba y Filtro del Circuito de Aceite",
-        mtbf: 9200,
-        ensayo: "Ensayo GRC - Degradación Térmica",
-        rpm: "Flujo volumétrico constante",
-        carga: "Temperatura de operación 70°C",
-        lbl: "Circuito de Lubricación",
-        imgUrl: "https://images.unsplash.com/photo-1612444530582-fc66183b16f7?q=80&w=800"
+        ensayo: "Ensayo Dinámico - Perfiles de Viento",
+        rpm: "Régimen dinámico",
+        carga: "Cargas aerodinámicas variables",
+        lbl: "Turbina Eólica",
+        imgUrl: "turbina.png"
     }
 };
 
@@ -423,9 +429,9 @@ function cargarDatosActivo() {
     
     document.getElementById('inp_mtbf').value = asset.mtbf;
     
-    document.getElementById('chip_ensayo').innerText = "Ensayo: " + asset.ensayo.substring(13);
+    document.getElementById('chip_ensayo').innerText = "Ensayo: " + asset.ensayo.split('-')[0];
     document.getElementById('chip_rpm').innerText = "RPM: " + asset.rpm.split(' ')[0];
-    document.getElementById('chip_carga').innerText = "Carga: " + asset.carga;
+    document.getElementById('chip_carga').innerText = "Carga: " + asset.carga.substring(0, 15) + "...";
     
     const imgElement = document.getElementById('comp_img');
     imgElement.src = asset.imgUrl;
