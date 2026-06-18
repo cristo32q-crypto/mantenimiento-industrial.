@@ -3,27 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ingeniería de Confiabilidad | Grupo 4 ESPOCH</title>
-    
+    <title>Ingeniería de Fiabilidad | Grupo 4 ESPOCH</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     
     <style>
         :root {
-            --bg-dark: #060214;
-            --bg-card: rgba(15, 6, 38, 0.75);
-            --bg-input: #0a0324;
-            --accent-neon: #a855f7; /* Morado Neón Intenso */
-            --accent-glow: #c084fc;
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
-            --border-neon: rgba(168, 85, 247, 0.4);
-            --neon-shadow: 0 0 20px rgba(168, 85, 247, 0.35);
+            --bg-dark: #030008;
+            --card-bg: rgba(20, 10, 35, 0.7);
+            --primary-purple: #7000ff;
+            --neon-cyan: #00f2ff;
+            --text-main: #f0f0f5;
+            --text-dim: #a0a0b5;
+            --glass-border: rgba(112, 0, 255, 0.3);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,191 +30,261 @@
             font-family: 'Plus Jakarta Sans', sans-serif; 
             background-color: var(--bg-dark); 
             background-image: 
-                radial-gradient(circle at 15% 15%, rgba(168, 85, 247, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 85% 85%, rgba(192, 132, 252, 0.08) 0%, transparent 50%);
+                radial-gradient(circle at 10% 20%, rgba(112, 0, 255, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 242, 255, 0.05) 0%, transparent 40%);
             color: var(--text-main); 
-            line-height: 1.6; 
+            line-height: 1.8; 
             overflow-x: hidden;
         }
 
+        /* NAVEGACIÓN */
         header {
-            background: rgba(6, 2, 20, 0.9);
+            background: rgba(3, 0, 8, 0.8);
             padding: 20px 8%;
             display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 2px solid var(--border-neon);
+            border-bottom: 1px solid var(--glass-border);
             position: sticky; top: 0; z-index: 1000;
-            backdrop-filter: blur(12px);
-            box-shadow: var(--neon-shadow);
+            backdrop-filter: blur(15px);
         }
-        .logo { font-weight: 800; font-size: 1.6rem; display: flex; align-items: center; gap: 10px; letter-spacing: -0.5px; }
-        .logo span { color: var(--accent-neon); text-shadow: 0 0 10px rgba(168, 85, 247, 0.6); }
-        .badge-espoch { background: #ff3e3e; color: #fff; padding: 6px 16px; border-radius: 30px; font-size: 0.75rem; font-weight: 800; letter-spacing: 1px; }
+        .logo { font-weight: 800; font-size: 1.6rem; letter-spacing: -1px; display: flex; align-items: center; gap: 12px; }
+        .logo span { background: linear-gradient(to right, var(--primary-purple), var(--neon-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-        .hero { padding: 50px 5% 30px; text-align: center; }
+        /* HERO SECTION */
+        .hero { padding: 100px 5% 40px; text-align: center; }
         .hero h1 { 
-            font-size: 3.5rem; margin-bottom: 15px; font-weight: 800; line-height: 1.2;
-            color: #ffffff; text-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+            font-size: 4.5rem; margin-bottom: 20px; font-weight: 800; line-height: 1.1;
+            background: linear-gradient(to bottom, #fff 40%, var(--primary-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 15px rgba(112, 0, 255, 0.3));
         }
-        .hero p.desc { font-size: 1.15rem; color: var(--text-muted); max-width: 800px; margin: 0 auto; }
+        .hero p { font-size: 1.3rem; color: var(--text-dim); max-width: 800px; margin: 0 auto; }
 
-        /* Sección de Mantenimiento Industrial Original */
-        .panel-introduccion { 
-            background: var(--bg-card); padding: 40px; border-radius: 20px; 
-            border: 1px solid var(--border-neon); margin-top: 30px; margin-bottom: 40px; text-align: justify;
-            box-shadow: var(--neon-shadow);
+        /* IMAGEN ILUSTRATIVA PRINCIPAL */
+        .featured-image-container { max-width: 1100px; margin: 0 auto 60px; padding: 0 20px; }
+        .featured-image {
+            width: 100%; height: 450px; border-radius: 30px; overflow: hidden;
+            border: 1px solid var(--glass-border); box-shadow: 0 0 40px rgba(112, 0, 255, 0.2); position: relative;
         }
-        .panel-introduccion h2 { color: var(--accent-glow); margin-bottom: 15px; font-size: 1.8rem; display: flex; align-items: center; gap: 12px; font-weight: 700; }
-        .panel-introduccion p { margin-bottom: 15px; font-size: 1.05rem; color: #e5e7eb; }
-
-        /* Conservación estricta de la Ecuación Original */
-        .caja-ecuacion { text-align: center; margin: 25px 0; padding: 25px; background: rgba(168, 85, 247, 0.08); border-radius: 12px; border: 1px dashed var(--accent-neon); }
-        .caja-ecuacion code { font-family: 'JetBrains Mono', monospace; font-size: 2rem; color: #ffffff; text-shadow: 0 0 12px var(--accent-neon); }
-
-        /* Módulo enfocado 100% en el Simulador */
-        .modulo-simulador { 
-            background: linear-gradient(145deg, #0f052d, #060214);
-            padding: 40px; border-radius: 24px; border: 2px solid var(--accent-neon);
-            box-shadow: var(--neon-shadow); margin-bottom: 60px;
+        .featured-image img {
+            width: 100%; height: 100%; object-fit: cover; filter: brightness(0.6) contrast(1.1); transition: transform 0.5s ease;
         }
-        .sim-grid-principal { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 25px; align-items: stretch; }
-        @media (max-width: 1024px) { .sim-grid-principal { grid-template-columns: 1fr; } }
+        .featured-image:hover img { transform: scale(1.05); }
 
-        .col-controles { display: flex; flex-direction: column; justify-content: center; }
-        .grupo-input { margin-bottom: 20px; }
-        .grupo-input label { color: var(--accent-glow); font-weight: 700; margin-bottom: 8px; display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
+        /* PANELES DE CONTENIDO */
+        .glass-panel { 
+            background: var(--card-bg); padding: 50px; border-radius: 30px; 
+            border: 1px solid var(--glass-border); margin-bottom: 60px; text-align: justify;
+            backdrop-filter: blur(10px); box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        .glass-panel h2 { color: var(--neon-cyan); margin-bottom: 25px; font-size: 2.2rem; display: flex; align-items: center; gap: 15px; }
+        .glass-panel p { margin-bottom: 20px; font-size: 1.1rem; color: #d0d0e0; }
+
+        /* MATEMÁTICAS NEÓN */
+        .math-box { text-align: center; margin: 40px 0; padding: 40px; background: rgba(112, 0, 255, 0.05); border-radius: 20px; border: 1px solid var(--primary-purple); }
+        .math-box code { font-family: 'JetBrains Mono', monospace; font-size: 2.8rem; color: var(--neon-cyan); text-shadow: 0 0 10px rgba(0, 242, 255, 0.5); }
+
+        /* GRID MULTIMEDIA */
+        .media-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 40px; margin-bottom: 60px; }
+        @media (max-width: 900px) { .media-grid { grid-template-columns: 1fr; } }
+        .video-card { border-radius: 25px; overflow: hidden; border: 1px solid var(--glass-border); background: #000; box-shadow: 0 0 30px rgba(112, 0, 255, 0.2); }
+        video { width: 100%; display: block; }
+        .qr-card { background: #fff; padding: 40px; border-radius: 25px; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 0 30px var(--primary-purple); }
+        #qrcode { margin-bottom: 15px; }
+        .qr-card p { color: #000; font-weight: 800; font-size: 0.9rem; }
+
+        /* SIMULADOR DE FIABILIDAD EN 3 COLUMNAS */
+        .simulator-card { 
+            background: linear-gradient(145deg, #0d0a1a, #030008);
+            padding: 50px; border-radius: 35px; border: 1px solid var(--neon-cyan);
+            box-shadow: 0 0 50px rgba(0, 242, 255, 0.1); margin-bottom: 80px;
+        }
+        
+        .sim-grid-3col { 
+            display: grid; 
+            grid-template-columns: 1fr 1.1fr 0.9fr; 
+            gap: 30px; 
+            align-items: stretch; 
+        }
+        
+        @media (max-width: 1050px) { 
+            .sim-grid-3col { grid-template-columns: 1fr; } 
+        }
+
+        /* COLUMNA 1: FORMULARIO */
+        .controls-side { display: flex; flex-direction: column; justify-content: center; }
+        .input-item { margin-bottom: 25px; }
+        .input-item label { color: var(--neon-cyan); font-weight: 700; margin-bottom: 10px; display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; }
+        
         input, select { 
-            width: 100%; padding: 14px; background: var(--bg-input); border: 1px solid var(--border-neon); 
-            color: #fff; border-radius: 8px; font-size: 1rem; outline: none; transition: 0.3s;
+            width: 100%; padding: 18px; background: #0a0614; border: 1px solid var(--glass-border); 
+            color: #fff; border-radius: 12px; font-size: 1.1rem; outline: none;
+            font-family: 'Plus Jakarta Sans', sans-serif; transition: 0.3s;
         }
-        input:focus, select:focus { border-color: var(--accent-glow); box-shadow: 0 0 12px rgba(168, 85, 247, 0.5); }
+        input:focus, select:focus { border-color: var(--neon-cyan); box-shadow: 0 0 15px rgba(0, 242, 255, 0.1); }
+        select option { background: #0c081c; color: #fff; }
         
-        .btn-primario { 
-            width: 100%; padding: 15px; background: var(--accent-neon); color: #fff; 
-            border: none; border-radius: 8px; font-weight: 800; cursor: pointer;
-            text-transform: uppercase; letter-spacing: 1.5px; transition: 0.3s; margin-top: 10px;
-            box-shadow: 0 0 15px rgba(168, 85, 247, 0.4);
+        .btn-glow { 
+            width: 100%; padding: 20px; background: var(--primary-purple); color: #fff; 
+            border: none; border-radius: 12px; font-weight: 800; cursor: pointer;
+            text-transform: uppercase; letter-spacing: 3px; transition: 0.4s;
         }
-        .btn-primario:hover { background: #b967ff; transform: translateY(-1px); box-shadow: 0 0 25px var(--accent-neon); }
-        
-        .btn-secundario {
-            width: 100%; padding: 14px; background: transparent; color: #ffffff;
-            border: 1px solid var(--accent-neon); border-radius: 8px; font-weight: 700; cursor: pointer;
-            text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; margin-top: 10px;
-        }
-        .btn-secundario:hover { background: rgba(168, 85, 247, 0.15); box-shadow: 0 0 15px rgba(168, 85, 247, 0.2); }
+        .btn-glow:hover { background: var(--neon-cyan); color: #000; box-shadow: 0 0 30px var(--neon-cyan); transform: translateY(-2px); }
 
-        .col-monitor {
-            background: rgba(10, 4, 28, 0.6); border: 1px solid var(--border-neon);
-            border-radius: 16px; padding: 25px; display: flex; flex-direction: column;
-            justify-content: space-between; text-align: center;
+        .btn-pdf {
+            width: 100%; padding: 16px; background: transparent; color: #ffffff;
+            border: 1px solid var(--primary-purple); border-radius: 12px; font-weight: 700; cursor: pointer;
+            text-transform: uppercase; letter-spacing: 1.5px; transition: 0.3s; margin-top: 15px;
         }
-        #res-val { font-size: 4.5rem; font-weight: 800; color: #fff; line-height: 1; margin-bottom: 10px; font-family: 'JetBrains Mono', monospace; text-shadow: 0 0 15px var(--accent-neon); }
-        .wrapper-grafica { height: 200px; position: relative; width: 100%; margin-top: 15px; }
+        .btn-pdf:hover { background: rgba(112, 0, 255, 0.15); border-color: var(--neon-cyan); }
 
-        .col-planos { display: flex; flex-direction: column; justify-content: center; }
-        .contenedor-plano-tecnico {
-            width: 100%; height: 100%; min-height: 320px; background: rgba(5, 2, 15, 0.9);
-            border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: space-between;
-            padding: 20px; border: 1px solid var(--accent-neon); box-shadow: var(--neon-shadow);
+        /* COLUMNA 2: PANTALLA CENTRAL DE GRÁFICA */
+        .display-side {
+            background: rgba(5, 2, 15, 0.6);
+            border: 1px solid rgba(112, 0, 255, 0.2);
+            border-radius: 24px; padding: 30px;
+            display: flex; flex-direction: column; justify-content: space-between; text-align: center;
         }
-        .contenedor-plano-tecnico img { 
-            width: 100%; height: 180px; object-fit: contain; border-radius: 6px; transition: 0.3s;
+        #res-val { font-size: 5.5rem; font-weight: 900; color: var(--neon-cyan); line-height: 1; margin-bottom: 15px; display: block; }
+        .chart-container { height: 220px; position: relative; width: 100%; }
+
+        /* COLUMNA 3: PANEL VISUALIZADOR DE RENDERS MEJORADO */
+        .model-3d-side { display: flex; flex-direction: column; justify-content: center; }
+        .model-3d-container {
+            width: 100%; height: 100%; min-height: 300px;
+            background: #ffffff; border-radius: 16px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 20px; border: 2px solid var(--neon-cyan);
+            box-shadow: 0 0 25px rgba(0, 242, 255, 0.15); position: relative;
         }
-        .desc-plano { font-size: 0.8rem; color: var(--text-muted); text-align: center; font-weight: 600; margin-top: 12px; }
-        .etiqueta-sistema {
-            font-size: 0.65rem; font-weight: 800; color: #ffffff; letter-spacing: 1px;
-            text-transform: uppercase; background: var(--accent-neon); padding: 5px 12px; border-radius: 4px; box-shadow: 0 0 10px var(--accent-neon);
+        .model-3d-container img { 
+            width: 100%; height: 100%; max-height: 220px; 
+            object-fit: contain; border-radius: 8px; cursor: zoom-in;
+            transition: transform 0.3s ease, opacity 0.15s ease; 
+        }
+        .model-3d-container:hover img { transform: scale(1.03); }
+        .model-label {
+            position: absolute; bottom: 12px; font-size: 0.7rem; font-weight: 800;
+            color: #030008; letter-spacing: 1px; text-transform: uppercase;
+            background: rgba(0, 242, 255, 0.3); padding: 3px 12px; border-radius: 6px;
         }
 
-        /* Área invisible en pantalla diseñada exclusivamente para estructurar el PDF limpio */
-        #bloqueReportePDF {
+        /* DISEÑO DE REPORTE ACADÉMICO PARA EL PDF DESCARGABLE (Oculto en Interfaz) */
+        #seccionReporteImpresion {
             display: none;
             background: #ffffff;
             color: #0f172a;
-            padding: 50px;
+            padding: 45px;
             font-family: 'Arial', sans-serif;
         }
 
-        footer { text-align: center; padding: 50px 20px; border-top: 1px solid var(--border-neon); background: #060214; }
-        footer p.facultad { color: var(--text-main); font-weight: 700; font-size: 1.1rem; }
-        footer p.creditos { margin-top: 10px; opacity: 0.5; font-size: 0.75rem; letter-spacing: 1px; }
+        /* FOOTER */
+        footer { text-align: center; padding: 80px 20px; border-top: 1px solid var(--glass-border); background: rgba(3, 0, 8, 0.9); }
+        .badge-espoch { background: #ff3e3e; color: #fff; padding: 6px 18px; border-radius: 30px; font-size: 0.8rem; font-weight: 800; margin-bottom: 20px; display: inline-block; }
     </style>
 </head>
 <body>
 
     <header>
         <div class="logo">
-            <i class="fas fa-bolt" style="color: var(--accent-glow); text-shadow: 0 0 8px var(--accent-neon);"></i> 
-            <span>Ingeniería de</span>Fiabilidad
+            <i class="fas fa-industry" style="color: var(--neon-cyan);"></i> 
+            <span>Reliability</span>Analytics
         </div>
-        <div class="badge-espoch">GRUPO 4 - INDUSTRIAL</div>
+        <div class="badge-espoch">GRUPO 4 - MECÁNICA</div>
     </header>
 
     <section class="hero">
-        <h1>Sistemas de Mantenimiento</h1>
-        <p class="desc">Plataforma interactiva de simulación y cálculo predictivo para activos críticos en ingeniería de mantenimiento industrial.</p>
+        <p style="color: var(--primary-purple); font-weight: 800; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 15px;">Mantenimiento Industrial 4.0</p>
+        <h1>Ingeniería de <br><span>Fiabilidad</span></h1>
+        <p>Optimización proactiva de activos mediante modelado probabilístico y estándares internacionales.</p>
     </section>
+
+    <div class="featured-image-container">
+        <div class="featured-image">
+            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070" alt="Mantenimiento Industrial Advanced">
+        </div>
+    </div>
 
     <div class="container">
         
-        <article class="panel-introduccion">
-            <h2><i class="fas fa-tools"></i> Introducción al Mantenimiento e Ingeniería de Confiabilidad</h2>
-            <p>En el ámbito industrial moderno, la gestión de activos y la fiabilidad de los sistemas se configuran como pilares estratégicos para garantizar la continuidad operativa, mitigar riesgos de fallos imprevistos y optimizar los costos del ciclo de vida de la maquinaria crítica.</p>
-            <p>Bajo modelos de tasa de fallas constante ($\lambda$), la probabilidad de que un componente o un sistema completo en serie sobreviva de forma correcta sin presentar averías durante un periodo determinado ($t$) se rige fielmente por la siguiente relación matemática exponencial:</p>
-            
-            <div class="caja-ecuacion">
-                <code>R(t) = e<sup>-λ·t</sup> = e<sup>-(1/MTBF)·t</sup></code>
-            </div>
+        <article class="glass-panel">
+            <h2><i class="fas fa-tools"></i> Mantenimiento Industrial</h2>
+            <p>El mantenimiento industrial es el conjunto de técnicas, procedures y actividades que se realizan para conservar máquinas, equipos e instalaciones en óptimas condiciones de funcionamiento. Su principal objetivo es prevenir fallas, reducir tiempos de parada y garantizar que los procesos productivos se desarrollen de manera segura y eficiente.</p>
+            <p>Además, el mantenimiento industrial sirve para prolongar la vida útil de los equipos, disminuir costos de reparación, mejorar la productividad y asegurar la continuidad de las operaciones dentro de una empresa. En la actualidad, las industrias dependen del correcto funcionamiento de sus sistemas mecánicos, eléctricos y automatizados, por lo que el mantenimiento se ha convertido en un área fundamental en sectores como la manufactura, minería, transporte, generación eléctrica y automatización industrial.</p>
+            <p>También permite detectar problemas antes de que ocurran daños graves, evitando accidentes y pérdidas económicas que pueden afectar tanto a la producción como a la seguridad de los trabajadores. Por esta razón, las empresas implementan distintos tipos de mantenimiento, como el preventivo, predictivo y correctivo, con el fin de garantizar un mejor rendimiento y mayor confiabilidad de los equipos industriales.</p>
         </article>
 
-        <section class="modulo-simulador">
-            <h3 style="color: #fff; text-align: center; margin-bottom: 35px; font-size: 2rem; font-weight: 800; text-shadow: 0 0 15px var(--accent-neon);">
-                <i class="fas fa-calculator"></i> Panel del Simulador Estadístico
-            </h3>
+        <article class="glass-panel">
+            <h2><i class="fas fa-calculator"></i> Cálculo de Fiabilidad R(t)</h2>
+            <p>Dentro de este campo, la ecuación de fiabilidad es una de las herramientas matemáticas más importantes del mantenimiento industrial y la ingeniería de confiabilidad, ya que permite calcular la probabilidad de que una máquina, equipo o sistema continúe funcionando correctamente durante un intervalo de tiempo determinado sin presentar fallas.</p>
             
-            <div class="sim-grid-principal">
+            <div class="math-box">
+                <code>R(t) = e<sup>-∫<sub style="font-size: 0.5em;">0</sub><sup style="font-size: 0.5em;">t</sup> λ(x)dx</sup></code>
+            </div>
+
+            <p>En esta ecuación, <strong>R(t)</strong> representa la confiabilidad del sistema, mientras que <strong>λ(x)</strong> corresponde a la tasa de fallas o frecuencia con la que pueden ocurrir averías a lo largo del tiempo. Su aplicación es fundamental en industrias donde una falla inesperada puede generar pérdidas económicas, accidentes laborales o interrupciones en la producción.</p>
+            <p>Gracias a esta ecuación, los ingenieros pueden analizar el comportamiento de los equipos, estimar su vida útil, programar mantenimientos preventivos y predictivos, reducir costos de reparación y optimizar el rendimiento de las máquinas. Además, esta herramienta permite realizar estudios estadísticos sobre el desempeño de los sistemas industriales, facilitando la toma de decisiones técnicas y administrativas basadas en datos reales.</p>
+        </article>
+
+        <div class="media-grid">
+            <div class="video-card">
+                <video controls poster="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1000">
+                    <source src="video_fiabilidad.mp4" type="video/mp4">
+                    Tu navegador no soporta video.
+                </video>
+            </div>
+            <div class="qr-card">
+                <h3>ESCANEAR PORTAL</h3>
+                <div id="qrcode"></div>
+                <p>GRUPO 4 - ESPOCH 2026</p>
+            </div>
+        </div>
+
+        <section class="simulator-card">
+            <h2 style="color: var(--neon-cyan); text-align: center; margin-bottom: 45px; font-size: 2.2rem;">Simulador de Fiabilidad</h2>
+            
+            <div class="sim-grid-3col">
                 
-                <div class="col-controles">
-                    <div class="grupo-input">
-                        <label><i class="fas fa-cubes"></i> Seleccionar Componente Activo</label>
-                        <select id="asset_select" onchange="actualizarComponente()">
-                            <option value="seleccion_general">-- Vista General de la Planta --</option>
-                            <option value="turbina">Turbina de Vapor Crítica</option>
-                            <option value="motor">Motor Eléctrico Principal</option>
-                            <option value="reductor">Reductor de Velocidad</option>
-                            <option value="compresor">Compresor de Aire Industrial</option>
-                            <option value="bomba">Bomba Centrífuga de Alimentación</option>
+                <div class="controls-side">
+                    <div class="input-item">
+                        <label><i class="fas fa-cogs"></i> Análisis de la Gearbox (Transmisión)</label>
+                        <select id="asset_select" onchange="cargarDatosActivo()">
+                            <option value="custom">-- Vista de Conjunto (Caja Completa) --</option>
+                            <option value="motor">Eje de Entrada de Alta Velocidad - MTBF: 14,000h</option>
+                            <option value="bomba">Engranajes Helicoidales Principales - MTBF: 24,000h</option>
+                            <option value="compresor">Rodamientos de Rodillos Cónicos - MTBF: 11,500h</option>
+                            <option value="turbina">Sistema de Lubricación por Salpicadura - MTBF: 9,200h</option>
+                            <option value="reductor">Retenes y Sellos de Cierre Mecánico - MTBF: 6,800h</option>
                         </select>
                     </div>
-                    <div class="grupo-input">
-                        <label>MTBF Estimado de Fábrica (Horas)</label>
-                        <input type="number" id="inp_mtbf" value="20000">
+                    <div class="input-item">
+                        <label>MTBF (Horas)</label>
+                        <input type="number" id="inp_mtbf" value="18000">
                     </div>
-                    <div class="grupo-input">
-                        <label>Tiempo de Misión Operativa t (Horas)</label>
-                        <input type="number" id="inp_time" value="3000">
+                    <div class="input-item">
+                        <label>Tiempo de Misión (Horas)</label>
+                        <input type="number" id="inp_time" value="2500">
                     </div>
-                    <button class="btn-primario" onclick="calcularFiabilidad()"><i class="fas fa-play"></i> Calcular Métricas</button>
-                    <button class="btn-secundario" onclick="descargarReportePDF()"><i class="fas fa-file-pdf" style="color: #ef4444;"></i> Descargar Reporte en PDF</button>
+                    <button class="btn-glow" onclick="procesarCalculo()">Ejecutar Algoritmo</button>
+                    <button class="btn-pdf" onclick="descargarReportePDF()"><i class="fas fa-file-pdf" style="color: #ef4444; margin-right: 8px;"></i> Exportar a PDF</button>
                 </div>
                 
-                <div class="col-monitor">
+                <div class="display-side">
                     <div>
-                        <p style="color: var(--text-muted); font-size: 0.75rem; letter-spacing: 2px; margin-bottom: 5px; font-weight: 700;">FIABILIDAD CALCULADA R(t)</p>
-                        <span id="res-val">0.0%</span>
+                        <p style="color: var(--text-dim); font-size: 0.75rem; letter-spacing: 4px; margin-bottom: 5px;">CONFIABILIDAD CALCULADA</p>
+                        <span id="res-val">0%</span>
                     </div>
-                    <div class="wrapper-grafica">
+                    <div class="chart-container">
                         <canvas id="chart_id"></canvas>
                     </div>
                 </div>
 
-                <div class="col-planos">
-                    <div class="contenedor-plano-tecnico">
-                        <img id="asset_img" src="seleccion_general.png" alt="Componente de Mantenimiento">
-                        <p id="asset_desc" class="desc-plano">Análisis estructural de la planta de potencia y distribución de los subsistemas mecánicos en serie.</p>
-                        <span id="model_lbl" class="etiqueta-sistema">SISTEMA GENERAL</span>
+                <div class="model-3d-side">
+                    <div class="model-3d-container">
+                        <img id="asset_img" src="seleccion_general.png" alt="Render de Componente">
+                        <span id="model_lbl" class="model-label">SISTEMA GENERAL</span>
                     </div>
                 </div>
 
@@ -225,74 +293,74 @@
 
     </div>
 
-    <div id="bloqueReportePDF">
-        <div style="border-bottom: 3px solid #0f172a; padding-bottom: 15px; margin-bottom: 25px;">
+    <div id="seccionReporteImpresion">
+        <div style="border-bottom: 2px solid #0f172a; padding-bottom: 12px; margin-bottom: 25px;">
             <table style="width: 100%; border-collapse: collapse;">
                 <tr>
-                    <td style="font-size: 1.5rem; font-weight: bold; text-transform: uppercase; color: #0f172a;">ESCUELA SUPERIOR POLÍTICA DE CHIMBORAZO</td>
-                    <td style="text-align: right; font-size: 0.9rem; color: #64748b; font-weight: bold;">GRUPO N° 4</td>
+                    <td style="font-size: 1.4rem; font-weight: bold; color: #0f172a; font-family: sans-serif;">ESCUELA SUPERIOR POLÍTICA DE CHIMBORAZO</td>
+                    <td style="text-align: right; font-size: 0.9rem; color: #475569; font-weight: bold;">INGENIERÍA MECÁNICA</td>
                 </tr>
                 <tr>
-                    <td style="font-size: 1rem; color: #475569; font-style: italic;">Facultad de Mecánica — Mantenimiento Industrial</td>
-                    <td style="text-align: right; font-size: 0.9rem; color: #64748b;">Año Académico: 2026</td>
+                    <td style="font-size: 0.95rem; color: #475569; font-style: italic;">Cátedra de Mantenimiento Industrial — Grupo N° 4</td>
+                    <td style="text-align: right; font-size: 0.9rem; color: #64748b;">Periodo: 2026</td>
                 </tr>
             </table>
         </div>
 
-        <h2 style="text-align: center; text-transform: uppercase; letter-spacing: 1px; color: #1e1b4b; margin-bottom: 30px; font-size: 1.4rem;">Reporte Técnico de Confiabilidad Operacional</h2>
+        <h3 style="text-align: center; text-transform: uppercase; letter-spacing: 1px; color: #1e1b4b; margin-bottom: 25px; font-size: 1.3rem;">Certificado Técnico de Confiabilidad Operacional</h3>
         
-        <div style="margin-bottom: 25px; background: #f8fafc; padding: 15px; border-radius: 6px; border: 1px solid #e2e8f0; font-size: 0.95rem;">
-            <p><strong>Metodología de Evaluación:</strong> Análisis probabilístico basado en distribución exponencial con tasa de falla constante ($\lambda = 1 / MTBF$).</p>
-            <p><strong>Código de Registro:</strong> #ESPOCH-MANT-2026-IND</p>
+        <div style="margin-bottom: 25px; background: #f8fafc; padding: 15px; border-radius: 6px; border: 1px solid #e2e8f0; font-size: 0.9rem;">
+            <p><strong>Metodología Estándar:</strong> Distribución probabilística exponencial bajo tasa de fallas constante e instantánea ($\lambda = 1 / MTBF$).</p>
+            <p><strong>Contexto Operacional:</strong> Monitoreo continuo de subsistemas de transmisión mecánica (Gearbox).</p>
         </div>
 
-        <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px; font-size: 1rem;">
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px; font-size: 0.95rem;">
             <thead>
                 <tr style="background: #0f172a; color: #ffffff; text-align: left;">
-                    <th style="padding: 12px; border: 1px solid #cbd5e1;">Criterio / Parámetro Evaluado</th>
-                    <th style="padding: 12px; border: 1px solid #cbd5e1; text-align: right;">Valor Registrado</th>
+                    <th style="padding: 10px; border: 1px solid #cbd5e1;">Módulo / Componente Evaluado</th>
+                    <th style="padding: 10px; border: 1px solid #cbd5e1; text-align: right;">Métrica y Valor</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td style="padding: 12px; border: 1px solid #cbd5e1;">Activo Industrial Analizado</td>
-                    <td id="pdf_comp" style="padding: 12px; border: 1px solid #cbd5e1; text-align: right; font-weight: bold;">--</td>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1;">Componente de la Transmisión</td>
+                    <td id="pdf_comp" style="padding: 10px; border: 1px solid #cbd5e1; text-align: right; font-weight: bold;">--</td>
                 </tr>
                 <tr style="background: #f8fafc;">
-                    <td style="padding: 12px; border: 1px solid #cbd5e1;">Tiempo Medio Entre Fallas (MTBF)</td>
-                    <td style="padding: 12px; border: 1px solid #cbd5e1; text-align: right;"><span id="pdf_mtbf">--</span> horas</td>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1;">Tiempo Medio Entre Fallas (MTBF)</td>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1; text-align: right;"><span id="pdf_mtbf">--</span> horas</td>
                 </tr>
                 <tr>
-                    <td style="padding: 12px; border: 1px solid #cbd5e1;">Tiempo de Operación Continua Evaluado (t)</td>
-                    <td style="padding: 12px; border: 1px solid #cbd5e1; text-align: right;"><span id="pdf_time">--</span> horas</td>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1;">Tiempo de Operación Continua Requerido (t)</td>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1; text-align: right;"><span id="pdf_time">--</span> horas</td>
                 </tr>
                 <tr style="background: #f8fafc;">
-                    <td style="padding: 12px; border: 1px solid #cbd5e1;">Tasa Instantánea de Falla (&lambda;)</td>
-                    <td id="pdf_lambda" style="padding: 12px; border: 1px solid #cbd5e1; text-align: right; font-family: monospace;">--</td>
+                    <td style="padding: 10px; border: 1px solid #cbd5e1;">Tasa de Falla Calculada (&lambda;)</td>
+                    <td id="pdf_lambda" style="padding: 10px; border: 1px solid #cbd5e1; text-align: right; font-family: monospace;">--</td>
                 </tr>
-                <tr style="background: #f1f5f9; font-weight: bold;">
-                    <td style="padding: 12px; border: 1px solid #cbd5e1; color: #1e1b4b; font-size: 1.1rem;">Índice de Fiabilidad Operacional R(t)</td>
-                    <td id="pdf_prob" style="padding: 12px; border: 1px solid #cbd5e1; text-align: right; color: #4c1d95; font-size: 1.1rem;">--</td>
+                <tr style="background: #ecfdf5; font-weight: bold;">
+                    <td style="padding: 10px; border: 1px solid #cbd5e1; color: #065f46; font-size: 1.05rem;">Probabilidad de Supervivencia R(t)</td>
+                    <td id="pdf_prob" style="padding: 10px; border: 1px solid #cbd5e1; text-align: right; color: #065f46; font-size: 1.05rem;">--</td>
                 </tr>
             </tbody>
         </table>
 
-        <div style="margin-top: 35px; padding: 20px; background: #fff; border-left: 5px solid #0f172a; border-radius: 4px; box-shadow: inset 0 0 10px rgba(0,0,0,0.02); border-top: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0;">
-            <h3 style="font-size: 1rem; margin-bottom: 8px; text-transform: uppercase; color: #0f172a;">Diagnóstico y Dictamen de Ingeniería</h3>
-            <p id="pdf_concl" style="font-style: italic; line-height: 1.5; color: #334155;">Sin datos simulados.</p>
+        <div style="margin-top: 30px; padding: 15px; background: #fafafa; border-left: 4px solid #0f172a; border-radius: 4px; border-top: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0;">
+            <h4 style="font-size: 0.95rem; margin-bottom: 6px; text-transform: uppercase; color: #0f172a;">Diagnóstico Predictivo de Ingeniería</h4>
+            <p id="pdf_concl" style="font-style: italic; font-size: 0.9rem; line-height: 1.5; color: #334155;">Sin datos de cálculo registrados.</p>
         </div>
 
-        <div style="margin-top: 80px; text-align: center;">
+        <div style="margin-top: 70px; text-align: center;">
             <table style="width: 100%;">
                 <tr>
                     <td style="width: 50%; text-align: center;">
-                        <div style="width: 200px; border-top: 1px solid #64748b; margin: 0 auto; padding-top: 5px; font-size: 0.85rem; color: #475569;">
-                            Comité de Control de Planta<br>Ingeniería de Mantenimiento
+                        <div style="width: 180px; border-top: 1px solid #94a3b8; margin: 0 auto; padding-top: 5px; font-size: 0.8rem; color: #475569;">
+                            Supervisión de Planta<br>Ingeniería de Confiabilidad
                         </div>
                     </td>
                     <td style="width: 50%; text-align: center;">
-                        <div style="width: 200px; border-top: 1px solid #64748b; margin: 0 auto; padding-top: 5px; font-size: 0.85rem; color: #475569;">
-                            Firma de Auditoría Técnica<br>Grupo N° 4 - ESPOCH
+                        <div style="width: 180px; border-top: 1px solid #94a3b8; margin: 0 auto; padding-top: 5px; font-size: 0.8rem; color: #475569;">
+                            Validación Técnica<br>Grupo N° 4 - ESPOCH
                         </div>
                     </td>
                 </tr>
@@ -300,69 +368,50 @@
         </div>
     </div>
 
+    <div id="zoomModal" style="display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(3, 0, 8, 0.95); backdrop-filter: blur(10px); align-items: center; justify-content: center; cursor: zoom-out;">
+        <span style="position: absolute; top: 20px; right: 30px; color: #00f2ff; font-size: 40px; font-weight: bold; cursor: pointer; font-family: sans-serif;">&times;</span>
+        <img id="imgZoomed" src="" style="max-width: 90%; max-height: 85%; object-fit: contain; border-radius: 12px; box-shadow: 0 0 50px rgba(0, 242, 255, 0.25); transition: transform 0.2s ease; cursor: grab;">
+    </div>
+
     <footer>
-        <p class="facultad">Facultad de Mecánica | Mantenimiento Industrial</p>
-        <p class="creditos">Desarrollado de forma íntegra por Grupo 4 • ESPOCH • 2026</p>
+        <div class="badge-espoch">ESCUELA SUPERIOR POLÍTICA DE CHIMBORAZO</div>
+        <p style="color: #fff; font-weight: 700; font-size: 1.1rem; margin-top: 10px;">Facultad de Mecánica | Ingeniería de Mantenimiento</p>
+        <p style="margin-top: 20px; opacity: 0.5; font-size: 0.7rem; letter-spacing: 3px;">DESARROLLADO POR GRUPO 4 • 2026</p>
     </footer>
 
     <script>
-        let chartInstance;
+        let mainChart;
 
-        // Base de datos del simulador integrada perfectamente con las rutas locales del repositorio de GitHub
-        const databaseAssets = {
-            seleccion_general: { 
-                mtbf: 20000, time: 3000, img: "seleccion_general.png", 
-                lbl: "SISTEMA GENERAL", name: "Sistema Completo de Planta",
-                desc: "Análisis estructural de la planta de potencia y distribución de los subsistemas mecánicos en serie."
-            },
-            turbina: { 
-                mtbf: 25000, time: 2000, img: "turbina.png", 
-                lbl: "TURBINA", name: "Turbina de Vapor Crítica",
-                desc: "Inspección de álabes, cojinetes hidrodinámicos y parámetros de entrada térmica de vapor de alta presión."
-            },
-            motor: { 
-                mtbf: 18000, time: 1500, img: "motor.png", 
-                lbl: "MOTOR", name: "Motor Eléctrico Principal",
-                desc: "Análisis del aislamiento del estator, devanados y control de temperatura en rodamientos de bolas."
-            },
-            reductor: { 
-                mtbf: 15000, time: 2500, img: "reductor.png", 
-                lbl: "REDUCTOR", name: "Reductor de Velocidad",
-                desc: "Cálculo cinemático en trenes de engranajes helicoidales. Monitoreo de desgaste físico y fatiga en dientes."
-            },
-            compresor: { 
-                mtbf: 12000, time: 1800, img: "compresor.png", 
-                lbl: "COMPRESOR", name: "Compresor de Aire Industrial",
-                desc: "Evaluación del sistema alternativo/rotativo, empaquetaduras y pérdida de eficiencia neumática por desgaste."
-            },
-            bomba: { 
-                mtbf: 9500, time: 1000, img: "bomba.png", 
-                lbl: "BOMBA", name: "Bomba Centrífuga de Alimentación",
-                desc: "Evaluación del impulsor, cavitación y sellos mecánicos ante flujos de alta presión hidráulica."
-            }
+        // Base de datos del simulador actualizada y enfocada en los componentes de una GEARBOX (Caja Reductora)
+        const baseDeDatosActivos = {
+            custom: { mtbf: 18000, time: 2500, img: "seleccion_general.png", lbl: "GEARBOX: CONJUNTO GENERAL", name: "Conjunto Completo de la Transmisión (Gearbox)" },
+            motor: { mtbf: 14000, time: 2000, img: "motor.png", lbl: "CAD: EJE DE ENTRADA", name: "Eje de Entrada (Alta Velocidad)" },
+            bomba: { mtbf: 24000, time: 1500, img: "bomba.png", lbl: "CAD: ENGRANAJES HELICOIDALES", name: "Tren de Engranajes Helicoidales Reductores" },
+            compresor: { mtbf: 11500, time: 1000, img: "compresor.png", lbl: "RENDER: RODAMIENTOS CÓNICOS", name: "Rodamientos de Rodillos Cónicos de Apoyo" },
+            turbina: { mtbf: 9200, time: 3000, img: "turbina.png", lbl: "VISTA: SISTEMA DE LUBRICACIÓN", name: "Circuito de Lubricación Interna por Salpicadura" },
+            reductor: { mtbf: 6800, time: 1200, img: "reductor.png", lbl: "CORTE: RETENES Y SELLOS", name: "Sellos Mecánicos y Retenes de Cierre" }
         };
 
-        function actualizarComponente() {
-            const idSeleccionado = document.getElementById('asset_select').value;
-            const asset = databaseAssets[idSeleccionado];
+        function cargarDatosActivo() {
+            const selector = document.getElementById('asset_select');
+            const activoSeleccionado = selector.value;
+            const datos = baseDeDatosActivos[activoSeleccionado];
             
-            document.getElementById('inp_mtbf').value = asset.mtbf;
-            document.getElementById('inp_time').value = asset.time;
+            document.getElementById('inp_mtbf').value = datos.mtbf;
+            document.getElementById('inp_time').value = datos.time;
             
-            const renderImg = document.getElementById('asset_img');
-            renderImg.style.opacity = '0.2';
-            
+            const imgElement = document.getElementById('asset_img');
+            imgElement.style.opacity = 0;
             setTimeout(() => {
-                renderImg.src = asset.img;
-                document.getElementById('asset_desc').innerText = asset.desc;
-                document.getElementById('model_lbl').innerText = asset.lbl;
-                renderImg.style.opacity = '1';
+                imgElement.src = datos.img;
+                document.getElementById('model_lbl').innerText = datos.lbl;
+                imgElement.style.opacity = 1;
             }, 150);
 
-            calcularFiabilidad(); 
+            procesarCalculo(); 
         }
 
-        function calcularFiabilidad() {
+        function procesarCalculo() {
             const mtbf = parseFloat(document.getElementById('inp_mtbf').value);
             const t = parseFloat(document.getElementById('inp_time').value);
             
@@ -370,91 +419,125 @@
             
             const lambda = 1 / mtbf;
             const r = Math.exp(-lambda * t);
-            const porcentajeFinal = (r * 100).toFixed(2);
+            const porcentajeFinal = (r * 100).toFixed(1);
             
-            // Render en monitor
-            document.getElementById('res-val').innerText = porcentajeFinal + "%";
+            const num = document.getElementById('res-val');
+            num.innerText = porcentajeFinal + "%";
             
-            // Actualizar Gráfica
-            renderizarGraficaExponencial(lambda, t);
-            
-            // Sincronizar datos con la sección oculta del PDF
-            prepararDatosPDF(porcentajeFinal, lambda, mtbf, t);
+            if(r < 0.6) num.style.color = "#ff3e3e";
+            else if(r < 0.85) num.style.color = "#ffa500";
+            else num.style.color = "#00f2ff";
+
+            updateVisuals(lambda, t);
+            sincronizarDatosReportePDF(porcentajeFinal, lambda, mtbf, t);
         }
 
-        function renderizarGraficaExponencial(lambda, tUser) {
+        function updateVisuals(lambda, tUser) {
             const ctx = document.getElementById('chart_id').getContext('2d');
-            const labels = []; const points = []; const rangeX = tUser * 2.5;
+            const labels = []; const points = []; const range = tUser * 2.5;
 
-            for(let i=0; i <= rangeX; i += rangeX/20) {
+            for(let i=0; i <= range; i += range/20) {
                 labels.push(Math.round(i));
                 points.push((Math.exp(-lambda * i) * 100).toFixed(2));
             }
 
-            if(chartInstance) chartInstance.destroy();
-            chartInstance = new Chart(ctx, {
+            if(mainChart) mainChart.destroy();
+            mainChart = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: labels,
                     datasets: [{
                         data: points,
-                        borderColor: '#a855f7',
-                        backgroundColor: 'rgba(168, 85, 247, 0.08)',
-                        fill: true, tension: 0.3, pointRadius: 0
+                        borderColor: '#7000ff',
+                        backgroundColor: 'rgba(112, 0, 255, 0.1)',
+                        fill: true, tension: 0.4, pointRadius: 0
                     }]
                 },
                 options: { 
                     responsive: true, maintainAspectRatio: false, 
                     plugins: { legend: { display: false } },
                     scales: { 
-                        x: { ticks: { color: '#9ca3af', font: { size: 9 } }, grid: { display: false } },
-                        y: { beginAtZero: true, max: 100, ticks: { color: '#9ca3af', font: { size: 9 } }, grid: { color: 'rgba(168, 85, 247, 0.05)' } }
+                        x: { ticks: { color: '#666', font: { size: 9 } }, grid: { display: false } },
+                        y: { beginAtZero: true, max: 100, ticks: { color: '#666', font: { size: 9 } }, grid: { color: 'rgba(112,0,255,0.05)' } }
                     }
                 }
             });
         }
 
-        function prepararDatosPDF(porcentaje, lambda, mtbf, t) {
-            const idSeleccionado = document.getElementById('asset_select').value;
-            const nombreCompleto = databaseAssets[idSeleccionado].name;
+        function sincronizarDatosReportePDF(porcentaje, lambda, mtbf, t) {
+            const selector = document.getElementById('asset_select');
+            const activo = baseDeDatosActivos[selector.value];
 
-            document.getElementById('pdf_comp').innerText = nombreCompleto;
+            document.getElementById('pdf_comp').innerText = activo.name;
             document.getElementById('pdf_mtbf').innerText = mtbf;
             document.getElementById('pdf_time').innerText = t;
             document.getElementById('pdf_prob').innerText = porcentaje + "%";
             document.getElementById('pdf_lambda').innerText = lambda.toExponential(6) + " fallas/hora";
 
-            let dictamen = "";
+            let conclusion = "";
             if (porcentaje > 85) {
-                dictamen = "DIAGNÓSTICO: Parámetros operativos dentro del umbral óptimo de seguridad. Se aprueba la continuidad del plan general de mantenimiento predictivo mediante termografía e inspección vibroacústica periódica.";
-            } else if (porcentaje > 65) {
-                dictamen = "DIAGNÓSTICO: Condición de advertencia moderada por incremento de fatiga en el ciclo de trabajo. Se aconseja adelantar la ventana de parada programada para lubricación, alineación de ejes y calibración estructural.";
+                conclusion = "DIAGNÓSTICO: Componente operando en zona segura de alta fiabilidad. Se autoriza continuar con el plan regular de mantenimiento predictivo (rutas de análisis de vibraciones e inspección de temperatura).";
+            } else if (porcentaje > 60) {
+                conclusion = "DIAGNÓSTICO: Fatiga moderada detectada. Se recomienda planificar una inspección en la próxima parada de planta para evaluar desgaste de dientes por fricción y verificar la pureza del aceite lubricante.";
             } else {
-                dictamen = "ALERTA CRÍTICA: Nivel de fiabilidad severamente degradado e inferior al estándar seguro. Existe alta probabilidad de interrupción imprevista. Se prescribe una intervención correctiva inmediata antes de la siguiente jornada de potencia.";
+                conclusion = "ALERTA CRÍTICA: La probabilidad de fallo supera el umbral límite admisible de seguridad industrial. Alto riesgo de atascamiento o rotura catastrófica. Se prescribe intervención correctiva y cambio inmediato de piezas de forma urgente.";
             }
-            document.getElementById('pdf_concl').innerText = dictamen;
+            document.getElementById('pdf_concl').innerText = conclusion;
         }
 
         function descargarReportePDF() {
-            const elemento = document.getElementById('bloqueReportePDF');
+            const elementoReporte = document.getElementById('seccionReporteImpresion');
             const selector = document.getElementById('asset_select');
-            const nombreActivo = databaseAssets[selector.value].lbl.replace(" ", "_");
+            const abreviatura = baseDeDatosActivos[selector.value].lbl.replace(/[:\s]+/g, '_');
             
-            // Opciones de configuración de html2pdf
-            const opciones = {
+            const configuracionHtml2Pdf = {
                 margin:       15,
-                filename:     `Reporte_Fiabilidad_${nombreActivo}_Grupo4.pdf`,
+                filename:     `Reporte_Confiabilidad_Gearbox_${abreviatura}.pdf`,
                 image:        { type: 'jpeg', quality: 0.98 },
                 html2canvas:  { scale: 2, useCORS: true },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
             
-            // Ejecutar conversión y descarga directa
-            html2pdf().from(elemento).set(opciones).save();
+            html2pdf().from(elementoReporte).set(configuracionHtml2Pdf).save();
         }
 
+        // INTERACTIVIDAD DE ZOOM Y MODAL EN PANTALLA COMPLETA
+        const modal = document.getElementById('zoomModal');
+        const modalImg = document.getElementById('imgZoomed');
+        const mainImg = document.getElementById('asset_img');
+        let scale = 1;
+
+        mainImg.onclick = function() {
+            modal.style.display = "flex";
+            modalImg.src = this.src;
+            scale = 1;
+            modalImg.style.transform = `scale(${scale})`;
+        };
+
+        modal.onclick = function(e) {
+            if (e.target !== modalImg) {
+                modal.style.display = "none";
+            }
+        };
+
+        modalImg.onwheel = function(e) {
+            e.preventDefault();
+            if (e.deltaY < 0) {
+                scale += 0.15;
+            } else {
+                scale -= 0.15;
+            }
+            scale = Math.min(Math.max(0.5, scale), 4); 
+            modalImg.style.transform = `scale(${scale})`;
+        };
+
         window.onload = () => {
-            calcularFiabilidad();
+            new QRCode(document.getElementById("qrcode"), {
+                text: window.location.href,
+                width: 150, height: 150,
+                colorDark : "#030008", colorLight : "#ffffff"
+            });
+            procesarCalculo();
         };
     </script>
 </body>
