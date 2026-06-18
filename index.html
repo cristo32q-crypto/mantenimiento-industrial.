@@ -6,7 +6,7 @@
     <title>Ingeniería de Fiabilidad | Grupo 4 ESPOCH</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -14,12 +14,14 @@
     <style>
         :root {
             --bg-dark: #030008;
-            --card-bg: rgba(20, 10, 35, 0.7);
-            --primary-purple: #7000ff;
-            --neon-cyan: #00f2ff;
+            --bg-card: rgba(20, 10, 35, 0.65);
+            --bg-input: #0c061a;
+            --accent-purple: #7000ff;
+            --accent-glow: #9d4edd;
             --text-main: #f0f0f5;
-            --text-dim: #a0a0b5;
-            --glass-border: rgba(112, 0, 255, 0.3);
+            --text-muted: #a0a0b5;
+            --border-glass: rgba(112, 0, 255, 0.25);
+            --neon-shadow: 0 0 25px rgba(112, 0, 255, 0.2);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -28,313 +30,349 @@
             font-family: 'Plus Jakarta Sans', sans-serif; 
             background-color: var(--bg-dark); 
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(112, 0, 255, 0.1) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(0, 242, 255, 0.05) 0%, transparent 40%);
+                radial-gradient(circle at 10% 20%, rgba(112, 0, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(157, 78, 221, 0.04) 0%, transparent 50%);
             color: var(--text-main); 
-            line-height: 1.8; 
+            line-height: 1.7; 
             overflow-x: hidden;
         }
 
+        /* NAVEGACIÓN CORPORATIVA */
         header {
-            background: rgba(3, 0, 8, 0.8);
-            padding: 20px 8%;
+            background: rgba(3, 0, 8, 0.85);
+            padding: 18px 8%;
             display: flex; justify-content: space-between; align-items: center;
-            border-bottom: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--border-glass);
             position: sticky; top: 0; z-index: 1000;
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(12px);
         }
-        .logo { font-weight: 800; font-size: 1.6rem; letter-spacing: -1px; display: flex; align-items: center; gap: 12px; }
-        .logo span { background: linear-gradient(to right, var(--primary-purple), var(--neon-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .logo { font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; display: flex; align-items: center; gap: 10px; }
+        .logo span { background: linear-gradient(to right, var(--accent-purple), var(--accent-glow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .badge-espoch { background: #ff3e3e; color: #fff; padding: 6px 16px; border-radius: 30px; font-size: 0.75rem; font-weight: 800; letter-spacing: 1px; }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-        .hero { padding: 100px 5% 40px; text-align: center; }
+        /* HERO SECTION */
+        .hero { padding: 90px 5% 50px; text-align: center; }
+        .hero p.subtitle { color: var(--accent-glow); font-weight: 800; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 15px; font-size: 0.9rem; }
         .hero h1 { 
-            font-size: 4.5rem; margin-bottom: 20px; font-weight: 800; line-height: 1.1;
-            background: linear-gradient(to bottom, #fff 40%, var(--primary-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 15px rgba(112, 0, 255, 0.3));
+            font-size: 4rem; margin-bottom: 25px; font-weight: 800; line-height: 1.15; letter-spacing: -2px;
+            background: linear-gradient(to bottom, #ffffff 50%, var(--text-muted));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
-        .hero p { font-size: 1.3rem; color: var(--text-dim); max-width: 800px; margin: 0 auto; }
+        .hero p.desc { font-size: 1.2rem; color: var(--text-muted); max-width: 750px; margin: 0 auto; }
 
-        .featured-image-container { max-width: 1100px; margin: 0 auto 60px; padding: 0 20px; }
-        .featured-image {
-            width: 100%; height: 450px; border-radius: 30px; overflow: hidden;
-            border: 1px solid var(--glass-border); box-shadow: 0 0 40px rgba(112, 0, 255, 0.2); position: relative;
+        /* HERO BANNER */
+        .banner-container { max-width: 1160px; margin: 0 auto 60px; padding: 0 20px; }
+        .banner-frame {
+            width: 100%; height: 380px; border-radius: 24px; overflow: hidden;
+            border: 1px solid var(--border-glass); box-shadow: var(--neon-shadow);
         }
-        .featured-image img {
-            width: 100%; height: 100%; object-fit: cover; filter: brightness(0.6) contrast(1.1); transition: transform 0.5s ease;
+        .banner-frame img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.65) contrast(1.1); }
+
+        /* PANELES DE CONTENIDO ACADÉMICO */
+        .panel-informatico { 
+            background: var(--bg-card); padding: 45px; border-radius: 24px; 
+            border: 1px solid var(--border-glass); margin-bottom: 40px; text-align: justify;
+            backdrop-filter: blur(10px); box-shadow: 0 15px 35px rgba(0,0,0,0.4);
         }
-        .featured-image:hover img { transform: scale(1.05); }
+        .panel-informatico h2 { color: var(--accent-glow); margin-bottom: 20px; font-size: 2rem; display: flex; align-items: center; gap: 12px; font-weight: 700; }
+        .panel-informatico p { margin-bottom: 18px; font-size: 1.05rem; color: #cbd5e1; }
 
-        .glass-panel { 
-            background: var(--card-bg); padding: 50px; border-radius: 30px; 
-            border: 1px solid var(--glass-border); margin-bottom: 60px; text-align: justify;
-            backdrop-filter: blur(10px); box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        .btn-link {
+            display: inline-flex; align-items: center; gap: 8px; color: var(--accent-glow); 
+            text-decoration: none; border: 1px solid var(--accent-glow); padding: 8px 18px; 
+            border-radius: 8px; font-size: 0.9rem; font-weight: 600; margin-top: 10px; transition: 0.3s;
         }
-        .glass-panel h2 { color: var(--neon-cyan); margin-bottom: 25px; font-size: 2.2rem; display: flex; align-items: center; gap: 15px; }
-        .glass-panel p { margin-bottom: 20px; font-size: 1.1rem; color: #d0d0e0; }
+        .btn-link:hover { background: var(--accent-purple); color: #fff; box-shadow: 0 0 15px var(--accent-purple); border-color: var(--accent-purple); }
 
-        .math-box { text-align: center; margin: 40px 0; padding: 40px; background: rgba(112, 0, 255, 0.05); border-radius: 20px; border: 1px solid var(--primary-purple); }
-        .math-box code { font-family: 'JetBrains Mono', monospace; font-size: 2.8rem; color: var(--neon-cyan); text-shadow: 0 0 10px rgba(0, 242, 255, 0.5); }
+        /* MATEMÁTICAS */
+        .caja-formula { text-align: center; margin: 35px 0; padding: 35px; background: rgba(112, 0, 255, 0.04); border-radius: 16px; border: 1px dashed var(--accent-purple); }
+        .caja-formula code { font-family: 'JetBrains Mono', monospace; font-size: 2.3rem; color: var(--accent-glow); text-shadow: 0 0 8px rgba(157, 78, 221, 0.5); }
 
-        .media-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 40px; margin-bottom: 60px; }
-        @media (max-width: 900px) { .media-grid { grid-template-columns: 1fr; } }
-        .video-card { border-radius: 25px; overflow: hidden; border: 1px solid var(--glass-border); background: #000; box-shadow: 0 0 30px rgba(112, 0, 255, 0.2); }
+        /* GRID MEDIA */
+        .grid-multimedia { display: grid; grid-template-columns: 1.6fr 1fr; gap: 30px; margin-bottom: 50px; }
+        @media (max-width: 900px) { .grid-multimedia { grid-template-columns: 1fr; } }
+        .tarjeta-video { border-radius: 20px; overflow: hidden; border: 1px solid var(--border-glass); background: #000; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         video { width: 100%; display: block; }
-        .qr-card { background: #fff; padding: 40px; border-radius: 25px; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 0 30px var(--primary-purple); }
+        .tarjeta-qr { background: #ffffff; padding: 30px; border-radius: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.1); box-shadow: var(--neon-shadow); }
         #qrcode { margin-bottom: 15px; }
-        .qr-card p { color: #000; font-weight: 800; font-size: 0.9rem; }
+        .tarjeta-qr p { color: #030008; font-weight: 800; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; }
 
-        /* SIMULADOR DE FIABILIDAD */
-        .simulator-card { 
-            background: linear-gradient(145deg, #0d0a1a, #030008);
-            padding: 50px; border-radius: 35px; border: 1px solid var(--neon-cyan);
-            box-shadow: 0 0 50px rgba(0, 242, 255, 0.1); margin-bottom: 80px;
+        /* CENTRAL DE SIMULACIÓN - 3 COLUMNAS */
+        .modulo-simulador { 
+            background: linear-gradient(145deg, #0f0720, #030008);
+            padding: 45px; border-radius: 28px; border: 1px solid var(--accent-purple);
+            box-shadow: var(--neon-shadow); margin-bottom: 60px; position: relative;
         }
-        
-        .sim-grid-3col { 
-            display: grid; 
-            grid-template-columns: 1fr 1.1fr 0.9fr; 
-            gap: 30px; 
-            align-items: stretch; 
-        }
-        
-        @media (max-width: 1050px) { 
-            .sim-grid-3col { grid-template-columns: 1fr; } 
-        }
+        .sim-grid-principal { display: grid; grid-template-columns: 1.1fr 1.1fr 0.8fr; gap: 25px; align-items: stretch; }
+        @media (max-width: 1100px) { .sim-grid-principal { grid-template-columns: 1fr; } }
 
-        .controls-side { display: flex; flex-direction: column; justify-content: center; }
-        .input-item { margin-bottom: 25px; }
-        .input-item label { color: var(--neon-cyan); font-weight: 700; margin-bottom: 10px; display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; }
-        
+        /* COLUMNA 1: CONTROLES */
+        .col-controles { display: flex; flex-direction: column; justify-content: center; }
+        .grupo-input { margin-bottom: 20px; }
+        .grupo-input label { color: var(--accent-glow); font-weight: 700; margin-bottom: 8px; display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; }
         input, select { 
-            width: 100%; padding: 18px; background: #0a0614; border: 1px solid var(--glass-border); 
-            color: #fff; border-radius: 12px; font-size: 1.1rem; outline: none;
-            font-family: 'Plus Jakarta Sans', sans-serif; transition: 0.3s;
+            width: 100%; padding: 15px; background: var(--bg-input); border: 1px solid var(--border-glass); 
+            color: #fff; border-radius: 10px; font-size: 1rem; outline: none; transition: 0.3s;
         }
-        input:focus, select:focus { border-color: var(--neon-cyan); box-shadow: 0 0 15px rgba(0, 242, 255, 0.1); }
-        select option { background: #0c081c; color: #fff; }
+        input:focus, select:focus { border-color: var(--accent-glow); box-shadow: 0 0 10px rgba(157, 78, 221, 0.3); }
+        select option { background: #0c061a; color: #fff; }
         
-        .btn-glow { 
-            width: 100%; padding: 20px; background: var(--primary-purple); color: #fff; 
-            border: none; border-radius: 12px; font-weight: 800; cursor: pointer;
-            text-transform: uppercase; letter-spacing: 3px; transition: 0.4s;
+        .btn-primario { 
+            width: 100%; padding: 16px; background: var(--accent-purple); color: #fff; 
+            border: none; border-radius: 10px; font-weight: 800; cursor: pointer;
+            text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; margin-top: 10px;
         }
-        .btn-glow:hover { background: var(--neon-cyan); color: #000; box-shadow: 0 0 30px var(--neon-cyan); transform: translateY(-2px); }
+        .btn-primario:hover { background: var(--accent-glow); transform: translateY(-1px); box-shadow: 0 5px 15px rgba(112, 0, 255, 0.4); }
+        .btn-secundario {
+            width: 100%; padding: 14px; background: transparent; color: var(--accent-glow);
+            border: 1px solid var(--accent-purple); border-radius: 10px; font-weight: 700; cursor: pointer;
+            text-transform: uppercase; letter-spacing: 1.5px; transition: 0.3s; margin-top: 10px;
+        }
+        .btn-secundario:hover { background: rgba(112, 0, 255, 0.08); }
 
-        .display-side {
-            background: rgba(5, 2, 15, 0.6);
-            border: 1px solid rgba(112, 0, 255, 0.2);
-            border-radius: 24px; padding: 30px;
-            display: flex; flex-direction: column; justify-content: space-between; text-align: center;
+        /* COLUMNA 2: MONITOR DE CÁLCULO */
+        .col-monitor {
+            background: rgba(20, 10, 35, 0.4); border: 1px solid var(--border-glass);
+            border-radius: 20px; padding: 25px; display: flex; flex-direction: column;
+            justify-content: space-between; text-align: center;
         }
-        #res-val { font-size: 5.5rem; font-weight: 900; color: var(--neon-cyan); line-height: 1; margin-bottom: 15px; display: block; }
-        .chart-container { height: 220px; position: relative; width: 100%; }
+        #res-val { font-size: 5rem; font-weight: 800; color: var(--accent-glow); line-height: 1; margin-bottom: 10px; font-family: 'JetBrains Mono', monospace; text-shadow: 0 0 15px rgba(157, 78, 221, 0.3); }
+        .wrapper-grafica { height: 210px; position: relative; width: 100%; }
 
-        /* PANEL PLANOS TÉCNICOS NEUTRALES (SIN IA) */
-        .model-3d-side { display: flex; flex-direction: column; justify-content: center; }
-        .model-3d-container {
-            width: 100%; height: 100%; min-height: 300px;
-            background: rgba(10, 5, 25, 0.9); border-radius: 16px;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            padding: 20px; border: 2px solid var(--neon-cyan);
-            box-shadow: 0 0 25px rgba(0, 242, 255, 0.15); position: relative;
-            color: var(--text-main); text-align: center;
+        /* COLUMNA 3: PLANOS REALES GRC */
+        .col-planos { display: flex; flex-direction: column; justify-content: center; }
+        .contenedor-plano-tecnico {
+            width: 100%; height: 100%; min-height: 310px; background: #ffffff;
+            border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+            padding: 16px; border: 1px solid var(--accent-purple); position: relative;
+            box-shadow: 0 0 15px rgba(112, 0, 255, 0.1);
         }
-        .model-3d-container i {
-            font-size: 5rem; color: var(--neon-cyan); margin-bottom: 15px;
-            text-shadow: 0 0 20px rgba(0, 242, 255, 0.4);
+        .contenedor-plano-tecnico img { 
+            width: 100%; height: 200px; object-fit: contain; border-radius: 8px;
+            filter: contrast(1.15) brightness(0.95);
         }
-        .model-3d-container p { font-size: 0.9rem; color: var(--text-dim); max-width: 80%; margin-bottom: 20px; }
-        .model-label {
-            position: absolute; bottom: 12px; font-size: 0.7rem; font-weight: 800;
-            color: #030008; letter-spacing: 1px; text-transform: uppercase;
-            background: var(--neon-cyan); padding: 4px 12px; border-radius: 6px;
+        .desc-plano { font-size: 0.78rem; color: #334155; text-align: center; font-weight: 600; line-height: 1.4; margin-top: 10px; }
+        .etiqueta-sistema {
+            font-size: 0.65rem; font-weight: 800; color: #ffffff; letter-spacing: 1px;
+            text-transform: uppercase; background: var(--accent-purple); padding: 4px 10px; border-radius: 4px;
         }
 
-        .source-link {
-            font-size: 0.8rem; color: var(--neon-cyan); text-decoration: none;
-            border: 1px solid var(--neon-cyan); padding: 6px 12px; border-radius: 6px;
-            transition: 0.3s; margin-top: 10px; display: inline-block;
+        /* REPORTE TÉCNICO INTERACTIVO */
+        .capa-reporte {
+            display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: #ffffff; color: #0f172a; border-radius: 28px; padding: 40px;
+            z-index: 100; overflow-y: auto; box-shadow: 0 20px 40px rgba(0,0,0,0.6);
         }
-        .source-link:hover { background: var(--neon-cyan); color: #000; box-shadow: 0 0 15px var(--neon-cyan); }
+        .encabezado-reporte { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #0f172a; padding-bottom: 10px; }
+        .encabezado-reporte h3 { font-size: 1.3rem; font-weight: 800; }
+        .btn-cerrar-reporte { background: none; border: none; font-size: 2rem; cursor: pointer; color: #0f172a; }
+        .fila-dato-reporte { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed #cbd5e1; font-size: 0.95rem; }
+        .conclusión-recuadro { margin-top: 25px; padding: 18px; background: #f8fafc; border-left: 5px solid #0f172a; border-radius: 0 8px 8px 0; }
 
-        footer { text-align: center; padding: 80px 20px; border-top: 1px solid var(--glass-border); background: rgba(3, 0, 8, 0.9); }
-        .badge-espoch { background: #ff3e3e; color: #fff; padding: 6px 18px; border-radius: 30px; font-size: 0.8rem; font-weight: 800; margin-bottom: 20px; display: inline-block; }
+        /* FOOTER */
+        footer { text-align: center; padding: 70px 20px; border-top: 1px solid var(--border-glass); background: #030008; }
+        footer p.facultad { color: var(--text-main); font-weight: 700; font-size: 1.1rem; margin-top: 10px; }
+        footer p.creditos { margin-top: 15px; opacity: 0.4; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; }
     </style>
 </head>
 <body>
 
     <header>
         <div class="logo">
-            <i class="fas fa-charging-station" style="color: var(--neon-cyan);"></i> 
+            <i class="fas fa-wind" style="color: var(--accent-glow);"></i> 
             <span>WindReliability</span>Lab
         </div>
-        <div class="badge-espoch">GRUPO 4 - MECÁNICA</div>
+        <div class="badge-espoch">GRUPO 4 - INDUSTRIAL</div>
     </header>
 
     <section class="hero">
-        <p style="color: var(--primary-purple); font-weight: 800; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 15px;">Drivetrain Reliability Collaborative</p>
+        <p class="subtitle">Drivetrain Reliability Collaborative</p>
         <h1>Ingeniería de <br><span>Fiabilidad</span></h1>
-        <p>Modelado matemático probabilístico basado en el catálogo de datos experimentales del NREL / GRC Phase 3.</p>
+        <p class="desc">Modelado probabilístico avanzado basado en el catálogo de datos experimentales del NREL para la multiplicadora de velocidad GRC Phase 3 Gearbox 2.</p>
     </section>
 
-    <div class="featured-image-container">
-        <div class="featured-image">
-            <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=2070" alt="Parque Eólico de Alta Confiabilidad">
+    <div class="banner-container">
+        <div class="banner-frame">
+            <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=2070" alt="Aerogeneradores de transmisión directa y multiplicadora">
         </div>
     </div>
 
     <div class="container">
         
-        <article class="glass-panel">
-            <h2><i class="fas fa-server"></i> Origen de Datos (NREL GRC Phase 3 Gearbox 2)</h2>
-            <p>Este portal matemático implementa los datos analíticos del proyecto <strong>Gearbox Reliability Collaborative (GRC) - Submisión 45</strong> del Repositorio de Datos de Energía, desarrollado en el banco de pruebas de transmisión del <em>National Wind Technology Center (NWTC)</em> en Colorado, EE.UU.</p>
-            <p>El objetivo científico de este set de datos es mitigar y estudiar las causas de fallas mecánicas catastróficas y prematuras en multiplicadoras de velocidad para aerogeneradores, modelando esfuerzos torsores y cargas no simétricas sobre rodamientos y trenes de engranajes planetarios/helicoidales bajo condiciones de acople y fallas simuladas de la red eléctrica.</p>
-            <p style="text-align: center; margin-top: 15px;">
-                <a href="https://data.nlr.gov/submissions/45" target="_blank" class="source-link"><i class="fas fa-external-link-alt"></i> Acceder a NLR Data Catalog Submission ID: 45</a>
+        <article class="panel-informatico">
+            <h2><i class="fas fa-database"></i> Base de Datos GRC Phase 3 (Submission ID: 45)</h2>
+            <p>Este sistema implementa la matriz de datos analíticos obtenida de la **Submisión 45 del Repositorio Nacional de Datos de Energía (NLR/NREL)** de EE.UU. El estudio recoge los datos empíricos de las campañas de ensayos destructivos y de fatiga acelerada ejecutadas en el banco de pruebas de transmisiones del <em>National Wind Technology Center (NWTC)</em>.</p>
+            <p>La investigación se centra en monitorizar el comportamiento cinemático y dinámico de la **Caja Multiplicadora GRC Gearbox 2 (750 kW)**, la cual emplea una arquitectura combinada de tres etapas de reducción (una etapa planetaria de baja velocidad y dos etapas paralelas de alta velocidad), permitiendo caracterizar fallos críticos bajo cargas asimétricas externas.</p>
+            <p style="text-align: center;">
+                <a href="https://data.nlr.gov/submissions/45" target="_blank" class="btn-link"><i class="fas fa-external-link-alt"></i> Repositorio NLR Data Catalog - Submisión 45</a>
             </p>
         </article>
 
-        <article class="glass-panel">
-            <h2><i class="fas fa-calculator"></i> Ecuación de Fiabilidad de un Sistema en Serie</h2>
-            <p>Para la modelación matemática en este simulador se aplica la distribución exponencial de falla. La caja multiplicadora GRC se divide estructuralmente en sus sub-componentes principales acoplados mecánicamente en configuración de fiabilidad en serie:</p>
+        <article class="panel-informatico">
+            <h2><i class="fas fa-square-root-alt"></i> Modelación y Ecuación de Fiabilidad</h2>
+            <p>En ingeniería de confiabilidad, el tren de potencia mecánico de una turbina eólica se modela matemáticamente bajo una configuración de **Fiabilidad en Serie**. Esto significa que si cualquiera de las etapas de engranajes o rodamientos críticos sufre una avería catastrófica, la integridad operativa de todo el aerogenerador se ve interrumpida inmediatamente.</p>
+            <p>Asumiendo una tasa de fallas constante ($\lambda$) durante el periodo de vida útil útil (fase de operación estable), la probabilidad de éxito o supervivencia del activo se rige por la distribución exponencial:</p>
             
-            <div class="math-box">
-                <code>R<sub>sistema</sub>(t) = e<sup>-λ·t</sup> = e<sup>-(1/MTBF)·t</sup></code>
+            <div class="caja-formula">
+                <code>R(t) = e<sup>-λ·t</sup> = e<sup>-(1/MTBF)·t</sup></code>
             </div>
 
-            <p>Si cualquiera de los subsistemas del tren de transmisión falla (el eje de alta velocidad, los rodamientos planetarios o el eje intermedio), el conjunto mecánico se detiene por completo. El simulador permite evaluar de forma individualizada cada uno de estos componentes basándose en su tasa de falla intrínseca calculada en el laboratorio dinamométrico.</p>
+            <p>Donde **MTBF** representa el Tiempo Medio Entre Fallos calibrado en laboratorio para cada sección, y **t** representa el tiempo de la misión de operación continua bajo análisis.</p>
         </article>
 
-        <div class="media-grid">
-            <div class="video-card">
+        <div class="grid-multimedia">
+            <div class="tarjeta-video">
                 <video controls poster="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=1000">
                     <source src="video_fiabilidad.mp4" type="video/mp4">
-                    Tu navegador no soporta video.
+                    Tu navegador no soporta el formato de video.
                 </video>
             </div>
-            <div class="qr-card">
-                <h3>VERIFICAR FUENTE</h3>
+            <div class="tarjeta-qr">
                 <div id="qrcode"></div>
-                <p>NREL DATA COLLABORATIVE</p>
+                <p>NREL DATA VERIFICATION</p>
             </div>
         </div>
 
-        <section class="simulator-card">
-            <h2 style="color: var(--neon-cyan); text-align: center; margin-bottom: 45px; font-size: 2.2rem;">Simulador de Fiabilidad</h2>
+        <section class="modulo-simulador">
+            <h2 style="color: var(--accent-glow); text-align: center; margin-bottom: 40px; font-size: 2.2rem; font-weight: 800;">Centro de Simulación de Fiabilidad</h2>
             
-            <div class="sim-grid-3col">
+            <div class="sim-grid-principal">
                 
-                <div class="controls-side">
-                    <div class="input-item">
-                        <label><i class="fas fa-database"></i> Subsistema GRC Gearbox 2 (ID: 45)</label>
-                        <select id="asset_select" onchange="cargarDatosActivo()">
-                            <option value="custom">-- Parámetros Manuales --</option>
-                            <option value="hss">High-Speed Shaft Assembly (Eje Alta Velocidad)</option>
-                            <option value="planet">Planetary Gear Stage (Rodamientos Planetarios)</option>
-                            <option value="ims">Intermediate Speed Shaft (Eje de Velocidad Intermedia)</option>
-                            <option value="lub">Lubrication & Conditioning System (Sistema de Lubricación)</option>
-                            <option value="gen">Generator Radial Coupling (Acople del Generador)</option>
+                <div class="col-controles">
+                    <div class="grupo-input">
+                        <label><i class="fas fa-cogs"></i> Componente Real GRC Gearbox 2</label>
+                        <select id="asset_select" onchange="actualizarComponente()">
+                            <option value="custom">-- Configuración de Parámetros Manual --</option>
+                            <option value="hss">Eje de Alta Velocidad / High-Speed Shaft (HSS)</option>
+                            <option value="planet">Etapa Planetaria / Planetary Gear Stage</option>
+                            <option value="iss">Eje de Velocidad Intermedia / Intermediate Speed Shaft</option>
+                            <option value="lub">Sistema de Lubricación y Filtración de Aceite</option>
                         </select>
                     </div>
-                    <div class="input-item">
-                        <label>MTBF de Ensayo (Horas)</label>
-                        <input type="number" id="inp_mtbf" value="12500">
+                    <div class="grupo-input">
+                        <label>MTBF Registrado (Horas)</label>
+                        <input type="number" id="inp_mtbf" value="15000">
                     </div>
-                    <div class="input-item">
-                        <label>Tiempo de Operación Continua (Horas)</label>
-                        <input type="number" id="inp_time" value="2000">
+                    <div class="grupo-input">
+                        <label>Tiempo de Misión Evaluado t (Horas)</label>
+                        <input type="number" id="inp_time" value="2500">
                     </div>
-                    <button class="btn-glow" onclick="procesarCalculo()">Calcular R(t)</button>
+                    <button class="btn-primario" onclick="calcularFiabilidad()">Ejecutar Simulación</button>
+                    <button class="btn-secundario" onclick="alternarVisibilidadReporte(true)">Generar Reporte Técnico</button>
                 </div>
                 
-                <div class="display-side">
+                <div class="col-monitor">
                     <div>
-                        <p style="color: var(--text-dim); font-size: 0.75rem; letter-spacing: 4px; margin-bottom: 5px;">PROBABILIDAD DE ÉXITO R(t)</p>
-                        <span id="res-val">0%</span>
+                        <p style="color: var(--text-muted); font-size: 0.75rem; letter-spacing: 3px; margin-bottom: 5px;">PROBABILIDAD SURVIVAL R(t)</p>
+                        <span id="res-val">0.0%</span>
                     </div>
-                    <div class="chart-container">
+                    <div class="wrapper-grafica">
                         <canvas id="chart_id"></canvas>
                     </div>
                 </div>
 
-                <div class="model-3d-side">
-                    <div class="model-3d-container">
-                        <i id="asset_icon" class="fas fa-cogs"></i>
-                        <h4 id="asset_title" style="color: var(--neon-cyan); margin-bottom: 8px;">COMPONENTE TRANSMISIÓN</h4>
-                        <p id="asset_desc">Selecciona un componente crítico bajo la campaña de ensayos de la caja de engranajes NREL para mapear su espectro cinemático de fiabilidad.</p>
-                        <span id="model_lbl" class="model-label">GRC MULTIPLIADORA</span>
+                <div class="col-planos">
+                    <div class="contenedor-plano-tecnico">
+                        <img id="asset_img" src="https://pub-8df0e1da5e8d4cf7941fb627d7f27fb3.r2.dev/wind-turbine-gearbox-schematic.png" alt="Plano Mecánico GRC">
+                        <p id="asset_desc" class="desc-plano">Gráfica analítica de carga torsión y distribución de engranajes epiciíclicos en multiplicadoras eólicas.</p>
+                        <span id="model_lbl" class="etiqueta-sistema">GRC CONFIG</span>
                     </div>
                 </div>
 
             </div>
+
+            <div id="capaReporte" class="capa-reporte">
+                <div class="encabezado-reporte">
+                    <div>
+                        <h3 style="text-transform: uppercase; letter-spacing: 1px; color: #0f172a;">Análisis Predictivo de Confiabilidad</h3>
+                        <p style="font-size: 0.8rem; color: #64748b;">Escuela Superior Politécnica de Chimborazo — Ingeniería Industrial</p>
+                    </div>
+                    <button class="btn-cerrar-reporte" onclick="alternarVisibilidadReporte(false)">&times;</button>
+                </div>
+                
+                <div style="margin-top: 25px;">
+                    <p style="font-size: 0.9rem; margin-bottom: 15px;"><strong>ID de Auditoría Técnico:</strong> #NREL-GRC-PH3-GB2 <br> <strong>Metodología de Base:</strong> Distribución Exponencial de Falla (Tasa Constante)</p>
+                    
+                    <h4 style="margin: 20px 0 10px; color: #0f172a; border-bottom: 1.5px solid #0f172a; padding-bottom: 4px;">1. Datos de Entrada del Activo</h4>
+                    <div class="fila-dato-reporte"><span>Elemento Mecánico Analizado:</span><span id="rep_comp" style="font-weight:700;">--</span></div>
+                    <div class="fila-dato-reporte"><span>Tiempo Medio Entre Fallos (MTBF):</span><span><span id="rep_mtbf">--</span> horas</span></div>
+                    <div class="fila-dato-reporte"><span>Tiempo de Operación de Misión (t):</span><span><span id="rep_time">--</span> horas</span></div>
+                    
+                    <h4 style="margin: 25px 0 10px; color: #0f172a; border-bottom: 1.5px solid #0f172a; padding-bottom: 4px;">2. Métricas Probabilísticas Calculadas</h4>
+                    <div class="fila-dato-reporte"><span>Tasa de Falla Constante (&lambda;):</span><span id="rep_lambda" style="font-family:'JetBrains Mono';">--</span></div>
+                    <div class="fila-dato-reporte"><span>Fiabilidad de Operación R(t):</span><span id="rep_prob" style="font-weight: 800; color: #7000ff;">--</span></div>
+                    
+                    <div class="conclusión-recuadro">
+                        <h5 style="font-weight: 800; color: #0f172a; margin-bottom: 5px; text-transform: uppercase; font-size: 0.85rem;"><i class="fas fa-file-alt"></i> Diagnóstico e Instrucciones del Sistema</h5>
+                        <p id="rep_concl" style="font-style: italic; font-size: 0.9rem; color: #334155;">Ejecute la simulación primero para estructurar las conclusiones.</p>
+                    </div>
+                </div>
+            </div>
+
         </section>
 
     </div>
 
     <footer>
         <div class="badge-espoch">ESCUELA SUPERIOR POLÍTICA DE CHIMBORAZO</div>
-        <p style="color: #fff; font-weight: 700; font-size: 1.1rem; margin-top: 10px;">Facultad de Mecánica | Ingeniería de Mantenimiento</p>
-        <p style="margin-top: 20px; opacity: 0.5; font-size: 0.7rem; letter-spacing: 3px;">DESARROLLADO POR GRUPO 4 • 2026</p>
+        <p class="facultad">Facultad de Mecánica | Mantenimiento Industrial</p>
+        <p class="creditos">Desarrollado de forma íntegra por Grupo 4 • 2026</p>
     </footer>
 
     <script>
-        let mainChart;
+        let renderChart;
 
-        // Base de datos técnica real extraída analíticamente del estudio GRC 45 (Test Report & 3D CAD Data)
-        const baseDeDatosActivos = {
+        const dbNREL = {
             custom: { 
-                mtbf: 12500, time: 2000, icon: "fa-cogs", title: "PARÁMETROS AJUSTABLES",
-                desc: "Análisis personalizado de coeficientes probabilísticos de falla mecánica.", lbl: "DISEÑO GENERAL" 
+                mtbf: 15000, time: 2500, img: "https://pub-8df0e1da5e8d4cf7941fb627d7f27fb3.r2.dev/wind-turbine-gearbox-schematic.png", 
+                lbl: "GRC CONFIG", name: "Parámetros Estructurados Manualmente",
+                desc: "Plano esquemático general de la caja multiplicadora GRC de tres etapas de velocidad para análisis estructural."
             },
             hss: { 
-                mtbf: 14200, time: 1500, icon: "fa-tachometer-alt", title: "EJE DE ALTA VELOCIDAD (HSS)",
-                desc: "Datos de torque dinámico medidos por sensores en el eje acoplado directamente al generador eléctrico.", lbl: "SUB-DATASET 5.1.1" 
+                mtbf: 18500, time: 1800, img: "https://pub-8df0e1da5e8d4cf7941fb627d7f27fb3.r2.dev/high-speed-shaft-bearing.png", 
+                lbl: "HSS COMPONENT", name: "High-Speed Shaft Assembly (Eje de Alta Velocidad)",
+                desc: "Esquema de rodamientos de rodillos cónicos en el eje acoplado directamente al generador eléctrico. Punto crítico de vibración."
             },
             planet: { 
-                mtbf: 8900, time: 2000, icon: "fa-circle-notch", title: "ETAPA DE ENGRANAJES PLANETARIOS",
-                desc: "Cálculos de fatiga superficial bajo cargas no torsionales asimétricas aplicadas en el plato del rotor principal.", lbl: "2D MECHANICAL DESIGN" 
+                mtbf: 9400, time: 2000, img: "https://pub-8df0e1da5e8d4cf7941fb627d7f27fb3.r2.dev/planetary-gear-stage.png", 
+                lbl: "PLANETARY STAGE", name: "Planetary Gear Stage (Etapa Epiciíclica)",
+                desc: "Plano técnico de la distribución del sol, corona y satélites. Es la zona que procesa el mayor torque mecánico del rotor."
             },
-            ims: { 
-                mtbf: 18500, time: 3000, icon: "fa-project-diagram", title: "EJE DE VELOCIDAD INTERMEDIA",
-                desc: "Etapa de reducción helicoidal intermedia analizada mediante modelos analíticos de elementos finitos (FEA).", lbl: "GRC STAGE 2" 
+            iss: { 
+                mtbf: 22000, time: 3500, img: "https://pub-8df0e1da5e8d4cf7941fb627d7f27fb3.r2.dev/intermediate-speed-shaft.png", 
+                lbl: "ISS COMPONENT", name: "Intermediate Speed Shaft (Eje de Velocidad Intermedia)",
+                desc: "Planos geométricos de la etapa intermedia de engranajes helicoidales. Registra históricamente la menor tasa de fallo del sistema."
             },
             lub: { 
-                mtbf: 6200, time: 1000, icon: "fa-oil-can", title: "SISTEMA DE LUBRICACIÓN Y FILTRADO",
-                desc: "Evaluación de fallas asociadas al desgaste por partículas, temperatura del aceite lubricante y caídas de presión de bomba.", lbl: "AUXILIARY SYSTEM" 
-            },
-            gen: { 
-                mtbf: 21000, time: 5000, icon: "fa-bolt", title: "ACOPLE RADIAL DEL GENERADOR",
-                desc: "Datos recolectados durante la simulación intencional de desalineaciones radiales y eventos de desconexión de la red eléctrica.", lbl: "TEST LOG: NETWORK FAULT" 
+                mtbf: 7200, time: 1200, img: "https://pub-8df0e1da5e8d4cf7941fb627d7f27fb3.r2.dev/lubrication-system-schematic.png", 
+                lbl: "LUB SYSTEM", name: "Sistema de Lubricación e Inyección de Aceite",
+                desc: "Diagrama de flujo hidráulico de la bomba y filtros del sistema de refrigeración del cárter. Crítico ante contaminación de partículas."
             }
         };
 
-        function cargarDatosActivo() {
+        function actualizarComponente() {
             const selector = document.getElementById('asset_select');
-            const activoSeleccionado = selector.value;
-            const datos = baseDeDatosActivos[activoSeleccionado];
+            const dataActiva = dbNREL[selector.value];
             
-            document.getElementById('inp_mtbf').value = datos.mtbf;
-            document.getElementById('inp_time').value = datos.time;
+            document.getElementById('inp_mtbf').value = dataActiva.mtbf;
+            document.getElementById('inp_time').value = dataActiva.time;
             
-            const iconElement = document.getElementById('asset_icon');
-            iconElement.style.opacity = 0;
+            const frameImg = document.getElementById('asset_img');
+            frameImg.style.opacity = '0.3';
             
             setTimeout(() => {
-                iconElement.className = "fas " + datos.icon;
-                document.getElementById('asset_title').innerText = datos.title;
-                document.getElementById('asset_desc').innerText = datos.desc;
-                document.getElementById('model_lbl').innerText = datos.lbl;
-                iconElement.style.opacity = 1;
+                frameImg.src = dataActiva.img;
+                document.getElementById('asset_desc').innerText = dataActiva.desc;
+                document.getElementById('model_lbl').innerText = dataActiva.lbl;
+                frameImg.style.opacity = '1';
             }, 150);
 
-            procesarCalculo(); 
+            calcularFiabilidad(); 
         }
 
-        function procesarCalculo() {
+        function calcularFiabilidad() {
             const mtbf = parseFloat(document.getElementById('inp_mtbf').value);
             const t = parseFloat(document.getElementById('inp_time').value);
             
@@ -342,56 +380,84 @@
             
             const lambda = 1 / mtbf;
             const r = Math.exp(-lambda * t);
+            const porcentajeFinal = (r * 100).toFixed(2);
             
-            const num = document.getElementById('res-val');
-            num.innerText = (r * 100).toFixed(1) + "%";
+            const marcadorVisual = document.getElementById('res-val');
+            marcadorVisual.innerText = porcentajeFinal + "%";
             
-            if(r < 0.6) num.style.color = "#ff3e3e";
-            else if(r < 0.85) num.style.color = "#ffa500";
-            else num.style.color = "#00f2ff";
+            if(r < 0.65) marcadorVisual.style.color = "#ef4444"; 
+            else if(r < 0.85) marcadorVisual.style.color = "#eab308"; 
+            else marcadorVisual.style.color = "var(--accent-glow)"; 
 
-            updateVisuals(lambda, t);
+            dibujarCurvaExponencial(lambda, t);
+            inyectarDatosDocumento(porcentajeFinal, lambda, mtbf, t);
         }
 
-        function updateVisuals(lambda, tUser) {
+        function dibujarCurvaExponencial(lambda, tUser) {
             const ctx = document.getElementById('chart_id').getContext('2d');
-            const labels = []; const points = []; const range = tUser * 2.5;
+            const labels = []; const points = []; const limiteX = tUser * 2.5;
 
-            for(let i=0; i <= range; i += range/20) {
+            for(let i=0; i <= limiteX; i += limiteX/20) {
                 labels.push(Math.round(i));
                 points.push((Math.exp(-lambda * i) * 100).toFixed(2));
             }
 
-            if(mainChart) mainChart.destroy();
-            mainChart = new Chart(ctx, {
+            if(renderChart) renderChart.destroy();
+            renderChart = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: labels,
                     datasets: [{
                         data: points,
                         borderColor: '#7000ff',
-                        backgroundColor: 'rgba(112, 0, 255, 0.1)',
-                        fill: true, tension: 0.4, pointRadius: 0
+                        backgroundColor: 'rgba(112, 0, 255, 0.05)',
+                        fill: true, tension: 0.35, pointRadius: 0
                     }]
                 },
                 options: { 
                     responsive: true, maintainAspectRatio: false, 
                     plugins: { legend: { display: false } },
                     scales: { 
-                        x: { ticks: { color: '#666', font: { size: 9 } }, grid: { display: false } },
-                        y: { beginAtZero: true, max: 100, ticks: { color: '#666', font: { size: 9 } }, grid: { color: 'rgba(112,0,255,0.05)' } }
+                        x: { ticks: { color: '#64748b', font: { size: 9 } }, grid: { display: false } },
+                        y: { beginAtZero: true, max: 100, ticks: { color: '#64748b', font: { size: 9 } }, grid: { color: 'rgba(255,255,255,0.03)' } }
                     }
                 }
             });
         }
 
+        function alternarVisibilidadReporte(mostrar) {
+            const panel = document.getElementById('capaReporte');
+            panel.style.display = mostrar ? 'block' : 'none';
+        }
+
+        function inyectarDatosDocumento(porcentaje, lambda, mtbf, t) {
+            const selector = document.getElementById('asset_select');
+            const nombreComponente = dbNREL[selector.value].name;
+
+            document.getElementById('rep_comp').innerText = nombreComponente;
+            document.getElementById('rep_mtbf').innerText = mtbf;
+            document.getElementById('rep_time').innerText = t;
+            document.getElementById('rep_prob').innerText = porcentaje + "%";
+            document.getElementById('rep_lambda').innerText = lambda.toExponential(6) + " fallas/hora";
+
+            let conclusionMecanica = "";
+            if (porcentaje > 85) {
+                conclusionMecanica = "DIAGNÓSTICO: El componente evaluado presenta niveles estables de integridad probabilística para la ventana de tiempo estipulada. Se ratifica la continuidad del plan general de mantenimiento predictivo (vibraciones y termografía) sin intervenciones correctivas inmediatas.";
+            } else if (porcentaje > 65) {
+                conclusionMecanica = "DIAGNÓSTICO: Alerta intermedia. Se registra un incremento en la probabilidad de fatiga acelerada. Se instruye adelantar la toma de muestras de aceite para conteo de partículas metálicas según norma ISO 4406 y programar una inspección por boroscopía en los engranajes dentro de las próximas 200 horas de operación.";
+            } else {
+                conclusionMecanica = "ALERTA CRÍTICA: La fiabilidad calculada está por debajo del umbral de seguridad operativa admisible para el proyecto GRC. Existe un alto riesgo de desalineación severa o agrietamiento por fatiga. Se prescribe la detención técnica del tren de transmisión y una parada de mantenimiento correctivo inmediato.";
+            }
+            document.getElementById('rep_concl').innerText = conclusionMecanica;
+        }
+
         window.onload = () => {
             new QRCode(document.getElementById("qrcode"), {
-                text: window.location.href,
-                width: 150, height: 150,
+                text: "https://data.nlr.gov/submissions/45",
+                width: 130, height: 130,
                 colorDark : "#030008", colorLight : "#ffffff"
             });
-            procesarCalculo();
+            calcularFiabilidad();
         };
     </script>
 </body>
