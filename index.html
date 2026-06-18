@@ -150,7 +150,7 @@
         #res-val { font-size: 5.5rem; font-weight: 900; color: var(--neon-cyan); line-height: 1; margin-bottom: 15px; display: block; }
         .chart-container { height: 220px; position: relative; width: 100%; }
 
-        /* COLUMNA 3: PANEL VISUALIZADOR DE RENDERS MEJORADO */
+        /* COLUMNA 3: PANEL VISUALIZADOR DE RENDERS EN Perspectiva isométrica */
         .model-3d-side { display: flex; flex-direction: column; justify-content: center; }
         .model-3d-container {
             width: 100%; height: 100%; min-height: 300px;
@@ -158,25 +158,30 @@
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             padding: 20px; border: 2px solid var(--neon-cyan);
             box-shadow: 0 0 25px rgba(0, 242, 255, 0.15); position: relative;
+            perspective: 800px; /* Le da profundidad de campo al render */
         }
         .model-3d-container img { 
             width: 100%; height: 100%; max-height: 220px; 
             object-fit: contain; border-radius: 8px; cursor: zoom-in;
-            transition: transform 0.3s ease, opacity 0.15s ease; 
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.15s ease; 
         }
-        .model-3d-container:hover img { transform: scale(1.03); }
+        /* Efecto de inclinación industrial 3D interactivo */
+        .model-3d-container:hover img { transform: scale(1.05) rotateY(-5deg) rotateX(5deg); }
+        
         .model-label {
             position: absolute; bottom: 12px; font-size: 0.7rem; font-weight: 800;
             color: #030008; letter-spacing: 1px; text-transform: uppercase;
             background: rgba(0, 242, 255, 0.3); padding: 3px 12px; border-radius: 6px;
         }
 
-        /* DISEÑO DE REPORTE ACADÉMICO PARA EL PDF DESCARGABLE (Oculto en Interfaz) */
+        /* CORRECCIÓN TÉCNICA REPORTE: Invisible para el usuario pero legible y con dimensiones físicas reales para html2pdf */
         #seccionReporteImpresion {
-            display: none;
+            opacity: 0;
+            height: 0;
+            overflow: hidden;
+            width: 190mm; /* Forzamos tamaño de página A4 estándar */
             background: #ffffff;
             color: #0f172a;
-            padding: 45px;
             font-family: 'Arial', sans-serif;
         }
 
@@ -211,7 +216,7 @@
         
         <article class="glass-panel">
             <h2><i class="fas fa-tools"></i> Mantenimiento Industrial</h2>
-            <p>El mantenimiento industrial es el conjunto de técnicas, procedures y actividades que se realizan para conservar máquinas, equipos e instalaciones en óptimas condiciones de funcionamiento. Su principal objetivo es prevenir fallas, reducir tiempos de parada y garantizar que los procesos productivos se desarrollen de manera segura y eficiente.</p>
+            <p>El mantenimiento industrial es el conjunto de técnicas, procedimientos y actividades que se realizan para conservar máquinas, equipos e instalaciones en óptimas condiciones de funcionamiento. Su principal objetivo es prevenir fallas, reducir tiempos de parada y garantizar que los procesos productivos se desarrollen de manera segura y eficiente.</p>
             <p>Además, el mantenimiento industrial sirve para prolongar la vida útil de los equipos, disminuir costos de reparación, mejorar la productividad y asegurar la continuidad de las operaciones dentro de una empresa. En la actualidad, las industrias dependen del correcto funcionamiento de sus sistemas mecánicos, eléctricos y automatizados, por lo que el mantenimiento se ha convertido en un área fundamental en sectores como la manufactura, minería, transporte, generación eléctrica y automatización industrial.</p>
             <p>También permite detectar problemas antes de que ocurran daños graves, evitando accidentes y pérdidas económicas que pueden afectar tanto a la producción como a la seguridad de los trabajadores. Por esta razón, las empresas implementan distintos tipos de mantenimiento, como el preventivo, predictivo y correctivo, con el fin de garantizar un mejor rendimiento y mayor confiabilidad de los equipos industriales.</p>
         </article>
@@ -252,11 +257,11 @@
                         <label><i class="fas fa-cogs"></i> Análisis de la Gearbox (Transmisión)</label>
                         <select id="asset_select" onchange="cargarDatosActivo()">
                             <option value="custom">-- Vista de Conjunto (Caja Completa) --</option>
-                            <option value="motor">Eje de Entrada de Alta Velocidad - MTBF: 14,000h</option>
-                            <option value="bomba">Engranajes Helicoidales Principales - MTBF: 24,000h</option>
-                            <option value="compresor">Rodamientos de Rodillos Cónicos - MTBF: 11,500h</option>
-                            <option value="turbina">Sistema de Lubricación por Salpicadura - MTBF: 9,200h</option>
-                            <option value="reductor">Retenes y Sellos de Cierre Mecánico - MTBF: 6,800h</option>
+                            <option value="eje_entrada">Eje de Entrada de Alta Velocidad - MTBF: 14,000h</option>
+                            <option value="engranajes">Engranajes Helicoidales Principales - MTBF: 24,000h</option>
+                            <option value="rodamientos">Rodamientos de Rodillos Cónicos - MTBF: 11,500h</option>
+                            <option value="lubricacion">Sistema de Lubricación por Salpicadura - MTBF: 9,200h</option>
+                            <option value="retenes">Retenes y Sellos de Cierre Mecánico - MTBF: 6,800h</option>
                         </select>
                     </div>
                     <div class="input-item">
@@ -293,78 +298,80 @@
 
     </div>
 
-    <div id="seccionReporteImpresion">
-        <div style="border-bottom: 2px solid #0f172a; padding-bottom: 12px; margin-bottom: 25px;">
-            <table style="width: 100%; border-collapse: collapse;">
-                <tr>
-                    <td style="font-size: 1.4rem; font-weight: bold; color: #0f172a; font-family: sans-serif;">ESCUELA SUPERIOR POLÍTICA DE CHIMBORAZO</td>
-                    <td style="text-align: right; font-size: 0.9rem; color: #475569; font-weight: bold;">INGENIERÍA MECÁNICA</td>
-                </tr>
-                <tr>
-                    <td style="font-size: 0.95rem; color: #475569; font-style: italic;">Cátedra de Mantenimiento Industrial — Grupo N° 4</td>
-                    <td style="text-align: right; font-size: 0.9rem; color: #64748b;">Periodo: 2026</td>
-                </tr>
+    <div style="position: absolute; left: -9999px; top: -9999px;">
+        <div id="seccionReporteImpresion" style="padding: 30px; background: #ffffff; color: #000000; width: 650px;">
+            <div style="border-bottom: 2px solid #000000; padding-bottom: 10px; margin-bottom: 20px;">
+                <table style="width: 100%;">
+                    <tr>
+                        <td style="font-size: 1.2rem; font-weight: bold; color: #111827;">ESCUELA SUPERIOR POLÍTICA DE CHIMBORAZO</td>
+                        <td style="text-align: right; font-size: 0.85rem; font-weight: bold; color: #4b5563;">INGENIERÍA MECÁNICA</td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: 0.85rem; color: #4b5563; font-style: italic;">Mantenimiento Industrial — Grupo N° 4</td>
+                        <td style="text-align: right; font-size: 0.85rem; color: #4b5563;">Año: 2026</td>
+                    </tr>
+                </table>
+            </div>
+
+            <h3 style="text-align: center; text-transform: uppercase; color: #1f2937; margin-bottom: 20px; font-size: 1.1rem; letter-spacing: 1px;">Certificado Técnico de Confiabilidad Operacional</h3>
+            
+            <div style="margin-bottom: 20px; background: #f3f4f6; padding: 12px; border-radius: 6px; border: 1px solid #e5e7eb; font-size: 0.85rem;">
+                <p><strong>Metodología:</strong> Distribución probabilística exponencial basada en la tasa de fallos uniforme ($\lambda = 1 / MTBF$).</p>
+                <p><strong>Activo Analizado:</strong> Componentes Críticos del Tren de Potencia de Transmisión (Gearbox Industrial).</p>
+            </div>
+
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 0.9rem;">
+                <thead>
+                    <tr style="background: #1f2937; color: #ffffff; text-align: left;">
+                        <th style="padding: 8px; border: 1px solid #d1d5db;">Parámetro de Confiabilidad</th>
+                        <th style="padding: 8px; border: 1px solid #d1d5db; text-align: right;">Valor Registrado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #d1d5db;">Subsistema Evaluado</td>
+                        <td id="pdf_comp" style="padding: 8px; border: 1px solid #d1d5db; text-align: right; font-weight: bold;">--</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #d1d5db;">Tiempo Medio Entre Fallas (MTBF)</td>
+                        <td style="padding: 8px; border: 1px solid #d1d5db; text-align: right;"><span id="pdf_mtbf">--</span> horas</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #d1d5db;">Tiempo de Misión Crítica (t)</td>
+                        <td style="padding: 8px; border: 1px solid #d1d5db; text-align: right;"><span id="pdf_time">--</span> horas</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid #d1d5db;">Tasa de Fallas Instantánea (&lambda;)</td>
+                        <td id="pdf_lambda" style="padding: 8px; border: 1px solid #d1d5db; text-align: right; font-family: monospace;">--</td>
+                    </tr>
+                    <tr style="background: #f0fdf4; font-weight: bold;">
+                        <td style="padding: 8px; border: 1px solid #d1d5db; color: #166534;">Confiabilidad Operacional R(t)</td>
+                        <td id="pdf_prob" style="padding: 8px; border: 1px solid #d1d5db; text-align: right; color: #166534; font-size: 1.05rem;">--</td>
+                    </tr>
+                </tbody>
             </table>
-        </div>
 
-        <h3 style="text-align: center; text-transform: uppercase; letter-spacing: 1px; color: #1e1b4b; margin-bottom: 25px; font-size: 1.3rem;">Certificado Técnico de Confiabilidad Operacional</h3>
-        
-        <div style="margin-bottom: 25px; background: #f8fafc; padding: 15px; border-radius: 6px; border: 1px solid #e2e8f0; font-size: 0.9rem;">
-            <p><strong>Metodología Estándar:</strong> Distribución probabilística exponencial bajo tasa de fallas constante e instantánea ($\lambda = 1 / MTBF$).</p>
-            <p><strong>Contexto Operacional:</strong> Monitoreo continuo de subsistemas de transmisión mecánica (Gearbox).</p>
-        </div>
+            <div style="margin-top: 20px; padding: 12px; background: #fafafa; border-left: 4px solid #1f2937; border-radius: 4px; border-top: 1px solid #e5e7eb; border-right: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb;">
+                <h4 style="font-size: 0.85rem; margin-bottom: 4px; text-transform: uppercase; color: #111827;">Evaluación Diagnóstica de Ingeniería</h4>
+                <p id="pdf_concl" style="font-style: italic; font-size: 0.85rem; line-height: 1.4; color: #374151;">Sin datos calculados.</p>
+            </div>
 
-        <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px; font-size: 0.95rem;">
-            <thead>
-                <tr style="background: #0f172a; color: #ffffff; text-align: left;">
-                    <th style="padding: 10px; border: 1px solid #cbd5e1;">Módulo / Componente Evaluado</th>
-                    <th style="padding: 10px; border: 1px solid #cbd5e1; text-align: right;">Métrica y Valor</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td style="padding: 10px; border: 1px solid #cbd5e1;">Componente de la Transmisión</td>
-                    <td id="pdf_comp" style="padding: 10px; border: 1px solid #cbd5e1; text-align: right; font-weight: bold;">--</td>
-                </tr>
-                <tr style="background: #f8fafc;">
-                    <td style="padding: 10px; border: 1px solid #cbd5e1;">Tiempo Medio Entre Fallas (MTBF)</td>
-                    <td style="padding: 10px; border: 1px solid #cbd5e1; text-align: right;"><span id="pdf_mtbf">--</span> horas</td>
-                </tr>
-                <tr>
-                    <td style="padding: 10px; border: 1px solid #cbd5e1;">Tiempo de Operación Continua Requerido (t)</td>
-                    <td style="padding: 10px; border: 1px solid #cbd5e1; text-align: right;"><span id="pdf_time">--</span> horas</td>
-                </tr>
-                <tr style="background: #f8fafc;">
-                    <td style="padding: 10px; border: 1px solid #cbd5e1;">Tasa de Falla Calculada (&lambda;)</td>
-                    <td id="pdf_lambda" style="padding: 10px; border: 1px solid #cbd5e1; text-align: right; font-family: monospace;">--</td>
-                </tr>
-                <tr style="background: #ecfdf5; font-weight: bold;">
-                    <td style="padding: 10px; border: 1px solid #cbd5e1; color: #065f46; font-size: 1.05rem;">Probabilidad de Supervivencia R(t)</td>
-                    <td id="pdf_prob" style="padding: 10px; border: 1px solid #cbd5e1; text-align: right; color: #065f46; font-size: 1.05rem;">--</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <div style="margin-top: 30px; padding: 15px; background: #fafafa; border-left: 4px solid #0f172a; border-radius: 4px; border-top: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0;">
-            <h4 style="font-size: 0.95rem; margin-bottom: 6px; text-transform: uppercase; color: #0f172a;">Diagnóstico Predictivo de Ingeniería</h4>
-            <p id="pdf_concl" style="font-style: italic; font-size: 0.9rem; line-height: 1.5; color: #334155;">Sin datos de cálculo registrados.</p>
-        </div>
-
-        <div style="margin-top: 70px; text-align: center;">
-            <table style="width: 100%;">
-                <tr>
-                    <td style="width: 50%; text-align: center;">
-                        <div style="width: 180px; border-top: 1px solid #94a3b8; margin: 0 auto; padding-top: 5px; font-size: 0.8rem; color: #475569;">
-                            Supervisión de Planta<br>Ingeniería de Confiabilidad
-                        </div>
-                    </td>
-                    <td style="width: 50%; text-align: center;">
-                        <div style="width: 180px; border-top: 1px solid #94a3b8; margin: 0 auto; padding-top: 5px; font-size: 0.8rem; color: #475569;">
-                            Validación Técnica<br>Grupo N° 4 - ESPOCH
-                        </div>
-                    </td>
-                </tr>
-            </table>
+            <div style="margin-top: 50px; text-align: center;">
+                <table style="width: 100%;">
+                    <tr>
+                        <td style="width: 50%; text-align: center;">
+                            <div style="width: 150px; border-top: 1px solid #9ca3af; margin: 0 auto; padding-top: 4px; font-size: 0.75rem; color: #4b5563;">
+                                Área de Fiabilidad<br>Transmisiones Mecánicas
+                            </div>
+                        </td>
+                        <td style="width: 50%; text-align: center;">
+                            <div style="width: 150px; border-top: 1px solid #9ca3af; margin: 0 auto; padding-top: 4px; font-size: 0.75rem; color: #4b5563;">
+                                Validación de Proyecto<br>Grupo N° 4 - ESPOCH
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 
@@ -382,14 +389,14 @@
     <script>
         let mainChart;
 
-        // Base de datos del simulador actualizada y enfocada en los componentes de una GEARBOX (Caja Reductora)
+        // Mapeo corregido de strings de los IDs del selector con sus datos e imágenes correspondientes
         const baseDeDatosActivos = {
-            custom: { mtbf: 18000, time: 2500, img: "seleccion_general.png", lbl: "GEARBOX: CONJUNTO GENERAL", name: "Conjunto Completo de la Transmisión (Gearbox)" },
-            motor: { mtbf: 14000, time: 2000, img: "motor.png", lbl: "CAD: EJE DE ENTRADA", name: "Eje de Entrada (Alta Velocidad)" },
-            bomba: { mtbf: 24000, time: 1500, img: "bomba.png", lbl: "CAD: ENGRANAJES HELICOIDALES", name: "Tren de Engranajes Helicoidales Reductores" },
-            compresor: { mtbf: 11500, time: 1000, img: "compresor.png", lbl: "RENDER: RODAMIENTOS CÓNICOS", name: "Rodamientos de Rodillos Cónicos de Apoyo" },
-            turbina: { mtbf: 9200, time: 3000, img: "turbina.png", lbl: "VISTA: SISTEMA DE LUBRICACIÓN", name: "Circuito de Lubricación Interna por Salpicadura" },
-            reductor: { mtbf: 6800, time: 1200, img: "reductor.png", lbl: "CORTE: RETENES Y SELLOS", name: "Sellos Mecánicos y Retenes de Cierre" }
+            custom: { mtbf: 18000, time: 2500, img: "seleccion_general.png", lbl: "GEARBOX: VISTA GENERAL", name: "Conjunto Completo de la Caja Reductora (Gearbox)" },
+            eje_entrada: { mtbf: 14000, time: 2000, img: "eje_entrada.png", lbl: "3D CAD: EJE DE ALTA VELOCIDAD", name: "Eje de Entrada de Alta Velocidad" },
+            engranajes: { mtbf: 24000, time: 1500, img: "engranajes.png", lbl: "ISOMÉTRICO: TREN HELICOIDAL", name: "Tren de Engranajes Helicoidales Principales" },
+            rodamientos: { mtbf: 11500, time: 1000, img: "rodamientos.png", lbl: "EXPLOSIONADO: RODAMIENTOS CÓNICOS", name: "Rodamientos de Rodillos Cónicos" },
+            lubricacion: { mtbf: 9200, time: 3000, img: "lubricacion.png", lbl: "FLUJO 3D: CIRCUITO DE SALPICADURA", name: "Sistema de Lubricación por Salpicadura" },
+            retenes: { mtbf: 6800, time: 1200, img: "retenes.png", lbl: "DETALLE CAD: SELLOS MECÁNICOS", name: "Retenes y Sellos de Cierre Mecánico" }
         };
 
         function cargarDatosActivo() {
@@ -476,11 +483,11 @@
 
             let conclusion = "";
             if (porcentaje > 85) {
-                conclusion = "DIAGNÓSTICO: Componente operando en zona segura de alta fiabilidad. Se autoriza continuar con el plan regular de mantenimiento predictivo (rutas de análisis de vibraciones e inspección de temperatura).";
-            } else if (porcentaje > 60) {
-                conclusion = "DIAGNÓSTICO: Fatiga moderada detectada. Se recomienda planificar una inspección en la próxima parada de planta para evaluar desgaste de dientes por fricción y verificar la pureza del aceite lubricante.";
+                conclusion = "DIAGNÓSTICO: Subsistema en rango óptimo de confiabilidad operacional. Mantener las frecuencias actuales de lubricación y monitoreo termográfico.";
+            } else if (porcentaje > 65) {
+                conclusion = "DIAGNÓSTICO: Alerta preventiva de desgaste. Se sugiere programar un análisis espectrométrico del aceite para verificar presencia de micropartículas metálicas.";
             } else {
-                conclusion = "ALERTA CRÍTICA: La probabilidad de fallo supera el umbral límite admisible de seguridad industrial. Alto riesgo de atascamiento o rotura catastrófica. Se prescribe intervención correctiva y cambio inmediato de piezas de forma urgente.";
+                conclusion = "ALERTA INTERRUPCIÓN: Alta probabilidad de fallo inminente. Se prescribe el reemplazo de piezas o detención programada inmediata para evitar daños en la carcasa estructural.";
             }
             document.getElementById('pdf_concl').innerText = conclusion;
         }
@@ -491,17 +498,18 @@
             const abreviatura = baseDeDatosActivos[selector.value].lbl.replace(/[:\s]+/g, '_');
             
             const configuracionHtml2Pdf = {
-                margin:       15,
+                margin:       10,
                 filename:     `Reporte_Confiabilidad_Gearbox_${abreviatura}.pdf`,
                 image:        { type: 'jpeg', quality: 0.98 },
                 html2canvas:  { scale: 2, useCORS: true },
                 jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
             
+            // Forzamos la actualización inmediata antes de empaquetar el documento
             html2pdf().from(elementoReporte).set(configuracionHtml2Pdf).save();
         }
 
-        // INTERACTIVIDAD DE ZOOM Y MODAL EN PANTALLA COMPLETA
+        // INTERACTIVIDAD DE ZOOM Y MODAL
         const modal = document.getElementById('zoomModal');
         const modalImg = document.getElementById('imgZoomed');
         const mainImg = document.getElementById('asset_img');
