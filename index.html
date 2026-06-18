@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ingeniería de Fiabilidad | Grupo 4 ESPOCH</title>
+    <title>Ingeniería de Fiabilidad</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;600;700;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
@@ -45,6 +45,7 @@
         .logo { font-weight: 800; font-size: 1.6rem; letter-spacing: -1px; display: flex; align-items: center; gap: 12px; }
         .logo span { background: linear-gradient(to right, var(--primary-purple), var(--neon-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
         .hero { padding: 100px 5% 40px; text-align: center; }
         .hero h1 {
             font-size: 4.5rem; margin-bottom: 20px; font-weight: 800; line-height: 1.1;
@@ -60,8 +61,8 @@
             border: 1px solid var(--glass-border); box-shadow: 0 0 40px rgba(112, 0, 255, 0.2); position: relative;
         }
         .featured-image img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.6) contrast(1.1); transition: transform 0.5s ease; }
-        .featured-image:hover img { transform: scale(1.05); }
 
+        /* PANELES RECONSTRUIDOS DE TU VERSIÓN ORIGINAL */
         .glass-panel {
             background: var(--card-bg); padding: 50px; border-radius: 30px;
             border: 1px solid var(--glass-border); margin-bottom: 60px; text-align: justify;
@@ -70,14 +71,7 @@
         .glass-panel h2 { color: var(--neon-cyan); margin-bottom: 25px; font-size: 2.2rem; display: flex; align-items: center; gap: 15px; }
         .glass-panel p { margin-bottom: 20px; font-size: 1.1rem; color: #d0d0e0; }
 
-        .grc-badge {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: rgba(0,242,255,0.08); border: 1px solid rgba(0,242,255,0.3);
-            padding: 6px 14px; border-radius: 20px; font-size: 0.75rem;
-            color: var(--neon-cyan); font-weight: 700; letter-spacing: 1px;
-            margin-bottom: 20px;
-        }
-
+        /* CONTENEDOR EXACTO DE TU ECUACIÓN ORIGINAL */
         .math-box { text-align: center; margin: 40px 0; padding: 40px; background: rgba(112, 0, 255, 0.05); border-radius: 20px; border: 1px solid var(--primary-purple); }
         .math-box code { font-family: 'JetBrains Mono', monospace; font-size: 2.8rem; color: var(--neon-cyan); text-shadow: 0 0 10px rgba(0, 242, 255, 0.5); }
         
@@ -129,7 +123,7 @@
         #res-val { font-size: 5.5rem; font-weight: 900; color: var(--neon-cyan); line-height: 1; margin-bottom: 15px; display: block; }
         .chart-container { height: 220px; position: relative; width: 100%; }
 
-        /* CONTENEDOR DE IMÁGENES REALES */
+        /* VISOR DE IMÁGENES REALES SELECCIONADAS */
         .image-viewer-side { display: flex; flex-direction: column; justify-content: center; }
         .image-viewer {
             width: 100%; min-height: 320px;
@@ -159,12 +153,12 @@
             font-family: 'JetBrains Mono', monospace; font-weight: 600;
         }
 
-        /* NUEVA SECCIÓN: REPORTE EN SITIO WEB */
+        /* INFORME INTEGRADO DIRECTAMENTE EN EL SITIO WEB */
         .report-section {
             background: #ffffff; color: #0f172a; border-radius: 30px;
-            padding: 40px; margin-bottom: 8px; border: 4px double #1e293b;
+            padding: 40px; margin-bottom: 30px; border: 4px double #1e293b;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            display: none; /* Se muestra dinámicamente */
+            display: none;
         }
         .report-header { display: flex; justify-content: space-between; border-bottom: 3px solid #0f172a; padding-bottom: 15px; margin-bottom: 25px; }
         .report-title { font-size: 1.6rem; font-weight: 800; text-transform: uppercase; letter-spacing: -0.5px; color: #0f172a; }
@@ -190,7 +184,6 @@
         footer { text-align: center; padding: 80px 20px; border-top: 1px solid var(--glass-border); background: rgba(3, 0, 8, 0.9); }
         .badge-espoch { background: #ff3e3e; color: #fff; padding: 6px 18px; border-radius: 30px; font-size: 0.8rem; font-weight: 800; margin-bottom: 20px; display: inline-block; }
         
-        /* Reglas de Impresión del Navegador */
         @media print {
             body * { visibility: hidden; }
             #live_report, #live_report * { visibility: visible; }
@@ -204,20 +197,18 @@
 <header>
     <div class="logo">
         <i class="fas fa-industry" style="color: var(--neon-cyan);"></i>
-        <span>Reliability</span>Analytics
+        <span>Ingeniería de Confiabilidad</span>
     </div>
-    <div class="badge-espoch">GRUPO 4 - MECÁNICA</div>
+    <div class="badge-espoch">GRUPO 4 - ESPOCH</div>
 </header>
 
 <section class="hero">
-    <p style="color: var(--primary-purple); font-weight: 800; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 15px;">Mantenimiento Industrial 4.0</p>
-    <h1>Ingeniería de <br><span>Fiabilidad</span></h1>
-    <p>Optimización proactiva de activos mediante modelado probabilístico y estándares internacionales.</p>
+    <h1>Ingeniería de <br><span>Confiabilidad</span></h1>
 </section>
 
 <div class="featured-image-container">
     <div class="featured-image">
-        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070" alt="Mantenimiento Industrial Advanced">
+        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070" alt="Mantenimiento">
     </div>
 </div>
 
@@ -231,7 +222,7 @@
     <article class="glass-panel">
         <h2><i class="fas fa-calculator"></i> Cálculo de Fiabilidad R(t)</h2>
         <div class="math-box">
-            <code>R(t) = e<sup>−λt</sup></code>
+            <code>R(t) = e<sup>-λt</sup></code>
         </div>
         <p>Modelo matemático exponencial utilizado para predecir la probabilidad de éxito de un componente dinámico en misiones continuas bajo condiciones nominales de carga.</p>
     </article>
@@ -300,7 +291,7 @@
             <div class="image-viewer-side">
                 <div class="image-viewer" id="image_viewer">
                     <img id="comp_img" src="" alt="Componente Industrial">
-                    <span class="model-label" id="model_lbl">MONITOR RECIPIENTE</span>
+                    <span class="model-label" id="model_lbl">—</span>
                 </div>
             </div>
         </div>
@@ -362,7 +353,7 @@
         
         <div class="print-btn-container">
             <button class="btn-print" onclick="window.print()">
-                <i class="fas fa-print"></i> Imprimir o Guardar Copia Física
+                <i class="fas fa-print"></i> Imprimir / Guardar Copia del Navegador
             </button>
         </div>
     </section>
@@ -376,51 +367,50 @@
 </footer>
 
 <script>
-// Base de datos sincronizada con imágenes reales del banco de pruebas GRC de NREL
 const baseDeDatosGRC = {
     gearbox_completo: {
         name: "Caja Multiplicadora GRC GB2 (Conjunto Completo)",
         mtbf: 18200,
-        ensayo: "Ensayo 5.4.1 - Operación Continua",
+        ensayo: "Ensayo GRC - Operación Continua",
         rpm: "1800 RPM (Alta) / 22.5 RPM (Baja)",
-        carga: "100% Torque Nominal en Dinamómetro",
-        lbl: "Tren de Transmisión Completo NREL",
-        imgUrl: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=800"
+        carga: "100% Torque Nominal",
+        lbl: "Tren de Transmisión Completo",
+        imgUrl: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=800"
     },
     hss: {
         name: "High Speed Shaft (Eje de Alta Velocidad)",
         mtbf: 14000,
-        ensayo: "Ensayo 5.1.1 - Variaciones de Torque",
-        rpm: "1800 RPM de salida al generador",
-        carga: "Cargas transitorias del 5% al 135%",
+        ensayo: "Ensayo GRC - Transitorios de Torque",
+        rpm: "1800 RPM nominales",
+        carga: "Cargas transitorias variables",
         lbl: "Eje Mecánico HSS GRC",
         imgUrl: "https://images.unsplash.com/photo-1537462715879-360eeb61a0bc?q=80&w=800"
     },
     ntl_planetario: {
         name: "Tren Epicíclico / Planetario de Baja Velocidad",
         mtbf: 24000,
-        ensayo: "Ensayo 5.2.1 - Cargas No-Torque (NTL)",
-        rpm: "22.5 RPM de entrada del rotor",
-        carga: "100% de fuerza radial simétrica inducida",
+        ensayo: "Ensayo GRC - Cargas No-Torque (NTL)",
+        rpm: "22.5 RPM de entrada",
+        carga: "Fuerza radial asimétrica",
         lbl: "Etapa Planetaria de Reducción",
         imgUrl: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=800"
     },
     rodamientos: {
         name: "Rodamientos Cónicos de Rodillos del Conjunto",
         mtbf: 11500,
-        ensayo: "Ensayo 5.3 - Desalineación de Generador",
-        rpm: "1800 RPM con fuerzas asimétricas",
-        carga: "Desalineación de rodadura de +/- 1.5mm",
+        ensayo: "Ensayo GRC - Desalineación Axial",
+        rpm: "Régimen dinámico acoplado",
+        carga: "Desalineación de rodadura controlada",
         lbl: "Pistas de Rodadura Integradas",
         imgUrl: "https://images.unsplash.com/photo-1619542402915-dcaf30e4e2a1?q=80&w=800"
     },
     lubricacion: {
-        name: "Sistema de Lubricación Forzada y Cojinetes",
+        name: "Bomba y Filtro del Circuito de Aceite",
         mtbf: 9200,
-        ensayo: "Ensayo 5.4.1 - Monitoreo Térmico de Aceite",
+        ensayo: "Ensayo GRC - Degradación Térmica",
         rpm: "Flujo volumétrico constante",
-        carga: "Temperatura de operación estable a 70°C",
-        lbl: "Circuito Hidráulico de Lubricación",
+        carga: "Temperatura de operación 70°C",
+        lbl: "Circuito de Lubricación",
         imgUrl: "https://images.unsplash.com/photo-1612444530582-fc66183b16f7?q=80&w=800"
     }
 };
@@ -433,11 +423,10 @@ function cargarDatosActivo() {
     
     document.getElementById('inp_mtbf').value = asset.mtbf;
     
-    document.getElementById('chip_ensayo').innerText = "Ensayo: " + asset.ensayo.substring(0, 12);
+    document.getElementById('chip_ensayo').innerText = "Ensayo: " + asset.ensayo.substring(13);
     document.getElementById('chip_rpm').innerText = "RPM: " + asset.rpm.split(' ')[0];
-    document.getElementById('chip_carga').innerText = "Carga: " + asset.carga.substring(0, 11);
+    document.getElementById('chip_carga').innerText = "Carga: " + asset.carga;
     
-    // Cambiar la imagen real
     const imgElement = document.getElementById('comp_img');
     imgElement.src = asset.imgUrl;
     document.getElementById('model_lbl').innerText = asset.lbl;
@@ -458,13 +447,11 @@ function procesarCalculo() {
     const r = Math.exp(-lambda * t);
     const porcentaje = (r * 100).toFixed(1);
     
-    // Renderizado en panel de control
     document.getElementById('res-val').innerText = porcentaje + "%";
     document.getElementById('res-lambda').innerText = "λ = " + lambda.toExponential(5) + " /h";
     
     dibujarGrafica(lambda, t);
     
-    // ACTUALIZACIÓN Y DESPLIEGUE DEL REPORTE INTEGRADO EN EL SITIO
     const selector = document.getElementById('asset_select');
     const asset = baseDeDatosGRC[selector.value];
     
@@ -477,7 +464,6 @@ function procesarCalculo() {
     document.getElementById('rep_lambda').innerText = lambda.toExponential(6) + " fallas/hora";
     document.getElementById('rep_resultado').innerText = porcentaje + "%";
     
-    // Clasificación y diagnóstico según el valor calculado de R(t)
     const reportBox = document.getElementById('rep_box_color');
     let diagnostico = "";
     
@@ -488,12 +474,11 @@ function procesarCalculo() {
         reportBox.classList.remove('critico');
         diagnostico = "PRECAUCIÓN OPERATIVA: Confiabilidad en declive moderado. Se recomienda adelantar la ventana de inspección visual boroscópica y verificar partículas de desgaste en el filtro de aceite.";
     } else {
-        reportBox.add('critico');
+        reportBox.classList.add('critico');
         diagnostico = "CRÍTICO / ALERTA DE FALLA: El riesgo de indisponibilidad supera los umbrales de seguridad industrial establecidos. Programar un paro preventivo inmediato de la transmisión.";
     }
     document.getElementById('rep_diagnostico').innerText = diagnostico;
     
-    // Hacer visible la sección completa del informe técnico
     document.getElementById('live_report').style.display = "block";
 }
 
@@ -502,7 +487,6 @@ function dibujarGrafica(lambda, tUser) {
     const labels = []; 
     const points = [];
     
-    // Crear curva extendida de vida útil
     const intervalo = (tUser * 2) / 10;
     for (let i = 0; i <= tUser * 2; i += intervalo) {
         labels.push(Math.round(i));
