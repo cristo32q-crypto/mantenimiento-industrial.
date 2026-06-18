@@ -35,7 +35,6 @@
             overflow-x: hidden;
         }
 
-        /* NAVEGACIÓN */
         header {
             background: rgba(3, 0, 8, 0.8);
             padding: 20px 8%;
@@ -49,7 +48,6 @@
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-        /* HERO SECTION - TÍTULO ACTUALIZADO */
         .hero { padding: 100px 5% 40px; text-align: center; }
         .hero h1 { 
             font-size: 4.5rem; margin-bottom: 20px; font-weight: 800; line-height: 1.1;
@@ -60,7 +58,6 @@
         }
         .hero p { font-size: 1.3rem; color: var(--text-dim); max-width: 800px; margin: 0 auto; }
 
-        /* IMAGEN ILUSTRATIVA PRINCIPAL */
         .featured-image-container { max-width: 1100px; margin: 0 auto 60px; padding: 0 20px; }
         .featured-image {
             width: 100%; height: 450px; border-radius: 30px; overflow: hidden;
@@ -71,7 +68,6 @@
         }
         .featured-image:hover img { transform: scale(1.05); }
 
-        /* PANELES DE CONTENIDO */
         .glass-panel { 
             background: var(--card-bg); padding: 50px; border-radius: 30px; 
             border: 1px solid var(--glass-border); margin-bottom: 60px; text-align: justify;
@@ -80,11 +76,9 @@
         .glass-panel h2 { color: var(--neon-cyan); margin-bottom: 25px; font-size: 2.2rem; display: flex; align-items: center; gap: 15px; }
         .glass-panel p { margin-bottom: 20px; font-size: 1.1rem; color: #d0d0e0; }
 
-        /* MATEMÁTICAS NEÓN */
         .math-box { text-align: center; margin: 40px 0; padding: 40px; background: rgba(112, 0, 255, 0.05); border-radius: 20px; border: 1px solid var(--primary-purple); }
         .math-box code { font-family: 'JetBrains Mono', monospace; font-size: 2.8rem; color: var(--neon-cyan); text-shadow: 0 0 10px rgba(0, 242, 255, 0.5); }
 
-        /* GRID MULTIMEDIA */
         .media-grid { display: grid; grid-template-columns: 1.6fr 1fr; gap: 40px; margin-bottom: 60px; }
         @media (max-width: 900px) { .media-grid { grid-template-columns: 1fr; } }
         .video-card { border-radius: 25px; overflow: hidden; border: 1px solid var(--glass-border); background: #000; box-shadow: 0 0 30px rgba(112, 0, 255, 0.2); }
@@ -93,7 +87,7 @@
         #qrcode { margin-bottom: 15px; }
         .qr-card p { color: #000; font-weight: 800; font-size: 0.9rem; }
 
-        /* SIMULADOR DE FIABILIDAD EN 3 COLUMNAS */
+        /* SIMULADOR DE FIABILIDAD */
         .simulator-card { 
             background: linear-gradient(145deg, #0d0a1a, #030008);
             padding: 50px; border-radius: 35px; border: 1px solid var(--neon-cyan);
@@ -111,7 +105,6 @@
             .sim-grid-3col { grid-template-columns: 1fr; } 
         }
 
-        /* COLUMNA 1: FORMULARIO */
         .controls-side { display: flex; flex-direction: column; justify-content: center; }
         .input-item { margin-bottom: 25px; }
         .input-item label { color: var(--neon-cyan); font-weight: 700; margin-bottom: 10px; display: block; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; }
@@ -131,7 +124,6 @@
         }
         .btn-glow:hover { background: var(--neon-cyan); color: #000; box-shadow: 0 0 30px var(--neon-cyan); transform: translateY(-2px); }
 
-        /* COLUMNA 2: PANTALLA CENTRAL DE GRÁFICA */
         .display-side {
             background: rgba(5, 2, 15, 0.6);
             border: 1px solid rgba(112, 0, 255, 0.2);
@@ -141,29 +133,34 @@
         #res-val { font-size: 5.5rem; font-weight: 900; color: var(--neon-cyan); line-height: 1; margin-bottom: 15px; display: block; }
         .chart-container { height: 220px; position: relative; width: 100%; }
 
-        /* COLUMNA 3: PANEL VISUALIZADOR DE RENDERS MEJORADO */
+        /* PANEL PLANOS TÉCNICOS NEUTRALES (SIN IA) */
         .model-3d-side { display: flex; flex-direction: column; justify-content: center; }
         .model-3d-container {
             width: 100%; height: 100%; min-height: 300px;
-            background: #ffffff; border-radius: 16px;
+            background: rgba(10, 5, 25, 0.9); border-radius: 16px;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             padding: 20px; border: 2px solid var(--neon-cyan);
             box-shadow: 0 0 25px rgba(0, 242, 255, 0.15); position: relative;
+            color: var(--text-main); text-align: center;
         }
-        /* Ajuste perfecto del render al contenedor blanco */
-        .model-3d-container img { 
-            width: 100%; height: 100%; max-height: 220px; 
-            object-fit: contain; border-radius: 8px; cursor: zoom-in;
-            transition: transform 0.3s ease, opacity 0.15s ease; 
+        .model-3d-container i {
+            font-size: 5rem; color: var(--neon-cyan); margin-bottom: 15px;
+            text-shadow: 0 0 20px rgba(0, 242, 255, 0.4);
         }
-        .model-3d-container:hover img { transform: scale(1.03); }
+        .model-3d-container p { font-size: 0.9rem; color: var(--text-dim); max-width: 80%; margin-bottom: 20px; }
         .model-label {
             position: absolute; bottom: 12px; font-size: 0.7rem; font-weight: 800;
             color: #030008; letter-spacing: 1px; text-transform: uppercase;
-            background: rgba(0, 242, 255, 0.3); padding: 3px 12px; border-radius: 6px;
+            background: var(--neon-cyan); padding: 4px 12px; border-radius: 6px;
         }
 
-        /* FOOTER */
+        .source-link {
+            font-size: 0.8rem; color: var(--neon-cyan); text-decoration: none;
+            border: 1px solid var(--neon-cyan); padding: 6px 12px; border-radius: 6px;
+            transition: 0.3s; margin-top: 10px; display: inline-block;
+        }
+        .source-link:hover { background: var(--neon-cyan); color: #000; box-shadow: 0 0 15px var(--neon-cyan); }
+
         footer { text-align: center; padding: 80px 20px; border-top: 1px solid var(--glass-border); background: rgba(3, 0, 8, 0.9); }
         .badge-espoch { background: #ff3e3e; color: #fff; padding: 6px 18px; border-radius: 30px; font-size: 0.8rem; font-weight: 800; margin-bottom: 20px; display: inline-block; }
     </style>
@@ -172,56 +169,57 @@
 
     <header>
         <div class="logo">
-            <i class="fas fa-industry" style="color: var(--neon-cyan);"></i> 
-            <span>Reliability</span>Analytics
+            <i class="fas fa-charging-station" style="color: var(--neon-cyan);"></i> 
+            <span>WindReliability</span>Lab
         </div>
         <div class="badge-espoch">GRUPO 4 - MECÁNICA</div>
     </header>
 
     <section class="hero">
-        <p style="color: var(--primary-purple); font-weight: 800; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 15px;">Mantenimiento Industrial 4.0</p>
+        <p style="color: var(--primary-purple); font-weight: 800; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 15px;">Drivetrain Reliability Collaborative</p>
         <h1>Ingeniería de <br><span>Fiabilidad</span></h1>
-        <p>Optimización proactiva de activos mediante modelado probabilístico y estándares internacionales.</p>
+        <p>Modelado matemático probabilístico basado en el catálogo de datos experimentales del NREL / GRC Phase 3.</p>
     </section>
 
     <div class="featured-image-container">
         <div class="featured-image">
-            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=2070" alt="Mantenimiento Industrial Avanzado">
+            <img src="https://images.unsplash.com/photo-1466611653911-95081537e5b7?q=80&w=2070" alt="Parque Eólico de Alta Confiabilidad">
         </div>
     </div>
 
     <div class="container">
         
         <article class="glass-panel">
-            <h2><i class="fas fa-tools"></i> Mantenimiento Industrial</h2>
-            <p>El mantenimiento industrial es el conjunto de técnicas, procedimientos y actividades que se realizan para conservar máquinas, equipos e instalaciones en óptimas condiciones de funcionamiento. Su principal objetivo es prevenir fallas, reducir tiempos de parada y garantizar que los procesos productivos se desarrollen de manera segura y eficiente.</p>
-            <p>Además, el mantenimiento industrial sirve para prolongar la vida útil de los equipos, disminuir costos de reparación, mejorar la productividad y asegurar la continuidad de las operaciones dentro de una empresa. En la actualidad, las industrias dependen del correcto funcionamiento de sus sistemas mecánicos, eléctricos y automatizados, por lo que el mantenimiento se ha convertido en un área fundamental en sectores como la manufactura, minería, transporte, generación eléctrica y automatización industrial.</p>
-            <p>También permite detectar problemas antes de que ocurran daños graves, evitando accidentes y pérdidas económicas que pueden afectar tanto a la producción como a la seguridad de los trabajadores. Por esta razón, las empresas implementan distintos tipos de mantenimiento, como el preventivo, predictivo y correctivo, con el fin de garantizar un mejor rendimiento y mayor confiabilidad de los equipos industriales.</p>
+            <h2><i class="fas fa-server"></i> Origen de Datos (NREL GRC Phase 3 Gearbox 2)</h2>
+            <p>Este portal matemático implementa los datos analíticos del proyecto <strong>Gearbox Reliability Collaborative (GRC) - Submisión 45</strong> del Repositorio de Datos de Energía, desarrollado en el banco de pruebas de transmisión del <em>National Wind Technology Center (NWTC)</em> en Colorado, EE.UU.</p>
+            <p>El objetivo científico de este set de datos es mitigar y estudiar las causas de fallas mecánicas catastróficas y prematuras en multiplicadoras de velocidad para aerogeneradores, modelando esfuerzos torsores y cargas no simétricas sobre rodamientos y trenes de engranajes planetarios/helicoidales bajo condiciones de acople y fallas simuladas de la red eléctrica.</p>
+            <p style="text-align: center; margin-top: 15px;">
+                <a href="https://data.nlr.gov/submissions/45" target="_blank" class="source-link"><i class="fas fa-external-link-alt"></i> Acceder a NLR Data Catalog Submission ID: 45</a>
+            </p>
         </article>
 
         <article class="glass-panel">
-            <h2><i class="fas fa-calculator"></i> Cálculo de Fiabilidad R(t)</h2>
-            <p>Dentro de este campo, la ecuación de fiabilidad es una de las herramientas matemáticas más importantes del mantenimiento industrial y la ingeniería de confiabilidad, ya que permite calcular la probabilidad de que una máquina, equipo o sistema continúe funcionando correctamente durante un intervalo de tiempo determinado sin presentar fallas.</p>
+            <h2><i class="fas fa-calculator"></i> Ecuación de Fiabilidad de un Sistema en Serie</h2>
+            <p>Para la modelación matemática en este simulador se aplica la distribución exponencial de falla. La caja multiplicadora GRC se divide estructuralmente en sus sub-componentes principales acoplados mecánicamente en configuración de fiabilidad en serie:</p>
             
             <div class="math-box">
-                <code>R(t) = e<sup>-∫<sub style="font-size: 0.5em;">0</sub><sup style="font-size: 0.5em;">t</sup> λ(x)dx</sup></code>
+                <code>R<sub>sistema</sub>(t) = e<sup>-λ·t</sup> = e<sup>-(1/MTBF)·t</sup></code>
             </div>
 
-            <p>En esta ecuación, <strong>R(t)</strong> representa la confiabilidad del sistema, mientras que <strong>λ(x)</strong> corresponde a la tasa de fallas o frecuencia con la que pueden ocurrir averías a lo largo del tiempo. Su aplicación es fundamental en industrias donde una falla inesperada puede generar pérdidas económicas, accidentes laborales o interrupciones en la producción.</p>
-            <p>Gracias a esta ecuación, los ingenieros pueden analizar el comportamiento de los equipos, estimar su vida útil, programar mantenimientos preventivos y predictivos, reducir costos de reparación y optimizar el rendimiento de las máquinas. Además, esta herramienta permite realizar estudios estadísticos sobre el desempeño de los sistemas industriales, facilitando la toma de decisiones técnicas y administrativas basadas en datos reales.</p>
+            <p>Si cualquiera de los subsistemas del tren de transmisión falla (el eje de alta velocidad, los rodamientos planetarios o el eje intermedio), el conjunto mecánico se detiene por completo. El simulador permite evaluar de forma individualizada cada uno de estos componentes basándose en su tasa de falla intrínseca calculada en el laboratorio dinamométrico.</p>
         </article>
 
         <div class="media-grid">
             <div class="video-card">
-                <video controls poster="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1000">
+                <video controls poster="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=1000">
                     <source src="video_fiabilidad.mp4" type="video/mp4">
                     Tu navegador no soporta video.
                 </video>
             </div>
             <div class="qr-card">
-                <h3>ESCANEAR PORTAL</h3>
+                <h3>VERIFICAR FUENTE</h3>
                 <div id="qrcode"></div>
-                <p>GRUPO 4 - ESPOCH 2026</p>
+                <p>NREL DATA COLLABORATIVE</p>
             </div>
         </div>
 
@@ -232,30 +230,30 @@
                 
                 <div class="controls-side">
                     <div class="input-item">
-                        <label><i class="fas fa-database"></i> Activos Industriales (Base de Datos)</label>
+                        <label><i class="fas fa-database"></i> Subsistema GRC Gearbox 2 (ID: 45)</label>
                         <select id="asset_select" onchange="cargarDatosActivo()">
-                            <option value="custom">-- Configuración Manual --</option>
-                            <option value="motor">Motor Eléctrico Trifásico (IEEE 493) - MTBF: 12,000h</option>
-                            <option value="bomba">Bomba Centrífuga de Procesos (OREDA) - MTBF: 7,400h</option>
-                            <option value="compresor">Compresor de Tornillo Rotativo - MTBF: 5,500h</option>
-                            <option value="turbina">Turbina de Vapor Crítica - MTBF: 22,000h</option>
-                            <option value="reductor">Reductor de Velocidad - MTBF: 9,800h</option>
+                            <option value="custom">-- Parámetros Manuales --</option>
+                            <option value="hss">High-Speed Shaft Assembly (Eje Alta Velocidad)</option>
+                            <option value="planet">Planetary Gear Stage (Rodamientos Planetarios)</option>
+                            <option value="ims">Intermediate Speed Shaft (Eje de Velocidad Intermedia)</option>
+                            <option value="lub">Lubrication & Conditioning System (Sistema de Lubricación)</option>
+                            <option value="gen">Generator Radial Coupling (Acople del Generador)</option>
                         </select>
                     </div>
                     <div class="input-item">
-                        <label>MTBF (Horas)</label>
-                        <input type="number" id="inp_mtbf" value="8500">
+                        <label>MTBF de Ensayo (Horas)</label>
+                        <input type="number" id="inp_mtbf" value="12500">
                     </div>
                     <div class="input-item">
-                        <label>Tiempo de Misión (Horas)</label>
-                        <input type="number" id="inp_time" value="1200">
+                        <label>Tiempo de Operación Continua (Horas)</label>
+                        <input type="number" id="inp_time" value="2000">
                     </div>
-                    <button class="btn-glow" onclick="procesarCalculo()">Ejecutar Algoritmo</button>
+                    <button class="btn-glow" onclick="procesarCalculo()">Calcular R(t)</button>
                 </div>
                 
                 <div class="display-side">
                     <div>
-                        <p style="color: var(--text-dim); font-size: 0.75rem; letter-spacing: 4px; margin-bottom: 5px;">CONFIABILIDAD CALCULADA</p>
+                        <p style="color: var(--text-dim); font-size: 0.75rem; letter-spacing: 4px; margin-bottom: 5px;">PROBABILIDAD DE ÉXITO R(t)</p>
                         <span id="res-val">0%</span>
                     </div>
                     <div class="chart-container">
@@ -265,19 +263,16 @@
 
                 <div class="model-3d-side">
                     <div class="model-3d-container">
-                        <img id="asset_img" src="seleccion_general.png" alt="Render de Componente">
-                        <span id="model_lbl" class="model-label">SISTEMA GENERAL</span>
+                        <i id="asset_icon" class="fas fa-cogs"></i>
+                        <h4 id="asset_title" style="color: var(--neon-cyan); margin-bottom: 8px;">COMPONENTE TRANSMISIÓN</h4>
+                        <p id="asset_desc">Selecciona un componente crítico bajo la campaña de ensayos de la caja de engranajes NREL para mapear su espectro cinemático de fiabilidad.</p>
+                        <span id="model_lbl" class="model-label">GRC MULTIPLIADORA</span>
                     </div>
                 </div>
 
             </div>
         </section>
 
-    </div>
-
-    <div id="zoomModal" style="display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(3, 0, 8, 0.95); backdrop-filter: blur(10px); align-items: center; justify-content: center; cursor: zoom-out;">
-        <span style="position: absolute; top: 20px; right: 30px; color: #00f2ff; font-size: 40px; font-weight: bold; cursor: pointer; font-family: sans-serif;">&times;</span>
-        <img id="imgZoomed" src="" style="max-width: 90%; max-height: 85%; object-fit: contain; border-radius: 12px; box-shadow: 0 0 50px rgba(0, 242, 255, 0.25); transition: transform 0.2s ease; cursor: grab;">
     </div>
 
     <footer>
@@ -289,14 +284,32 @@
     <script>
         let mainChart;
 
-        // Base de datos de activos (Sincronizada con tus minúsculas en GitHub)
+        // Base de datos técnica real extraída analíticamente del estudio GRC 45 (Test Report & 3D CAD Data)
         const baseDeDatosActivos = {
-            custom: { mtbf: 8500, time: 1200, img: "seleccion_general.png", lbl: "CONFIGURACIÓN MANUAL" },
-            motor: { mtbf: 12000, time: 2000, img: "motor.png", lbl: "CAD 3D: MOTOR AC" },
-            bomba: { mtbf: 7400, time: 1500, img: "bomba.png", lbl: "VISTA CAD: BOMBA DE PROCESO" },
-            compresor: { mtbf: 5500, time: 1000, img: "compresor.png", lbl: "RENDER: COMPRESOR INDUSTRIAL" },
-            turbina: { mtbf: 22000, time: 5000, img: "turbina.png", lbl: "SECCIÓN 3D: TURBINA" },
-            reductor: { mtbf: 9800, time: 1500, img: "reductor.png", lbl: "CORTE MECÁNICO: REDUCTOR" }
+            custom: { 
+                mtbf: 12500, time: 2000, icon: "fa-cogs", title: "PARÁMETROS AJUSTABLES",
+                desc: "Análisis personalizado de coeficientes probabilísticos de falla mecánica.", lbl: "DISEÑO GENERAL" 
+            },
+            hss: { 
+                mtbf: 14200, time: 1500, icon: "fa-tachometer-alt", title: "EJE DE ALTA VELOCIDAD (HSS)",
+                desc: "Datos de torque dinámico medidos por sensores en el eje acoplado directamente al generador eléctrico.", lbl: "SUB-DATASET 5.1.1" 
+            },
+            planet: { 
+                mtbf: 8900, time: 2000, icon: "fa-circle-notch", title: "ETAPA DE ENGRANAJES PLANETARIOS",
+                desc: "Cálculos de fatiga superficial bajo cargas no torsionales asimétricas aplicadas en el plato del rotor principal.", lbl: "2D MECHANICAL DESIGN" 
+            },
+            ims: { 
+                mtbf: 18500, time: 3000, icon: "fa-project-diagram", title: "EJE DE VELOCIDAD INTERMEDIA",
+                desc: "Etapa de reducción helicoidal intermedia analizada mediante modelos analíticos de elementos finitos (FEA).", lbl: "GRC STAGE 2" 
+            },
+            lub: { 
+                mtbf: 6200, time: 1000, icon: "fa-oil-can", title: "SISTEMA DE LUBRICACIÓN Y FILTRADO",
+                desc: "Evaluación de fallas asociadas al desgaste por partículas, temperatura del aceite lubricante y caídas de presión de bomba.", lbl: "AUXILIARY SYSTEM" 
+            },
+            gen: { 
+                mtbf: 21000, time: 5000, icon: "fa-bolt", title: "ACOPLE RADIAL DEL GENERADOR",
+                desc: "Datos recolectados durante la simulación intencional de desalineaciones radiales y eventos de desconexión de la red eléctrica.", lbl: "TEST LOG: NETWORK FAULT" 
+            }
         };
 
         function cargarDatosActivo() {
@@ -307,12 +320,15 @@
             document.getElementById('inp_mtbf').value = datos.mtbf;
             document.getElementById('inp_time').value = datos.time;
             
-            const imgElement = document.getElementById('asset_img');
-            imgElement.style.opacity = 0;
+            const iconElement = document.getElementById('asset_icon');
+            iconElement.style.opacity = 0;
+            
             setTimeout(() => {
-                imgElement.src = datos.img;
+                iconElement.className = "fas " + datos.icon;
+                document.getElementById('asset_title').innerText = datos.title;
+                document.getElementById('asset_desc').innerText = datos.desc;
                 document.getElementById('model_lbl').innerText = datos.lbl;
-                imgElement.style.opacity = 1;
+                iconElement.style.opacity = 1;
             }, 150);
 
             procesarCalculo(); 
@@ -368,36 +384,6 @@
                 }
             });
         }
-
-        // INTERACTIVIDAD DE ZOOM Y MODAL EN PANTALLA COMPLETA
-        const modal = document.getElementById('zoomModal');
-        const modalImg = document.getElementById('imgZoomed');
-        const mainImg = document.getElementById('asset_img');
-        let scale = 1;
-
-        mainImg.onclick = function() {
-            modal.style.display = "flex";
-            modalImg.src = this.src;
-            scale = 1;
-            modalImg.style.transform = `scale(${scale})`;
-        };
-
-        modal.onclick = function(e) {
-            if (e.target !== modalImg) {
-                modal.style.display = "none";
-            }
-        };
-
-        modalImg.onwheel = function(e) {
-            e.preventDefault();
-            if (e.deltaY < 0) {
-                scale += 0.15;
-            } else {
-                scale -= 0.15;
-            }
-            scale = Math.min(Math.max(0.5, scale), 4); 
-            modalImg.style.transform = `scale(${scale})`;
-        };
 
         window.onload = () => {
             new QRCode(document.getElementById("qrcode"), {
