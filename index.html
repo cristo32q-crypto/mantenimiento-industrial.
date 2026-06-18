@@ -246,8 +246,8 @@
     <article class="glass-panel">
         <h2><i class="fas fa-calculator"></i> Cálculo de Fiabilidad R(t)</h2>
         <p>Dentro de este campo, la ecuación de fiabilidad es una de las herramientas matemáticas más importantes del mantenimiento industrial y la ingeniería de confiabilidad, ya que permite calcular la probabilidad de que una máquina, equipo o sistema continúe funcionando correctamente durante un intervalo de tiempo determinado sin presentar fallas.</p>
-        <div class="math-box">
-            <code>R(t) = e<sup>−λt</sup></code>
+       <div class="math-box" style="font-size: 1.5rem; text-align: center; margin: 20px 0; color: var(--text-main);">
+    $$R(t) = e^{-\int_{0}^{t} \lambda(x) dx}$$
         </div>
         <p>En esta ecuación, <strong>R(t)</strong> representa la confiabilidad del sistema, mientras que <strong>λ = 1/MTBF</strong> corresponde a la tasa de fallas por hora. Su aplicación es fundamental en industrias donde una falla inesperada puede generar pérdidas económicas, accidentes laborales o interrupciones en la producción.</p>
         <p>Gracias a esta ecuación, los ingenieros pueden analizar el comportamiento de los equipos, estimar su vida útil, programar mantenimientos preventivos y predictivos, reducir costos de reparación y optimizar el rendimiento de las máquinas. Los valores de MTBF utilizados en este simulador provienen de datos experimentales reales del <strong>Gearbox Reliability Collaborative (GRC)</strong> del Laboratorio Nacional de Energías Renovables (NREL/NLR), obtenidos en ensayos con dinamómetro en el National Wind Technology Center.</p>
